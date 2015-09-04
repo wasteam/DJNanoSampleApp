@@ -8,6 +8,7 @@ using AppStudio.DataProviders.Core;
 using AppStudio.DataProviders.Twitter;
 using DJNanoShow.Config;
 using DJNanoShow.ViewModels;
+using Microsoft.AppStudio.Core.Extensions;
 
 namespace DJNanoShow.Sections
 {
@@ -61,7 +62,7 @@ namespace DJNanoShow.Sections
                     {
                         viewModel.Title = item.UserName.ToSafeString();
                         viewModel.SubTitle = item.Text.ToSafeString();
-                        viewModel.Description = null;
+                        viewModel.Description = item.CreationDateTime.FriendlyDate();
                         viewModel.Image = item.UserProfileImageUrl.ToSafeString();
 
                     },

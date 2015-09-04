@@ -1,4 +1,7 @@
 using AppStudio.Controls;
+using Windows.UI.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace DJNanoShow.Layouts.List
 {
@@ -8,17 +11,25 @@ namespace DJNanoShow.Layouts.List
         {
             this.InitializeComponent();
         }
+        private void OnElementHolding(object sender, Windows.UI.Xaml.Input.HoldingRoutedEventArgs args)
+        {
+            // this event is fired multiple times. We do not want to show the menu twice
+            if (args.HoldingState != HoldingState.Started) return;
 
-        //protected override double VBPItemHeight0 { get { return 130; } }
-        //protected override double VBPItemHeight1 { get { return 180; } }
-        //protected override double VBPItemHeight2 { get { return 180; } }
-        //protected override double VBPItemHeight3 { get { return 220; } }
-        //protected override double VBPItemHeight4 { get { return 280; } }
-        //protected override double VBPItemHeight5 { get { return 320; } }
+            FrameworkElement element = sender as FrameworkElement;
+            if (element == null) return;
 
-        //protected override ResponsiveGridView GridView()
-        //{
-        //    return responsiveGridView;
-        //}
+            // If the menu was attached properly, we just need to call this handy method
+            FlyoutBase.ShowAttachedFlyout(element);
+        }
+
+        private void OnElementTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            FrameworkElement element = sender as FrameworkElement;
+            if (element == null) return;
+
+            // If the menu was attached properly, we just need to call this handy method
+            FlyoutBase.ShowAttachedFlyout(element);
+        }
     }
 }

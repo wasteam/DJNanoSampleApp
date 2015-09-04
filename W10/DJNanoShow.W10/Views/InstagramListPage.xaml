@@ -65,7 +65,7 @@
 
         <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" Height="3" Margin="0,6,0,6" IsIndeterminate="True" Foreground="{StaticResource PageTitleForeground}" Visibility="{Binding ViewModel.IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"/>
         <was_controls:ErrorNotificationControl Grid.ColumnSpan="2" x:Uid="ListErrorNotificationControl" Grid.Row="2" ErrorVisibility="{Binding ViewModel.HasLoadDataErrors, Converter={StaticResource BoolToVisibilityConverter}}" ErrorColor="{StaticResource PageTitleForeground}" Margin="10,0,18,0"/>
-        <list_layouts:ListBigVerticalCardBox Grid.Row="3" Grid.ColumnSpan="2" DataContext="{Binding ViewModel}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="False" Margin="14,0,6,0" />
+        <list_layouts:ListInstagram Grid.Row="3" Grid.ColumnSpan="2" DataContext="{Binding ViewModel}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="False" Margin="14,0,6,0" />
         <controls:DataUpdateInformationControl Grid.ColumnSpan="2" Grid.Row="4" LastUpdateDateTime="{Binding ViewModel.LastUpdated}" Color="{StaticResource PageTitleForeground}" Margin="8,4,8,4" HorizontalAlignment="Left" HasLocalData="{Binding ViewModel.HasLocalData}"/>
     </Grid>
 </base:PageBase>

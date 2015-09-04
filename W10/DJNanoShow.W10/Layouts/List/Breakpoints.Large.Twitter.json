@@ -1,0 +1,71 @@
+﻿{
+  "_import": "/Layouts/List/Breakpoints.Large.json",
+  "breakpoints": [
+    {
+      "maxwidth": "321",
+      "properties": {
+        "itemsHeight": "140",
+        "imageWidth": "80",
+        "imageHeight": "80",
+        "titleMaxLines": "3",
+        "leftMarginTitle": "6,0,0,0",
+        "leftMarginSubTitle": "6,6,0,0"
+      }
+    },
+    {
+      "maxwidth": "500",
+      "properties": {
+        "itemsHeight": "160",
+        "imageWidth": "100",
+        "imageHeight": "100",
+        "titleMaxLines": "4",
+        "leftMarginTitle": "10,0,0,0",
+        "leftMarginSubTitle": "10,10,0,0"
+      }
+    },
+    {
+      "maxwidth": "900",
+      "properties": {
+        "itemsHeight": "210",
+        "imageWidth": "110",
+        "imageHeight": "110",
+        "titleMaxLines": "5",
+        "leftMarginTitle": "12,0,0,0",
+        "leftMarginSubTitle": "12,12,0,0"
+      }
+    },
+    {
+      "maxwidth": "1140",
+      "properties": {
+        "itemsHeight": "210",
+        "imageWidth": "120",
+        "imageHeight": "120",
+        "titleMaxLines": "5",
+        "leftMarginTitle": "16,0,0,0",
+        "leftMarginSubTitle": "16,16,0,0"
+      }
+    },
+    {
+      "maxwidth": "1650",
+      "properties": {
+        "itemsHeight": "230",
+        "imageWidth": "130",
+        "imageHeight": "130",
+        "titleMaxLines": "5",
+        "leftMarginTitle": "16,0,0,0",
+        "leftMarginSubTitle": "16,16,0,0"
+      }
+    },
+    {
+      "maxwidth": "*",
+      "properties": {
+        "itemsHeight": "260",
+        "imageWidth": "150",
+        "imageHeight": "150",
+        "titleMaxLines": "6",
+        "leftMarginTitle": "16,0,0,0",
+        "leftMarginSubTitle": "16,16,0,0"
+      }
+    }
+  ]
+}

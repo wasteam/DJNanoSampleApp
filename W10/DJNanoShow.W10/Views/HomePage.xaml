@@ -106,7 +106,7 @@
                 LoadingVisibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}">
                 <DataTemplate>
-                    <list_layouts:ListBigHorizontalCardBox DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="14,0,6,0"/>
+                    <list_layouts:ListYouTube DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="14,0,6,0"/>
                 </DataTemplate>
             </was_controls:SectionListItem>
             <was_controls:SectionListItem
@@ -117,7 +117,7 @@
                 LoadingVisibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 d:DataContext="{d:DesignData Source=/Assets/Design/DesignDataMenu.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}">
                 <DataTemplate>
-                    <list_layouts:MenuMedium DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="False" Margin="14,0,6,0"/>
+                    <list_layouts:MenuSocial DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="False" Margin="14,0,6,0"/>
                 </DataTemplate>
             </was_controls:SectionListItem>
             <was_controls:SectionListItem
@@ -128,7 +128,7 @@
                 LoadingVisibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}">
                 <DataTemplate>
-                    <list_layouts:ListContactCard DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="14,0,6,0"/>
+                    <list_layouts:ListAlbum DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="14,0,6,0"/>
                 </DataTemplate>
             </was_controls:SectionListItem>
             <was_controls:SectionListItem

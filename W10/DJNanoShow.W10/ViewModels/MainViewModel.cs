@@ -22,7 +22,7 @@ namespace DJNanoShow.ViewModels
         public MainViewModel(int visibleItems)
         {
             PageTitle = "DJNano Show";
-            Tours = new ListViewModel<DynamicStorageDataConfig, Tours1Schema>(new ToursConfig(), visibleItems);
+            Tours = new ListViewModel<DynamicStorageDataConfig, Tours1Schema>(new ToursConfig());
             Videos = new ListViewModel<YouTubeDataConfig, YouTubeSchema>(new VideosConfig(), visibleItems);
             Social = new ListViewModel<LocalStorageDataConfig, MenuSchema>(new SocialConfig());
             Discography = new ListViewModel<DynamicStorageDataConfig, Discography1Schema>(new DiscographyConfig(), visibleItems);
@@ -83,8 +83,8 @@ namespace DJNanoShow.ViewModels
             var loadDataTasks = GetViewModels().Select(vm => vm.LoadDataAsync());
 
             await Task.WhenAll(loadDataTasks);
-
             OnPropertyChanged("LastUpdated");
+            ToursConfig.RemoveDeprecatedTours(Tours.Items);
         }
 
         private async void Refresh()
@@ -96,6 +96,7 @@ namespace DJNanoShow.ViewModels
             await Task.WhenAll(refreshDataTasks);
 
             OnPropertyChanged("LastUpdated");
+            ToursConfig.RemoveDeprecatedTours(Tours.Items);
         }
 
         private IEnumerable<DataViewModelBase> GetViewModels()

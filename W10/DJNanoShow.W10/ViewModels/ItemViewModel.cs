@@ -3,6 +3,7 @@ using AppStudio.Common;
 using AppStudio.Common.Actions;
 using AppStudio.Common.DataSync;
 using AppStudio.Common.Navigation;
+using System.Windows.Input;
 
 namespace DJNanoShow.ViewModels
 {
@@ -14,6 +15,7 @@ namespace DJNanoShow.ViewModels
         private string _description;
         private string _image;
         private string _content;
+        private ICommand _mainCommand;
 
         public string Id { get; set; }
 
@@ -46,6 +48,7 @@ namespace DJNanoShow.ViewModels
             get { return _image; }
             set { SetProperty(ref _image, value); }
         }
+
         public string Content
         {
             get { return _content; }
@@ -55,6 +58,12 @@ namespace DJNanoShow.ViewModels
         public NavigationInfo NavigationInfo { get; set; }
 
         public List<ActionInfo> Actions { get; set; }
+
+        public ICommand MainCommand
+        {
+            get { return _mainCommand; }
+            set { SetProperty(ref _mainCommand, value); }
+        }
 
         public bool HasActions
         {

@@ -195,4 +195,31 @@
   <data name="SectionListItem.HeaderLinkText" xml:space="preserve">
     <value>View all</value>
   </data>
+  <data name="AfterExtensionString" xml:space="preserve">
+    <value> ago</value>
+  </data>
+  <data name="BeforeExtensionString" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DayString" xml:space="preserve">
+    <value> day</value>
+  </data>
+  <data name="HourString" xml:space="preserve">
+    <value> hour</value>
+  </data>
+  <data name="LessThan1Minute" xml:space="preserve">
+    <value>Less than one minute</value>
+  </data>
+  <data name="LessThan1SecondString" xml:space="preserve">
+    <value>Less than 1 second</value>
+  </data>
+  <data name="MinuteString" xml:space="preserve">
+    <value> minute</value>
+  </data>
+  <data name="MonthString" xml:space="preserve">
+    <value> month</value>
+  </data>
+  <data name="MoreThan1YearString" xml:space="preserve">
+    <value>More than one year</value>
+  </data>
 </root>
