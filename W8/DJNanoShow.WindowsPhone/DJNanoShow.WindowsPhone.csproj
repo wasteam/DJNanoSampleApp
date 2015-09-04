@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{75ded8e1-7c28-4cba-b03d-59220f364ee7}</ProjectGuid>
+    <ProjectGuid>{75DED8E1-7C28-4CBA-B03D-59220F364EE7}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DJNanoShow</RootNamespace>
@@ -277,12 +277,12 @@
   </ItemGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Reference Include="AppStudio.Common">
-      <HintPath>..\packages\WindowsAppStudio.Common.0.1.1\lib\portable-win81+wpa81\AppStudio.Common.dll</HintPath>
+    <Reference Include="AppStudio.Common, Version=0.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAppStudio.Common.0.1.3-beta\lib\portable-win81+wpa81\AppStudio.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppStudio.DataProviders">
-      <HintPath>..\packages\WindowsAppStudio.DataProviders.0.1.1\lib\portable-win81+wpa81\AppStudio.DataProviders.dll</HintPath>
+    <Reference Include="AppStudio.DataProviders, Version=0.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAppStudio.DataProviders.0.1.3-beta\lib\portable-win81+wpa81\AppStudio.DataProviders.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, processorArchitecture=MSIL">
