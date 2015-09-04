@@ -1,0 +1,55 @@
+<Page
+    x:Class="DJNanoShow.AboutThisAppPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:AppStudio.Common.Controls"
+    xmlns:html2xaml="using:AppStudio.Common.Controls.Html2Xaml"
+    xmlns:vm="using:DJNanoShow.ViewModels"
+    mc:Ignorable="d"
+    DataContext="{Binding AboutModel, RelativeSource={RelativeSource Self}}"
+    d:DataContext="{d:DesignInstance Type=vm:AboutThisAppViewModel, IsDesignTimeCreatable=true}"
+    Background="{StaticResource AppBackground}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="HeaderHost" Grid.Row="0">
+            <ContentPresenter ContentTemplate="{StaticResource PageHeader}" />
+        </Border>
+
+        <TextBlock x:Uid="AboutSection" Margin="12,0" Grid.Row="1"  Text="about" Style="{StaticResource PageTitleStyle}" />
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Grid.Row="0" Margin="12,20"
+                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <RichTextBlock Style="{StaticResource RichDescriptionStyle}"
+                               html2xaml:Properties.Html="{Binding AboutText}"  TextWrapping="Wrap"/>
+            </ScrollViewer>
+
+            <TextBlock Grid.Row="1" Margin="12,24,12,0" FontSize="18" Style="{StaticResource DescriptionStyle}" TextWrapping="Wrap">
+                <Run x:Uid="AppVersion" Text="App version:"/>
+                <Run Text="{Binding AppVersion}" />
+                <Run Text="- https://appstudio.windows.com" />
+            </TextBlock>
+
+            <TextBlock Grid.Row="2" Margin="12,0,12,12" FontSize="18" Style="{StaticResource DescriptionStyle}">
+                <Run x:Uid="DevelopedBy" Text="Developed by:" />
+                <Run Text="{Binding Publisher}"/>
+            </TextBlock>
+
+        </Grid>
+    </Grid>
+</Page>

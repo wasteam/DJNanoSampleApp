@@ -1,0 +1,31 @@
+<Application
+    x:Class="DJNanoShow.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:commands="using:AppStudio.Common.Commands"
+    xmlns:converters="using:AppStudio.Common.Converters"
+    xmlns:navigation="using:AppStudio.Common.Navigation"
+    xmlns:fonts="using:AppStudio.Common.Fonts">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converters:StringVisibilityConverter x:Key="StringVisibilityConverter"/>
+            <navigation:NavigationService x:Key="NavigationService"/>
+            <fonts:FontSettings x:Key="FontSettings" />
+            <commands:ActionCommands x:Key="ActionCommands" />
+
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default" Source="Styles/DefaultTheme.xaml"/>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/FontSizes.xaml"/>
+                <ResourceDictionary Source="Styles/AppColors.xaml"/>
+                <ResourceDictionary Source="Styles/AppTheme.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="Styles/AppBarButtons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

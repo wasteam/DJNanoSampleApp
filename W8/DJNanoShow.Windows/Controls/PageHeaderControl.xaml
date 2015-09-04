@@ -1,0 +1,84 @@
+<UserControl
+    x:Class="DJNanoShow.Controls.PageHeaderControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:AppStudio.Common.Converters"
+    x:Name="LayoutRoot"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <converters:PageHeaderTypeConverter x:Key="PageHeaderTypeConverter"/>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:StringVisibilityConverter x:Key="StringVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Visibility="{Binding ElementName=LayoutRoot, Path=ShowSnappedMode, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Style="{StaticResource CustomNavigationBackButtonNormalStyle}" Visibility="{Binding ShowBackButton, ElementName=LayoutRoot, Converter={StaticResource BoolToVisibilityConverter}}"
+                Click="GoBackButton_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Grid Grid.Column="1" Visibility="{Binding PageHeaderType, ElementName=LayoutRoot, Converter={StaticResource PageHeaderTypeConverter}, ConverterParameter=LogoText}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="{StaticResource AppLogoImage}" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="Uniform" />
+                <TextBlock Grid.Column="1" Margin="24,0,0,0" Text="{Binding HeaderText, ElementName=LayoutRoot, Mode=OneWay}" Style="{StaticResource AppTitleStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="NoWrap" IsHitTestVisible="false"/>
+            </Grid>
+            <Image Grid.Column="1" Source="{StaticResource HeaderImage}" Height="80" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="Uniform" Visibility="{Binding PageHeaderType, ElementName=LayoutRoot, Converter={StaticResource PageHeaderTypeConverter}, ConverterParameter=Logo}"/>
+            <TextBlock Grid.Column="1" Text="{Binding HeaderText, ElementName=LayoutRoot}" Style="{StaticResource AppTitleStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="NoWrap" IsHitTestVisible="false" Visibility="{Binding PageHeaderType, ElementName=LayoutRoot, Converter={StaticResource PageHeaderTypeConverter}, ConverterParameter=Text}"/>
+            <StackPanel
+                    Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal"
+                    Visibility="{Binding HasLocalData, ElementName=LayoutRoot, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True, FallbackValue=Collapsed}"
+                    Margin="40,0,120,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            Visibility="{Binding LastUpdateDateTime, ElementName=LayoutRoot, Converter={StaticResource StringVisibilityConverter}}">
+                    <TextBlock Style="{StaticResource SubtitleStyle}" x:Uid="LastUpdated" FontSize="{StaticResource SubtitleTextSizeSmall}"/>
+                    <TextBlock Margin="0,6,0,0" Style="{StaticResource SubtitleStyle}" FontSize="{StaticResource SubtitleTextSizeSmall}" Text="{Binding LastUpdateDateTime, ElementName=LayoutRoot}"/>
+                </StackPanel>
+                <Grid HorizontalAlignment="Right" Margin="12,0,0,0" VerticalAlignment="Bottom"
+                      Visibility="{Binding IsNetworkAvailable, ElementName=LayoutRoot, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}">
+                    <TextBlock Text="&#x2715;" Foreground="{StaticResource SubtitleForeground}" FontSize="12" FontFamily="Segoe UI Symbol" Margin="0,-5,25,0"/>
+                    <TextBlock Text="&#xE1E9;" Foreground="{StaticResource SubtitleForeground}" FontSize="20" FontFamily="Segoe UI Symbol"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <Grid Visibility="{Binding ElementName=LayoutRoot, Path=ShowSnappedMode, Converter={StaticResource BoolToVisibilityConverter}}"
+              Margin="12,12,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button Style="{StaticResource CustomNavigationBackButtonNormalStyle}" Visibility="{Binding ShowBackButton, ElementName=LayoutRoot, Converter={StaticResource BoolToVisibilityConverter}}" Click="GoBackButton_Click" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <Grid Grid.Row="1" Visibility="{Binding PageHeaderType, ElementName=LayoutRoot, Converter={StaticResource PageHeaderTypeConverter}, ConverterParameter=LogoText}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="{StaticResource AppLogoImage}" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="Uniform" />
+                <TextBlock Grid.Column="1" Margin="24,0,0,0" Text="{Binding HeaderText, ElementName=LayoutRoot, Mode=OneWay}" Style="{StaticResource AppTitleStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="NoWrap" IsHitTestVisible="false"/>
+            </Grid>
+            <Image Grid.Row="1" Source="{StaticResource HeaderImage}" Height="80" VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="Uniform" Visibility="{Binding PageHeaderType, ElementName=LayoutRoot, Converter={StaticResource PageHeaderTypeConverter}, ConverterParameter=Logo}"/>
+            <TextBlock Grid.Row="1" Text="{Binding HeaderText, ElementName=LayoutRoot}" Style="{StaticResource AppTitleStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="NoWrap" IsHitTestVisible="false" Visibility="{Binding PageHeaderType, ElementName=LayoutRoot, Converter={StaticResource PageHeaderTypeConverter}, ConverterParameter=Text}"/>
+            <StackPanel
+                Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Grid HorizontalAlignment="Right" Visibility="{Binding IsNetworkAvailable, ElementName=LayoutRoot, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}">
+                    <TextBlock Text="&#x2715;" Foreground="{StaticResource SubtitleForeground}" FontSize="15" FontFamily="Segoe UI Symbol" Margin="0,-5,25,0"/>
+                    <TextBlock Text="&#xE1E9;" Foreground="{StaticResource SubtitleForeground}" FontSize="30" FontFamily="Segoe UI Symbol"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Visibility="{Binding LastUpdateDateTime, ElementName=LayoutRoot, Converter={StaticResource StringVisibilityConverter}}">
+                    <TextBlock Style="{StaticResource SubtitleStyle}" FontSize="{StaticResource SubtitleTextSizeSmall}" x:Uid="LastUpdated"/>
+                    <TextBlock Margin="12,0,0,0" Style="{StaticResource SubtitleStyle}" FontSize="{StaticResource SubtitleTextSizeSmall}" Text="{Binding LastUpdateDateTime, ElementName=LayoutRoot}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

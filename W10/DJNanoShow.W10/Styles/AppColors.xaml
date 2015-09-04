@@ -1,0 +1,19 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Pages Colors-->
+    <Color x:Key="AppBackgroundColor">#13161a</Color>
+    <!--Text Colors-->
+    <Color x:Key="PageTitleForegroundColor">#ffffff</Color>
+    <Color x:Key="TitleForegroundColor">#ffffff</Color>
+    <Color x:Key="SubtitleForegroundColor">#ffffff</Color>
+    <Color x:Key="DescriptionForegroundColor">#ffffff</Color>
+    <!--AppBar Colors-->
+    <Color x:Key="AppBarBackgroundColor">#171c20</Color>
+    <Color x:Key="AppBarForegroundColor">#ffffff</Color>
+    <!--Tile Colors-->
+    <Color x:Key="BoxBackgroundColor">#171c20</Color>
+    <Color x:Key="BoxForegroundColor">#ffffff</Color>
+
+</ResourceDictionary>

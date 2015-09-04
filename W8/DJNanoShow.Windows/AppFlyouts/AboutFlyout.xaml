@@ -1,0 +1,34 @@
+<SettingsFlyout
+    x:Uid="AboutFlyout"
+    x:Class="DJNanoShow.AppFlyouts.AboutFlyout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:AppStudio.Common.Controls"
+    xmlns:html2xaml="using:AppStudio.Common.Controls.Html2Xaml"
+    xmlns:vm="using:DJNanoShow.ViewModels"
+    IconSource="Assets/SmallLogo.png"
+    mc:Ignorable="d"
+    d:DesignWidth="346"
+    Title="About">
+
+    <!-- This StackPanel acts as a root panel for vertical layout of the content sections -->
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                DataContext="{Binding AboutThisAppModel}"
+                d:DataContext="{d:DesignInstance Type=vm:AboutThisAppViewModel, IsDesignTimeCreatable=true}">
+        <TextBlock FontSize="18" Margin="0,0,0,20" TextWrapping="Wrap">
+            <Run x:Uid="AppVersion" Text="App version:"/>
+            <Run Text="{Binding AppVersion}" />
+            <Run Text="- https://appstudio.windows.com" />
+        </TextBlock>
+        <TextBlock FontSize="18" Margin="0,0,0,20">
+            <Run x:Uid="DevelopedBy" Text="Developed by:" />
+            <Run Text="{Binding Publisher}"/>
+        </TextBlock>
+        <ScrollViewer Grid.Row="1" Margin="0,0,0,25" Width="266" Height="400" ZoomMode="Disabled"
+                      HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <RichTextBlock html2xaml:Properties.Html="{Binding AboutText}"  Foreground="Black" Style="{StaticResource RichDescriptionStyle}"/>
+        </ScrollViewer>
+    </StackPanel>
+</SettingsFlyout>

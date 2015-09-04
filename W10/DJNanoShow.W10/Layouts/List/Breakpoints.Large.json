@@ -1,0 +1,60 @@
+﻿{
+  "breakpoints": [
+    {
+      //Small Phones
+      "maxwidth": "321",
+      "properties": {
+        "itemsDesiredWidth": "300",
+        "itemMargin": "2,2,2,2",
+        "titleFontSize": "15",
+        "subTitleFontSize": "13"
+      }
+    },
+    {
+      //Big Phones
+      "maxwidth": "500",
+      "properties": {
+        "itemsDesiredWidth": "300",
+        "itemMargin": "4,4,4,4",
+        "titleFontSize": "17",
+        "subTitleFontSize": "15"
+      }
+    },
+    {
+      "maxwidth": "900",
+      "properties": {
+        "itemsDesiredWidth": "330",
+        "itemMargin": "6,6,6,6",
+        "titleFontSize": "17",
+        "subTitleFontSize": "15"
+      }
+    },
+    {
+      "maxwidth": "1140",
+      "properties": {
+        "itemsDesiredWidth": "400",
+        "itemMargin": "10,10,10,10",
+        "titleFontSize": "19",
+        "subTitleFontSize": "17"
+      }
+    },
+    {
+      "maxwidth": "1650",
+      "properties": {
+        "itemsDesiredWidth": "550",
+        "itemMargin": "10,10,10,10",
+        "titleFontSize": "21",
+        "subTitleFontSize": "19"
+      }
+    },
+    {
+      "maxwidth": "*",
+      "properties": {
+        "itemsDesiredWidth": "700",
+        "itemMargin": "10,10,10,10",
+        "titleFontSize": "21",
+        "subTitleFontSize": "19"
+      }
+    }
+  ]
+}

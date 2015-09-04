@@ -1,0 +1,296 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:was_controls="using:AppStudio.Common.Controls"
+    xmlns:html2xaml="using:AppStudio.Common.Controls.Html2Xaml"
+    xmlns:converters="using:AppStudio.Common.Converters"
+    xmlns:app_controls="using:DJNanoShow.Controls">
+
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <converters:StringVisibilityConverter x:Key="StringVisibilityConverter"/>
+
+    <!--Detail_Text-->
+    <DataTemplate x:Key="Detail_Text">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <app_controls:PageHeaderControl HeaderText="{Binding Title}" PageHeaderType="Text" ShowBackButton="True"/>
+            <app_controls:ErrorNotificationControl IsVisible="{Binding HasLoadDataErrors}" Grid.Row="1" Margin="120,0,120,0"/>
+            <FlipView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" VerticalAlignment="Top" Grid.Row="2">
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Margin="120,0,40,0" Text="{Binding PageTitle}" Style="{StaticResource PageTitleStyle}" MaxLines="1"/>
+                            <TextBlock Grid.Row="1" Margin="120,12,40,12" Text="{Binding Title}" Style="{StaticResource TitleStyle}" MaxLines="2"/>
+                            <ScrollViewer
+                                Grid.Row="2"
+                                Style="{StaticResource HorizontalScrollViewerStyle}"
+                                VerticalContentAlignment="Stretch"
+                                ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                                ManipulationMode="All">
+                                <StackPanel Orientation="Horizontal" Margin="120,0,120,80" VerticalAlignment="Top">
+                                    <Button Style="{StaticResource ImageButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Left" MaxWidth="480"
+                                        Visibility="{Binding Image, Converter={StaticResource StringVisibilityConverter}}"
+                                        Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding Image}">
+                                        <Viewbox StretchDirection="DownOnly" Margin="0,0,80,0">
+                                            <Image Source="{Binding Image}"/>
+                                        </Viewbox>
+                                    </Button>
+                                    <was_controls:RichTextColumns VerticalAlignment="Top">
+                                        <was_controls:RichTextColumns.ColumnTemplate>
+                                            <DataTemplate>
+                                                <RichTextBlockOverflow Width="400" Margin="0,0,80,0"/>
+                                            </DataTemplate>
+                                        </was_controls:RichTextColumns.ColumnTemplate>
+                                        <RichTextBlock Width="400" Margin="0,0,80,0" VerticalAlignment="Top"
+                                html2xaml:Properties.Html="{Binding Description}" 
+                                TextWrapping="Wrap" Style="{Binding Current.FontSize, Source={StaticResource FontSettings}, Converter={StaticResource RichDescriptionStyleConverter}}"/>
+                                    </was_controls:RichTextColumns>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+        </Grid>
+    </DataTemplate>
+    <!--Detail_Text_Snapped-->
+    <DataTemplate x:Key="Detail_Text_Snapped">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <app_controls:PageHeaderControl HeaderText="{Binding Title}" PageHeaderType="Text" ShowBackButton="True" ShowSnappedMode="True" VerticalAlignment="Top" Margin="0,40,0,0"/>
+            <app_controls:ErrorNotificationControl IsVisible="{Binding HasLoadDataErrors}" Grid.Row="1" Margin="12,0,12,0"/>
+            <FlipView Grid.Row="2" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" VerticalAlignment="Top">
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" ZoomMode="Disabled">
+                            <Grid Margin="12,0,20,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Margin="0,12,12,12" Text="{Binding Title}" LineStackingStrategy="MaxHeight" Style="{StaticResource PageTitleStyle}" />
+                                <TextBlock Grid.Row="1" Margin="0,12,12,12" Text="{Binding Title}"
+                               Style="{StaticResource TitleStyle}" LineStackingStrategy="MaxHeight" FontFamily="Segoe UI"/>
+                                <Button Style="{StaticResource ImageButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2"
+                                    Visibility="{Binding ImageUrl, Converter={StaticResource VisibilityConverter}}" MaxHeight="100"
+                                    Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding Image}">
+                                    <Viewbox StretchDirection="DownOnly">
+                                        <Image Source="{Binding Image}" Margin="0,0,80,0"/>
+                                    </Viewbox>
+                                </Button>
+                                <RichTextBlock Grid.Row="3" Margin="0,12,12,0"
+                               html2xaml:Properties.Html="{Binding Description}"   VerticalAlignment="Top"
+                               TextWrapping="Wrap" Style="{Binding Current.FontSize, Source={StaticResource FontSettings}, Converter={StaticResource RichDescriptionStyleConverter}}"/>
+                            </Grid>
+                        </ScrollViewer>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+        </Grid>
+    </DataTemplate>
+
+    <!--Detail_Photo-->
+    <DataTemplate x:Key="Detail_Photo">
+        <Grid x:Name="PhotoDetailGrid">
+            <FlipView ItemsSource="{Binding Items}" Grid.RowSpan="2" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" VerticalAlignment="Top">
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width=".7*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.ColumnSpan="2" Source="{Binding Image}" Stretch="Uniform"/>
+
+                            <Border Grid.Column="0" Margin="37,0,0,40" MaxHeight="200"
+                                VerticalAlignment="Bottom"
+                                Visibility="{Binding DataContext.IsFullScreen, ElementName=PhotoDetailGrid, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{StaticResource BoxBackgroundColor}" Opacity="0.8" />
+                                </Border.Background>
+                                <ScrollViewer ZoomMode="Disabled">
+                                    <StackPanel Margin="40,20,20,20">
+                                        <TextBlock Text="{Binding PageTitle}" Style="{StaticResource PageTitleStyle}" Foreground="{StaticResource BoxForeground}"/>
+                                        <TextBlock Text="{Binding Title}" Margin="0,10,0,0" Style="{StaticResource BoxTitleStyle}"/>
+                                        <RichTextBlock Style="{StaticResource BoxRichDescriptionStyle}" Foreground="{StaticResource BoxForeground}"
+                                            html2xaml:Properties.Html="{Binding Description}"  />
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Border>                            
+                            <AppBarToggleButton Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,10"
+                                IsCompact="True" IsChecked="True" Style="{StaticResource InfoAppBarToggleButtonStyle}"
+                                                Command="{Binding DataContext.FullScreenCommand, ElementName=PhotoDetailGrid}">
+                                <AppBarToggleButton.Icon>
+                                    <FontIcon FontFamily="Arial" Glyph="&#x0069;" />
+                                </AppBarToggleButton.Icon>
+                            </AppBarToggleButton>
+                        </Grid>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+            <app_controls:ErrorNotificationControl IsVisible="{Binding HasLoadDataErrors}" Margin="120,30,120,12" VerticalAlignment="Top"/>
+            <app_controls:PageHeaderControl ShowBackButton="True" PageHeaderType="None" VerticalAlignment="Top" Margin="0,30,0,0"/>
+        </Grid>
+    </DataTemplate>
+
+    
+    <!--Detail_Photo_Snapped-->
+    <DataTemplate x:Key="Detail_Photo_Snapped">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <app_controls:PageHeaderControl PageHeaderType="None" ShowBackButton="True" ShowSnappedMode="True" VerticalAlignment="Top" Margin="0,30,0,0"/>
+            <app_controls:ErrorNotificationControl Grid.Row="1" IsVisible="{Binding HasLoadDataErrors}" Margin="12,0,12,0"/>
+            <FlipView Grid.Row="2" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" VerticalAlignment="Top">
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image Source="{Binding Image}" />
+
+                            <Border Margin="40" MaxHeight="200"
+                            VerticalAlignment="Bottom"
+                            Visibility="{Binding ElementName=ViewInfoToggleButton, Mode=OneWay, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{StaticResource BoxBackgroundColor}" Opacity="0.8" />
+                                </Border.Background>
+                                <ScrollViewer VerticalAlignment="Bottom" Margin="10,0,0,0" ZoomMode="Disabled">
+                                    <StackPanel Margin="40,20,20,20">
+                                        <TextBlock Text="{Binding PageTitle}" Margin="10,0,0,20" Style="{StaticResource BoxTitleStyle}"/>
+                                        <TextBlock Text="{Binding Title}" Margin="10,0,0,20" Style="{StaticResource BoxTitleStyle}"/>
+                                        <RichTextBlock Style="{StaticResource BoxRichDescriptionStyle}" html2xaml:Properties.Html="{Binding Description}"  />
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Border>
+                            <AppBarToggleButton x:Name="ViewInfoToggleButton" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,0"
+                                IsCompact="True" IsChecked="True" Style="{StaticResource InfoAppBarToggleButtonStyle}">
+                                <AppBarToggleButton.Icon>
+                                    <FontIcon FontFamily="Arial" Glyph="&#x0069;" />
+                                </AppBarToggleButton.Icon>
+                            </AppBarToggleButton>
+                        </Grid>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+        </Grid>
+    </DataTemplate>
+
+    <!--Detail_Multicolumn-->
+    <DataTemplate x:Key="Detail_Multicolumn">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <app_controls:PageHeaderControl HeaderText="{Binding Title}" PageHeaderType="Text" ShowBackButton="True"/>
+            <app_controls:ErrorNotificationControl Grid.Row="1" IsVisible="{Binding HasLoadDataErrors}" Margin="120,0"/>
+            <ScrollViewer x:Name="MainScroll" Style="{StaticResource HorizontalScrollViewerStyle}" VerticalContentAlignment="Stretch" Grid.Row="2">
+                <ItemsControl ItemsSource="{Binding SelectedItem}" Margin="120,0,40,40">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Auto" HorizontalScrollMode="Disabled" ZoomMode="Disabled">
+                                <StackPanel Width="600" Margin="0,0,40,0">
+                                    <TextBlock Style="{StaticResource PageTitleStyle}" Text="{Binding PageTitle}"/>
+                                    <TextBlock Margin="0,12,0,0" VerticalAlignment="Top" Style="{StaticResource TitleStyle}" Text="{Binding Title}"/>
+                                    <Button Margin="0,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource ImageButtonStyle}"
+                                        Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding Image}">
+                                        <Viewbox StretchDirection="DownOnly">
+                                            <Image Source="{Binding Image}"/>
+                                        </Viewbox>
+                                    </Button>
+                                    <RichTextBlock Margin="0,12,0,0" Style="{StaticResource RichDescriptionStyle}" html2xaml:Properties.Html="{Binding Description}" />
+                                </StackPanel>
+                            </ScrollViewer>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </DataTemplate>
+    <!--Detail_Multicolumn_Snapped-->
+    <DataTemplate x:Key="Detail_Multicolumn_Snapped">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <app_controls:PageHeaderControl HeaderText="{Binding Title}" PageHeaderType="Text" ShowBackButton="True" ShowSnappedMode="True" VerticalAlignment="Top" Margin="0,40,0,0"/>
+            <app_controls:ErrorNotificationControl Grid.Row="1" IsVisible="{Binding HasLoadDataErrors}" Margin="12,0,12,0"/>
+            <ScrollViewer x:Name="MainScroll" Grid.Row="2">
+                <ItemsControl ItemsSource="{Binding SelectedItem}" Margin="12,12,12,0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ScrollViewer ZoomMode="Disabled">
+                                <StackPanel Width="260" Margin="0,0,0,40" HorizontalAlignment="Left">
+                                    <TextBlock Style="{StaticResource PageTitleStyle}" Text="{Binding Title}"/>
+                                    <TextBlock Margin="0,12,0,0" VerticalAlignment="Top" Style="{StaticResource TitleStyle}" Text="{Binding SubTitle}"/>
+                                    <Button Margin="0,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource ImageButtonStyle}"
+                                        Command="{Binding Source={StaticResource ActionCommands}, Path=ShowImage}" CommandParameter="{Binding Image}">
+                                        <Viewbox StretchDirection="DownOnly">
+                                            <Image Source="{Binding Image}"/>
+                                        </Viewbox>
+                                    </Button>
+                                    <RichTextBlock Margin="0,12,0,0" Style="{StaticResource RichDescriptionStyle}" html2xaml:Properties.Html="{Binding Description}" />
+                                </StackPanel>
+                            </ScrollViewer>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </DataTemplate>
+
+    <!--Detail_YouTube-->
+    <DataTemplate x:Key="Detail_YouTube">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <app_controls:ErrorNotificationControl IsVisible="{Binding HasLoadDataErrors}" Margin="120,0,120,0"/>
+            <app_controls:YouTubeViewer Grid.Row="1" PageTitle="{Binding Title}" TitleText="{Binding SelectedItem.PageTitle}" EmbedUrl="{Binding SelectedItem.Content}" SummaryText="{Binding SelectedItem.Description}" DataContext="{Binding}" ShowSnappedMode="False"/>
+        </Grid>
+    </DataTemplate>
+    <!--Detail_YouTube_Snapped-->
+    <DataTemplate x:Key="Detail_YouTube_Snapped">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <app_controls:ErrorNotificationControl IsVisible="{Binding HasLoadDataErrors}" Margin="12,0,12,0"/>
+            <app_controls:YouTubeViewer Grid.Row="1" PageTitle="{Binding Title}" TitleText="{Binding SelectedItem.PageTitle}" DataContext="{Binding}" EmbedUrl="{Binding SelectedItem.Content}" SummaryText="{Binding SelectedItem.Description}" ShowSnappedMode="True"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

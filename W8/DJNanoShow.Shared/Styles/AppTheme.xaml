@@ -1,0 +1,134 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:AppStudio.Common.Converters">
+
+    <!--<APP COLORS>-->
+    <!--Pages Colors-->
+    <Color x:Key="AppBackgroundColor">#000000</Color>
+    <!--Text Colors-->
+    <Color x:Key="AppTitleForegroundColor">#ffffff</Color>
+    <Color x:Key="PageTitleForegroundColor">#ffffff</Color>
+    <Color x:Key="TitleForegroundColor">#ffffff</Color>
+    <Color x:Key="SubtitleForegroundColor">#ffffff</Color>
+    <Color x:Key="DescriptionForegroundColor">#ffffff</Color>
+    <!--AppBar Colors-->
+    <Color x:Key="AppBarBackgroundColor">#000000</Color>
+    <Color x:Key="AppBarForegroundColor">#ffffff</Color>
+    <!--Tile Colors-->
+    <Color x:Key="BoxBackgroundColor">#000000</Color>
+    <Color x:Key="BoxForegroundColor">#ffffff</Color>
+
+    <!--Text Brushes-->
+    <SolidColorBrush x:Key="AppTitleForeground" Color="{StaticResource AppTitleForegroundColor}"/>
+    <SolidColorBrush x:Key="PageTitleForeground" Color="{StaticResource PageTitleForegroundColor}"/>
+    <SolidColorBrush x:Key="TitleForeground" Color="{StaticResource TitleForegroundColor}"/>
+    <SolidColorBrush x:Key="SubtitleForeground" Color="{StaticResource SubtitleForegroundColor}"/>
+    <SolidColorBrush x:Key="DescriptionForeground" Color="{StaticResource DescriptionForegroundColor}"/>
+    <!--AppBar Brushes-->
+    <SolidColorBrush x:Key="AppBarBackground" Color="{StaticResource AppBarBackgroundColor}"/>
+    <SolidColorBrush x:Key="AppBarForeground" Color="{StaticResource AppBarForegroundColor}"/>
+    <!--Tile Brushes-->
+    <SolidColorBrush x:Key="BoxBackground" Color="{StaticResource BoxBackgroundColor}"/>
+    <SolidColorBrush x:Key="BoxForeground" Color="{StaticResource BoxForegroundColor}"/>
+
+    <BitmapImage x:Key="AppBackgroundImage" UriSource="/Assets/ApplicationBackgroundImage.jpg"/>
+    <ImageBrush x:Key="AppBackground" ImageSource="{StaticResource AppBackgroundImage}" Stretch="UniformToFill" AlignmentX="Left" />
+    <SolidColorBrush x:Key="AppBackgroundColorBrush" Color="{StaticResource AppBackgroundColor}" />
+    <BitmapImage x:Key="AppLogoImage" UriSource="/Assets/ApplicationLogo.png"/>
+    <BitmapImage x:Key="HeaderImage" UriSource="/Assets/AppTitleImage.png"/>
+    <!--</APP COLORS>-->
+
+    <Style TargetType="TextBlock" x:Key="BaseTextStyle">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="AppTitleStyle">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
+        <Setter Property="Foreground" Value="{StaticResource AppTitleForegroundColor}"/>
+        <Setter Property="FontSize" Value="{StaticResource AppTitleTextSizeNormal}"/>
+        <Setter Property="FontWeight" Value="Light"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="PageTitleStyle">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
+        <Setter Property="Foreground" Value="{StaticResource PageTitleForegroundColor}"/>
+        <Setter Property="FontSize" Value="{StaticResource PageTitleTextSizeNormal}"/>
+        <Setter Property="FontWeight" Value="Light"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="TitleStyle" BasedOn="{StaticResource BaseTextStyle}">
+        <Setter Property="Foreground" Value="{StaticResource TitleForegroundColor}"/>
+        <Setter Property="FontSize" Value="{StaticResource TitleTextSizeNormal}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="SubtitleStyle" BasedOn="{StaticResource BaseTextStyle}">
+        <Setter Property="Foreground" Value="{StaticResource SubtitleForegroundColor}"/>
+        <Setter Property="FontSize" Value="{StaticResource SubtitleTextSizeNormal}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="DescriptionStyle" BasedOn="{StaticResource BaseTextStyle}">
+        <Setter Property="Foreground" Value="{StaticResource DescriptionForegroundColor}"/>
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeNormal}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="ErrorStyle" BasedOn="{StaticResource BaseTextStyle}">
+        <Setter Property="Foreground" Value="{StaticResource SubtitleForeground}"/>
+        <Setter Property="FontSize" Value="{StaticResource SubtitleTextSizeNormal}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="RichDescriptionStyle">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
+        <Setter Property="Foreground" Value="{StaticResource DescriptionForegroundColor}"/>
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeNormal}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="BoxTitleStyle" BasedOn="{StaticResource TitleStyle}">
+        <Setter Property="Foreground" Value="{StaticResource BoxForegroundColor}"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="BoxSubtitleStyle" BasedOn="{StaticResource SubtitleStyle}">
+        <Setter Property="Foreground" Value="{StaticResource BoxForegroundColor}"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="BoxRichDescriptionStyle" BasedOn="{StaticResource RichDescriptionStyle}">
+        <Setter Property="Foreground" Value="{StaticResource BoxForegroundColor}"/>
+    </Style>
+    <Style TargetType="Grid" x:Key="BoxGrid">
+        <Setter Property="Background" Value="{StaticResource BoxBackground}"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="RichDescriptionLargeLargeStyle" BasedOn="{StaticResource RichDescriptionStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeLargeLarge}"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="RichDescriptionLargeNormalStyle" BasedOn="{StaticResource RichDescriptionStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeLargeNormal}"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="RichDescriptionLargeSmallStyle" BasedOn="{StaticResource RichDescriptionStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeLargeSmall}"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="RichDescriptionNormalLargeStyle" BasedOn="{StaticResource RichDescriptionStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeNormalLarge}"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="RichDescriptionNormalNormalStyle" BasedOn="{StaticResource RichDescriptionStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeNormalNormal}"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="RichDescriptionNormalSmallStyle" BasedOn="{StaticResource RichDescriptionStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeNormalSmall}"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="RichDescriptionSmallLargeStyle" BasedOn="{StaticResource RichDescriptionStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeSmallLarge}"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="RichDescriptionSmallNormalStyle" BasedOn="{StaticResource RichDescriptionStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeSmallNormal}"/>
+    </Style>
+    <Style TargetType="RichTextBlock" x:Key="RichDescriptionSmallSmallStyle" BasedOn="{StaticResource RichDescriptionStyle}">
+        <Setter Property="FontSize" Value="{StaticResource DescriptionTextSizeSmallSmall}"/>
+    </Style>
+    <converters:RichTextBlockStyleConverter x:Key="RichDescriptionStyleConverter"
+                                            LargeStyle="{StaticResource RichDescriptionNormalLargeStyle}"
+                                            NormalStyle="{StaticResource RichDescriptionNormalNormalStyle}"
+                                            SmallStyle="{StaticResource RichDescriptionNormalSmallStyle}"/>
+
+    <DataTemplate x:Key="HubSectionHeaderTemplate">
+        <TextBlock Text="{Binding}" Style="{StaticResource PageTitleStyle}"/>
+    </DataTemplate>
+</ResourceDictionary>

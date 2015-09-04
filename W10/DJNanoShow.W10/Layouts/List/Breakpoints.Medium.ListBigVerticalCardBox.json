@@ -1,0 +1,65 @@
+﻿{
+  "_import": "/Layouts/List/Breakpoints.Medium.json",
+  "breakpoints": [
+    {
+      "maxwidth": "321",
+      "properties": {
+        "itemsHeight": "220",
+        "imageHeight": "120",
+        "titleMaxLines": "3",
+        "leftMarginTitleBox": "6,6,6,0",
+        "leftMarginSubTitleBox": "6,6,6,6"
+      }
+    },
+    {
+      "maxwidth": "500",
+      "properties": {
+        "itemsHeight": "240",
+        "imageHeight": "120",
+        "titleMaxLines": "2",
+        "leftMarginTitleBox": "10,10,10,0",
+        "leftMarginSubTitleBox": "10,10,10,10"
+      }
+    },
+    {
+      "maxwidth": "900",
+      "properties": {
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "titleMaxLines": "2",
+        "leftMarginTitleBox": "12,12,12,0",
+        "leftMarginSubTitleBox": "12,12,12,12"
+      }
+    },
+    {
+      "maxwidth": "1140",
+      "properties": {
+        "itemsHeight": "350",
+        "imageHeight": "210",
+        "titleMaxLines": "2",
+        "leftMarginTitleBox": "16,16,16,0",
+        "leftMarginSubTitleBox": "16,16,16,16"
+      }
+    },
+    {
+      "maxwidth": "1820",
+      "properties": {
+        "itemsHeight": "400",
+        "imageHeight": "240",
+        "titleMaxLines": "2",
+        "leftMarginTitleBox": "16,16,16,0",
+        "leftMarginSubTitleBox": "16,16,16,16"
+      }
+    },
+    {
+      "maxwidth": "*",
+      "properties": {
+        "itemsHeight": "500",
+        "imageHeight": "300",
+        "titleMaxLines": "3",
+        "leftMarginTitleBox": "16,16,16,0",
+        "leftMarginSubTitleBox": "16,16,16,16"
+      }
+    }
+  ]
+}

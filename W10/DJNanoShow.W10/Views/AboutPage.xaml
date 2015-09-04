@@ -1,0 +1,49 @@
+<base:PageBase
+    x:Class="DJNanoShow.Views.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:base="using:DJNanoShow"
+    DataContext="{Binding AboutThisAppModel, RelativeSource={RelativeSource Self}}"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource AppBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Height="48" HorizontalAlignment="Stretch" Background="{StaticResource AppBarBackground}">
+            <TextBlock x:Uid="AboutSection" Margin="60,0,12,0" Foreground="{StaticResource AppBarForeground}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
+        </Grid>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Margin="24,32,24,8">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                    <Image Source="ms-appx:///Assets/Logo.png" VerticalAlignment="Top"/>
+                    <StackPanel Margin="24,-9,0,0" VerticalAlignment="Top">
+                        <TextBlock Text="DJNano Show" Style="{StaticResource TitleStyle}"/>
+                        <TextBlock Style="{StaticResource SubtitleStyle}">
+                            <Run x:Uid="AppVersion" Text="Version:"/>
+                            <Run Text="{Binding AppVersion}" />
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock Margin="0,25,0,0" Style="{StaticResource SubtitleStyle}">
+                    <Run x:Uid="DevelopedBy" Text="Developed by:" />
+                    <Run Text="{Binding Publisher}"/>
+                </TextBlock>
+                <HyperlinkButton Content="https://appstudio.windows.com/" NavigateUri="https://appstudio.windows.com/" Margin="0,0,0,0" Style="{StaticResource HyperlinkStyle}"/>
+                <TextBlock Margin="0,25,0,0" Text="{Binding AboutText}" Style="{StaticResource DescriptionStyle}"/>
+                <TextBlock x:Uid="AboutSectionLicenses" Margin="0,25,0,0" Style="{StaticResource TitleStyle}"/>
+                <TextBlock x:Uid="AboutSectionLicensesDescription" Margin="0,6,0,0" Style="{StaticResource SubtitleStyle}"/>
+                <TextBlock Text="Newtonsoft JSON" Margin="0,12,0,0" Style="{StaticResource DescriptionStyle}"/>
+                <HyperlinkButton Content="Open project URL" NavigateUri="http://www.newtonsoft.com/json" Margin="0,-4,0,0" Style="{StaticResource HyperlinkStyle}"/>
+                <TextBlock Text="Html Agility Pack" Margin="0,12,0,0" Style="{StaticResource DescriptionStyle}"/>
+                <HyperlinkButton Content="Open project URL" NavigateUri="http://htmlagilitypack.codeplex.com/" Margin="0,-4,0,0" Style="{StaticResource HyperlinkStyle}"/>
+                <TextBlock x:Uid="AboutSectionCapabilities" Margin="0,25,0,0" Style="{StaticResource TitleStyle}"/>
+                <TextBlock Text="·   Internet connection" Margin="0,12,0,0" Style="{StaticResource SubtitleStyle}"/>
+                <TextBlock Text="·   Application Insights" Margin="0,12,0,0" Style="{StaticResource SubtitleStyle}"/>
+                <TextBlock Text="·   Tile Updater" Margin="0,12,0,0" Style="{StaticResource SubtitleStyle}"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</base:PageBase>

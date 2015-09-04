@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Config\ActionConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\ConfigBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\PageConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\SectionConfigBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DesignTime\DesignViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\TileServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutThisAppViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ComposedItemViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DataViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DetailViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ItemViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PrivacyViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MenuExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ImageViewer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ToursListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\VideosListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\VideosDetailPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SocialListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\InstagramListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\InstagramDetailPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\YouTubeListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\YouTubeDetailPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\FacebookListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\FacebookDetailPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\TwitterListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\DiscographyListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\DiscographyDetailPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\BiographyListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\Tours1Schema.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\Discography1Schema.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\ToursConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\VideosConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\SocialConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\InstagramConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\YouTubeConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\FacebookConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\TwitterConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\DiscographyConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sections\BiographyConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\PlatformCommands.cs" />
+        <PRIResource Include="$(MSBuildThisFileDirectory)Strings\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Design\DesignData.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Design\DesignDataHtml.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Design\DesignDataMenu.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Design\DesignDataTD.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Design\DarkGray.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Design\LightGray.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Design\MediumGray.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\Tile1.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\Tile2.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\Tile3.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\Tile4.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\Tile5.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\Tile6.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\Tile7.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\Tile8.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\IconInstagram.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\iconYouTube.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\IconFacebook.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\IconTwitter.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\nanobio.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\djnano1.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\ApplicationLogo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\AppTitleImage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\ApplicationBackgroundImage.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Data\Social.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Data\Biography.htm">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ErrorNotificationControl.xaml.cs">
+      <DependentUpon>ErrorNotificationControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\ErrorNotificationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+        <Page Include="$(MSBuildThisFileDirectory)Styles\AppBarButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\AppTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\DefaultTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+</Project>

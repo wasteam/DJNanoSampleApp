@@ -1,0 +1,35 @@
+<base:PageBase
+    x:Class="DJNanoShow.Views.YouTubeDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:was_actions="using:AppStudio.Common.Actions"
+    xmlns:base="using:DJNanoShow"
+    xmlns:controls="using:DJNanoShow.Controls"
+    xmlns:vm="using:DJNanoShow.ViewModels"
+    DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}"
+    d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource AppBackgroundColorBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <ContentPresenter DataContext="{Binding}" 
+                          ContentTemplate="{StaticResource Detail_YouTube}"/>
+
+    </Grid>
+    <Page.BottomAppBar>
+        <was_actions:ActionsCommandBar ClosedDisplayMode="Minimal" ActionsSource="{Binding SelectedItem.Actions}" 
+                                       Visibility="{Binding IsFullScreen, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}" 
+                                       Background="{StaticResource AppBarBackground}" BorderBrush="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}">
+            <was_actions:ActionsCommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="ShareItemButton" Icon="ReShare" Command="{Binding Source={StaticResource ActionCommands}, Path=Share}"/>
+            </was_actions:ActionsCommandBar.SecondaryCommands>
+        </was_actions:ActionsCommandBar>
+    </Page.BottomAppBar>
+</base:PageBase>

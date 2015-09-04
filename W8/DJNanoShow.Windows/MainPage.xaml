@@ -1,0 +1,105 @@
+<base:PageBase
+    x:Class="DJNanoShow.MainPage"
+    DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:was_commands="using:AppStudio.Common.Commands"
+    xmlns:was_actions="using:AppStudio.Common.Actions"
+    xmlns:base="using:DJNanoShow"
+    xmlns:controls="using:DJNanoShow.Controls"
+    xmlns:vm="using:DJNanoShow.ViewModels"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource AppBackground}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <controls:PageHeaderControl x:Name="Header" LastUpdateDateTime="{Binding LastUpdated}" ShowBackButton="False" PageHeaderType="Logo" HeaderText="{StaticResource AppTitle}" ShowSnappedMode="False"/>
+        <Hub x:Name="Container" Grid.Row="1" Padding="0,0,0,0" Margin="0,-18,0,0" DataContext="{Binding}" was_commands:SectionHeaderClickCommand.Command="{Binding SectionHeaderClickCommand}">
+            <HubSection x:Name="ToursSection" Header="{Binding Title}" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}"
+                        ContentTemplate="{StaticResource Panel_List_NoPhoto}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="120,12,0,30"
+                        DataContext="{Binding Tours}"
+                        d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"/>
+            <HubSection x:Name="VideosSection" Header="{Binding Title}" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}"
+                        ContentTemplate="{StaticResource Panel_List_HorizontalCards}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="80,12,0,30"
+                        DataContext="{Binding Videos}"
+                        d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"/>
+            <HubSection x:Name="SocialSection" Header="{Binding Title}" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}"
+                        ContentTemplate="{StaticResource Panel_Menu_GridPhoto}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="80,12,0,30"
+                        DataContext="{Binding Social}"
+                        d:DataContext="{d:DesignData Source=/Assets/Design/DesignDataMenu.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"/>
+            <HubSection x:Name="DiscographySection" Header="{Binding Title}" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}"
+                        ContentTemplate="{StaticResource Panel_List_VerticalCards}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="80,12,0,30"
+                        DataContext="{Binding Discography}"
+                        d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"/>
+            <HubSection x:Name="BiographySection" Header="{Binding Title}" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}"
+                        ContentTemplate="{StaticResource Panel_List_Html}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="80,12,120,30"
+                        DataContext="{Binding Biography}"
+                        d:DataContext="{d:DesignData Source=/Assets/Design/DesignDataHtml.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"/>
+        </Hub>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="SnappedView">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Container" Storyboard.TargetProperty="Orientation">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Orientation>Vertical</Orientation>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Header" Storyboard.TargetProperty="ShowSnappedMode">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="True"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToursSection" Storyboard.TargetProperty="ContentTemplate">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_List_NoPhoto_Snapped}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToursSection" Storyboard.TargetProperty="Padding">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,24,10"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VideosSection" Storyboard.TargetProperty="ContentTemplate">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_List_HorizontalCards_Snapped}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VideosSection" Storyboard.TargetProperty="Padding">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,24,10"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SocialSection" Storyboard.TargetProperty="ContentTemplate">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_Menu_GridPhoto_Snapped}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SocialSection" Storyboard.TargetProperty="Padding">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,24,10"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DiscographySection" Storyboard.TargetProperty="ContentTemplate">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_List_VerticalCards_Snapped}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DiscographySection" Storyboard.TargetProperty="Padding">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,24,10"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BiographySection" Storyboard.TargetProperty="ContentTemplate">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_List_Html_Snapped}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BiographySection" Storyboard.TargetProperty="Padding">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,24,10"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="FullscreenView">
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <was_actions:ActionsCommandBar ActionsSource="{Binding Actions}" Visibility="{Binding HasActions, Converter={StaticResource BoolToVisibilityConverter}}"
+                                       Background="{StaticResource AppBarBackground}" BorderBrush="{StaticResource AppBarBackground}" Foreground="{StaticResource AppBarForeground}"/>
+    </Page.BottomAppBar>
+</base:PageBase>

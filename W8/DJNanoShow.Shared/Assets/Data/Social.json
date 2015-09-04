@@ -1,0 +1,30 @@
+[
+  {
+    "MenuType": "Page",
+    "Title": "Instagram",
+    "Icon": "/Assets/DataImages/IconInstagram.png",
+    "Target": "InstagramListPage",
+    "_id": "321f732a-b8f4-4852-90b1-df8db2f34779"
+  },
+  {
+    "MenuType": "Page",
+    "Title": "YouTube",
+    "Icon": "/Assets/DataImages/iconYouTube.png",
+    "Target": "YouTubeListPage",
+    "_id": "35e812f9-a1a4-4431-a808-365c5e5f4502"
+  },
+  {
+    "MenuType": "Page",
+    "Title": "Facebook",
+    "Icon": "/Assets/DataImages/IconFacebook.png",
+    "Target": "FacebookListPage",
+    "_id": "55383e3a-d8c3-4762-9cf7-db6d17fe24eb"
+  },
+  {
+    "MenuType": "Page",
+    "Title": "Twitter",
+    "Icon": "/Assets/DataImages/IconTwitter.png",
+    "Target": "TwitterListPage",
+    "_id": "b8eab6c5-23e9-4e86-bd15-1c0247c82e21"
+  }
+]
