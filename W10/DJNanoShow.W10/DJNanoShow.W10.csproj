@@ -105,6 +105,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Layouts\List\ListTour.xaml.cs">
+      <DependentUpon>ListTour.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Config\ActionConfig.cs" />
     <Compile Include="Config\ConfigBase.cs" />
@@ -296,6 +299,10 @@
     <Compile Include="Layouts\List\ListPhoto.xaml.cs">
       <DependentUpon>ListPhoto.xaml</DependentUpon>
     </Compile>
+    <Page Include="Layouts\List\ListTour.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Layouts\List\ListTextCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -485,6 +492,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Layouts\List\Breakpoints.Large.ListTour.json" />
     <None Include="Service References\Application Insights\ConnectedService.json" />
     <None Include="project.json" />
   </ItemGroup>

@@ -75,7 +75,7 @@
             </was_controls:SectionList.LoadingTemplate>
             <was_controls:SectionListItem
                 HeaderLinkVisibility="Collapsed"
-                TitleVisibility="Collapsed"
+                TitleVisibility="Collapsed"                
                 ErrorVisibility="Collapsed"
                 LoadingVisibility="Collapsed"
                 ManageLoading="False">
@@ -90,11 +90,12 @@
                 DataContext="{Binding Tours}" 
                 HeaderLinkClickCommand="{Binding SectionHeaderClickCommand}" 
                 HeaderLinkVisibility="Visible"
+                Background="{StaticResource AppBarBackground}"
                 ErrorVisibility="{Binding HasLoadDataErrors, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 LoadingVisibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}">
                 <DataTemplate>
-                    <list_layouts:ListTextCard DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="14,0,6,0"/>
+                    <list_layouts:ListTour DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="14,0,6,0"/>
                 </DataTemplate>
             </was_controls:SectionListItem>
             <was_controls:SectionListItem
