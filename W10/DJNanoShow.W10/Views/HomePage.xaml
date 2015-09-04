@@ -74,6 +74,19 @@
                 </DataTemplate>
             </was_controls:SectionList.LoadingTemplate>
             <was_controls:SectionListItem
+                HeaderLinkVisibility="Collapsed"
+                TitleVisibility="Collapsed"
+                ErrorVisibility="Collapsed"
+                LoadingVisibility="Collapsed"
+                ManageLoading="False">
+                <DataTemplate>
+                    <Grid>
+                        <Image Source="/Assets/DjNanoHeroImage.jpg"
+                            Stretch="Uniform"/>
+                    </Grid>
+                </DataTemplate>
+            </was_controls:SectionListItem>
+            <was_controls:SectionListItem
                 DataContext="{Binding Tours}" 
                 HeaderLinkClickCommand="{Binding SectionHeaderClickCommand}" 
                 HeaderLinkVisibility="Visible"

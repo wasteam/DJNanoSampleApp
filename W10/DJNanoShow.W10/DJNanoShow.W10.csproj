@@ -145,6 +145,7 @@
     <PRIResource Include="Strings\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\DjNanoHeroImage.jpg" />
     <Content Include="Properties\Default.rd.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -201,7 +202,8 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Layouts\Controls\DataUpdateInformationControl.xaml">
       <SubType>Designer</SubType>
