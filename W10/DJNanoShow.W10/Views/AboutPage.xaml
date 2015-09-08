@@ -12,8 +12,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Height="48" HorizontalAlignment="Stretch" Background="{StaticResource AppBarBackground}">
-            <TextBlock x:Uid="AboutSection" Margin="60,0,12,0" Foreground="{StaticResource AppBarForeground}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
+        <Grid Height="48" HorizontalAlignment="Stretch" Background="{StaticResource MenuBackground}">
+            <TextBlock x:Uid="AboutSection" Margin="60,0,12,0" Foreground="{StaticResource MenuText}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
         </Grid>
         <ScrollViewer Grid.Row="1">
             <StackPanel Margin="24,32,24,8">

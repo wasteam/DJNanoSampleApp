@@ -7,6 +7,8 @@ using AppStudio.Common.Commands;
 using AppStudio.DataProviders;
 using Windows.ApplicationModel.DataTransfer;
 using DJNanoShow.Config;
+using Windows.UI.Xaml;
+using DJNanoShow.Services;
 
 namespace DJNanoShow.ViewModels
 {
@@ -20,10 +22,15 @@ namespace DJNanoShow.ViewModels
             : base(sectionConfig)
         {
             Items = new ObservableCollection<ComposedItemViewModel>();
-
+            FullScreenService.FullScreenModeChanged += FullScreenModeChanged;
             _sectionConfig = sectionConfig;
 
             Title = _sectionConfig.DetailPage.Title;
+        }
+
+        private void FullScreenModeChanged(object sender, bool isFullScreen)
+        {
+            this.IsFullScreen = isFullScreen;
         }
 
         public ComposedItemViewModel SelectedItem
@@ -42,6 +49,22 @@ namespace DJNanoShow.ViewModels
             get { return _isFullScreen; }
             set { SetProperty(ref _isFullScreen, value); }
         }
+        public Visibility FullScreenCommandVisibility
+        {
+            get
+            {
+                var qualifiers = Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView().QualifierValues;
+                var isOnMobile = qualifiers.ContainsKey("DeviceFamily") && qualifiers["DeviceFamily"].ToLowerInvariant() == "Mobile".ToLowerInvariant();
+                if (isOnMobile)
+                {
+                    return Visibility.Collapsed;
+                }
+                else
+                {
+                    return Visibility.Visible;
+                }
+            }
+        }
 
         public ICommand FullScreenCommand
         {
@@ -49,7 +72,7 @@ namespace DJNanoShow.ViewModels
             {
                 return new RelayCommand(() =>
                 {
-                    this.IsFullScreen = !_isFullScreen;
+                    FullScreenService.ChangeFullScreenMode();
                 });
             }
         }

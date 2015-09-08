@@ -7,11 +7,13 @@ namespace DJNanoShow.Navigation
 {
     public abstract class NavigationNode : ObservableBase
     {
-        private bool _isSelected;
         public string Title { get; set; }
         public string Label { get; set; }
+        public string FontIcon { get; set; }
+        public string Image { get; set; }
         public abstract bool IsContainer { get; }
 
+        private bool _isSelected;
         public bool IsSelected
         {
             get

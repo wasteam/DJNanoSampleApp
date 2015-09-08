@@ -1,0 +1,36 @@
+﻿{
+  "breakpoints": [
+    {
+      "maxwidth": "800",
+      "properties": {
+        "displayMode": "Overlay",
+        "pageTitleMargin": "69,0,12,0",
+        "homeAppBarRow": "3",
+        "homeAppBarColumn": "0",        
+        "homeAppBarColumnSpan": "2",
+        "listAppBarRow": "5",
+        "listAppBarColumn": "0",        
+        "listAppBarColumnSpan": "2",
+        "detailAppBarRow": "2",
+        "detailAppBarColumn": "0",        
+        "detailAppBarColumnSpan": "2"
+      }
+    },
+    {
+      "maxwidth": "*",
+      "properties": {
+        "displayMode": "CompactOverlay",
+        "pageTitleMargin": "21,0,12,0",
+        "homeAppBarRow": "0",
+        "homeAppBarColumn": "1",        
+        "homeAppBarColumnSpan": "1",
+        "listAppBarRow": "0",
+        "listAppBarColumn": "1",        
+        "listAppBarColumnSpan": "1",
+        "detailAppBarRow": "0",
+        "detailAppBarColumn": "1",        
+        "detailAppBarColumnSpan": "1"
+      }
+    }
+  ]
+}

@@ -68,16 +68,16 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="topBarBackground" Grid.Row="0" Grid.ColumnSpan="2" Background="{StaticResource AppBarBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48"/>
-        <TextBlock x:Name="appTitle" Grid.Row="0" Grid.Column="0" Margin="60,0,12,0" Text="{Binding ViewModel.SelectedItem.PageTitle}" Foreground="{StaticResource AppBarForeground}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
+        <Grid x:Name="topBarBackground" Grid.Row="0" Grid.ColumnSpan="2" Background="{StaticResource MenuBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48"/>
+        <TextBlock x:Name="appTitle" Grid.Row="0" Grid.Column="0" Margin="60,0,12,0" Text="{Binding ViewModel.SelectedItem.PageTitle}" Foreground="{StaticResource MenuText}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
         <was_actions:ActionsCommandBar 
             x:Name="appBar"
             HideOnLandscape="False" 
             ActionsSource="{Binding ViewModel.SelectedItem.Actions}"
-            Background="{StaticResource AppBarBackground}">
+            Background="{StaticResource MenuBackground}">
             <was_actions:ActionsCommandBar.CommandBarOverflowPresenterStyle>
                 <Style TargetType="CommandBarOverflowPresenter">
-                    <Setter Property="Background" Value="{StaticResource AppBarBackground}"/>
+                    <Setter Property="Background" Value="{StaticResource MenuBackground}"/>
                 </Style>
             </was_actions:ActionsCommandBar.CommandBarOverflowPresenterStyle>
             <was_actions:ActionsCommandBar.SecondaryCommands>

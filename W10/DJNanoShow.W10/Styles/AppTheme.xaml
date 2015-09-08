@@ -11,8 +11,13 @@
     <SolidColorBrush x:Key="SubtitleForeground" Color="{StaticResource SubtitleForegroundColor}"/>
     <SolidColorBrush x:Key="DescriptionForeground" Color="{StaticResource DescriptionForegroundColor}"/>
     <!--AppBar Brushes-->
+    <!--<SolidColorBrush x:Key="AppBarBackground" Color="{StaticResource AppBarBackgroundColor}"/>
+    <SolidColorBrush x:Key="AppBarForeground" Color="{StaticResource AppBarForegroundColor}"/>-->
     <SolidColorBrush x:Key="AppBarBackground" Color="{StaticResource AppBarBackgroundColor}"/>
     <SolidColorBrush x:Key="AppBarForeground" Color="{StaticResource AppBarForegroundColor}"/>
+    <SolidColorBrush x:Key="MenuBackground" Color="{StaticResource MenuBackgroundColor}"/>
+    <SolidColorBrush x:Key="MenuText" Color="{StaticResource MenuTextColor}"/>
+    <SolidColorBrush x:Key="MenuButton" Color="{StaticResource MenuButtonColor}"/>
     <!--Tile Brushes-->
     <SolidColorBrush x:Key="BoxBackground" Color="{StaticResource BoxBackgroundColor}"/>
     <SolidColorBrush x:Key="BoxForeground" Color="{StaticResource BoxForegroundColor}"/>

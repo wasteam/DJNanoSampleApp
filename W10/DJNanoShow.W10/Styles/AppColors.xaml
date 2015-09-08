@@ -10,7 +10,10 @@
     <Color x:Key="SubtitleForegroundColor">#ffffff</Color>
     <Color x:Key="DescriptionForegroundColor">#ffffff</Color>
     <!--AppBar Colors-->
-    <Color x:Key="AppBarBackgroundColor">#171c20</Color>
+    <Color x:Key="MenuBackgroundColor">#171c20</Color>
+    <Color x:Key="MenuTextColor">#ffffff</Color>
+    <Color x:Key="MenuButtonColor">#448ccb</Color>
+    <Color x:Key="AppBarBackgroundColor">#000000</Color>
     <Color x:Key="AppBarForegroundColor">#ffffff</Color>
     <!--Tile Colors-->
     <Color x:Key="BoxBackgroundColor">#171c20</Color>

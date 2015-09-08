@@ -185,7 +185,7 @@ namespace DJNanoShow.ViewModels
         }
 
         private bool CanPerformLoad()
-        {
+        {                            
             return DataProvider.IsLocal || NetworkInterface.GetIsNetworkAvailable();
         }
     }

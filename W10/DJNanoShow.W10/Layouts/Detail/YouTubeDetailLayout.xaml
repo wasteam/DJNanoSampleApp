@@ -21,11 +21,15 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="infoPanel.Visibility" Value="Collapsed"/>
+                        <Setter Target="DisableFullScreenButton.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <WebView Source="{Binding ViewModel.SelectedItem.Content, ElementName=root}" Unloaded="WebView_Unloaded"/>
+        <Button x:Name="DisableFullScreenButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,40,40" Click="DisableFullScreenClick" Visibility="{Binding ViewModel.IsFullScreen, Converter={StaticResource BoolToVisibilityConverter}}">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#57816;" FontSize="40" Foreground="White"/>
+        </Button>
         <Grid x:Name="infoPanel" MaxHeight="250" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                   Visibility="{Binding ViewModel.IsFullScreen, ElementName=root, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}">
             <Grid.Background>

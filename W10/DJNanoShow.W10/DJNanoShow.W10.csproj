@@ -126,6 +126,7 @@
     <Compile Include="Config\PageConfig.cs" />
     <Compile Include="Config\SectionConfigBase.cs" />
     <Compile Include="DesignTime\DesignViewModel.cs" />
+    <Compile Include="Services\FullScreenService.cs" />
     <Compile Include="Services\TileServices.cs" />
     <Compile Include="Utils\DateTime.extensions.cs" />
     <Compile Include="ViewModels\AboutThisAppViewModel.cs" />
@@ -161,10 +162,14 @@
     <PRIResource Include="Strings\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\DataImages\FacebookIcon.png" />
+    <Content Include="Assets\DataImages\InstagramIcon.png" />
     <Content Include="Assets\DataImages\layoutFacebook.png" />
     <Content Include="Assets\DataImages\layoutInstagram.png" />
     <Content Include="Assets\DataImages\layoutTwitter.png" />
     <Content Include="Assets\DataImages\layoutYoutube.png" />
+    <Content Include="Assets\DataImages\TwitterIcon.png" />
+    <Content Include="Assets\DataImages\YouTubeIcon.png" />
     <Content Include="Assets\DjNanoHeroImage.jpg" />
     <Content Include="Properties\Default.rd.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -542,6 +547,7 @@
     <Content Include="Layouts\List\Breakpoints.Large.ListTour.json" />
     <Content Include="Layouts\List\Breakpoints.Large.Twitter.json" />
     <Content Include="Layouts\List\Breakpoints.Medium.Album.json" />
+    <Content Include="Assets\ResponsiveBehaviorsVBP.json" />
     <None Include="Service References\Application Insights\ConnectedService.json" />
     <None Include="project.json" />
   </ItemGroup>

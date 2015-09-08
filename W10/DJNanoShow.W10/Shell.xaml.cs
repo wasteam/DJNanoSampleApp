@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Controls;
 using AppStudio.Common.Navigation;
 using DJNanoShow.ViewModels;
 using DJNanoShow.Views;
+using DJNanoShow.Services;
 
 namespace DJNanoShow
 {
@@ -37,6 +38,14 @@ namespace DJNanoShow
         {
             NavigationService.Initialize(typeof(App), MainFrame);
             NavigationService.NavigateToPage(typeof(HomePage));
+        }
+
+        private void PageLayout_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Escape && ViewModel.CurrentPageName.Contains("DetailPage"))
+            {
+                FullScreenService.ChangeFullScreenMode();
+            }
         }
     }
 }

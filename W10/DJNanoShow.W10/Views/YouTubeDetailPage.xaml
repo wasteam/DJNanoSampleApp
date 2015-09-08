@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:was_actions="using:AppStudio.Common.Actions"
+    xmlns:was_controls="using:AppStudio.Controls"
     xmlns:base="using:DJNanoShow"
     xmlns:vm="using:DJNanoShow.ViewModels"
     xmlns:layouts="using:DJNanoShow.Layouts"
@@ -14,30 +15,12 @@
     DataContext="{Binding RelativeSource={RelativeSource Self}}"
     d:DataContext="{d:DesignData Source=/Assets/Design/DetailDesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"
     mc:Ignorable="d">
+    <Page.Resources>
+        <was_controls:VisualBreakpoints
+            ConfigFile="/Assets/ResponsiveBehaviorsVBP.json" x:Name="vbpResponsive"/>
+    </Page.Resources>
     <Grid Background="{StaticResource AppBackground}">
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup >
-                <VisualState x:Name="narrow">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="appBar.(Grid.Row)" Value="2" />
-                        <Setter Target="appBar.(Grid.Column)" Value="0"/>
-                        <Setter Target="appBar.(Grid.ColumnSpan)" Value="2"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="wide">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="appBar.(Grid.Row)" Value="0" />
-                        <Setter Target="appBar.(Grid.Column)" Value="1"/>
-                        <Setter Target="appBar.(Grid.ColumnSpan)" Value="1"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
@@ -68,23 +51,47 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="topBarBackground" Grid.Row="0" Grid.ColumnSpan="2" Background="{StaticResource AppBarBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48"/>
-        <TextBlock x:Name="appTitle" Grid.Row="0" Grid.Column="0" Margin="60,0,12,0" Text="{Binding ViewModel.SelectedItem.PageTitle}" Foreground="{StaticResource AppBarForeground}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
-        <was_actions:ActionsCommandBar 
-            x:Name="appBar"
-            HideOnLandscape="True" 
+        <Grid Grid.Row="0" x:Name="topBarBackground" Grid.ColumnSpan="2" Background="{StaticResource MenuBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48" Visibility="{Binding ViewModel.IsFullScreen, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}">
+            <TextBlock x:Name="appTitle" Margin="{Binding Active.pageTitleMargin, Source={StaticResource vbpResponsive}}" Text="{Binding ViewModel.SelectedItem.PageTitle}" Foreground="{StaticResource MenuText}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
+        </Grid>
+        <was_actions:ActionsCommandBar
+            x:Name="appBar"            
+            HideOnLandscape="True"
             ActionsSource="{Binding ViewModel.SelectedItem.Actions}"
-            Background="{StaticResource AppBarBackground}">
+            Background="{StaticResource MenuBackground}"
+            Foreground="{StaticResource MenuText}"
+            Visibility="{Binding ViewModel.IsFullScreen, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}"
+            Grid.Row="{Binding Active.listAppBarRow, Source={StaticResource vbpResponsive}}"
+            Grid.Column="{Binding Active.listAppBarColumn, Source={StaticResource vbpResponsive}}"
+            Grid.ColumnSpan="{Binding Active.listAppBarColumnSpan, Source={StaticResource vbpResponsive}}">
             <was_actions:ActionsCommandBar.CommandBarOverflowPresenterStyle>
                 <Style TargetType="CommandBarOverflowPresenter">
-                    <Setter Property="Background" Value="{StaticResource AppBarBackground}"/>
+                    <Setter Property="Background" Value="{StaticResource MenuBackground}"/>
                 </Style>
             </was_actions:ActionsCommandBar.CommandBarOverflowPresenterStyle>
+            <!--IF PHOTO OR YOUTUBE-->
             <was_actions:ActionsCommandBar.PrimaryCommands>
-                <AppBarButton x:Uid="FullScreenButton" Icon="FullScreen" Command="{Binding ViewModel.FullScreenCommand, ElementName=root}" Style="{StaticResource WasAppBarButtonStyle}"/>
+                <AppBarButton x:Uid="FullScreenButton" Icon="FullScreen" Command="{Binding ViewModel.FullScreenCommand, ElementName=root}" Visibility="{Binding ViewModel.FullScreenCommandVisibility, ElementName=root}" Style="{StaticResource WasAppBarButtonStyle}"/>
             </was_actions:ActionsCommandBar.PrimaryCommands>
+            <!--END IF-->
             <was_actions:ActionsCommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="ShareItemButton" Icon="ReShare" Command="{Binding Source={StaticResource ActionCommands}, Path=Share}"/>
+                <AppBarButton x:Uid="ShareItemButton" Icon="ReShare" Command="{Binding Source={StaticResource ActionCommands}, Path=Share}">
+                </AppBarButton>
+                <AppBarButton x:Uid="SmallTextButton" Click="AppBarButton_Click" Tag="{StaticResource DescriptionTextSizeSmall}">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe UI" Glyph="&#x0041;" FontSize="10"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Uid="NormalTextButton" Click="AppBarButton_Click" Tag="{StaticResource DescriptionTextSizeNormal}">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe UI" Glyph="&#x0041;" FontSize="15"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Uid="BigTextButton" Click="AppBarButton_Click" Tag="{StaticResource DescriptionTextSizeLarge}">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe UI" Glyph="&#x0041;" FontSize="20"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
             </was_actions:ActionsCommandBar.SecondaryCommands>
         </was_actions:ActionsCommandBar>
 

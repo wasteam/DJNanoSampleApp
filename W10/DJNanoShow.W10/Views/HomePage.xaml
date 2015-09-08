@@ -14,32 +14,12 @@
     xmlns:base="using:DJNanoShow"
     DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}"
     mc:Ignorable="d">
+    <Page.Resources>
+        <was_controls:VisualBreakpoints
+            ConfigFile="/Assets/ResponsiveBehaviorsVBP.json" x:Name="vbpResponsive"/>
+    </Page.Resources>
 
     <Grid Background="{StaticResource AppBackground}">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup >
-                <VisualState x:Name="narrow">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="appBar.(Grid.Row)" Value="3" />
-                        <Setter Target="appBar.(Grid.Column)" Value="0"/>
-                        <Setter Target="appBar.(Grid.ColumnSpan)" Value="2"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="wide">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="appBar.(Grid.Row)" Value="0" />
-                        <Setter Target="appBar.(Grid.Column)" Value="1"/>
-                        <Setter Target="appBar.(Grid.ColumnSpan)" Value="1"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -50,12 +30,15 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="{StaticResource AppBarBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48"/>
-        <TextBlock Grid.Row="0" Grid.Column="0" Margin="60,0,12,0" Text="{Binding PageTitle}" Foreground="{StaticResource AppBarForeground}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="{StaticResource MenuBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="{Binding Active.pageTitleMargin, Source={StaticResource vbpResponsive}}" Text="{Binding PageTitle}" Foreground="{StaticResource MenuText}" FontSize="21" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
         <was_actions:ActionsCommandBar
                     x:Name="appBar"
-                    ActionsSource="{Binding Actions}" IsVisible="{Binding HasActions}" Foreground="{StaticResource AppBarForeground}"
-                    Background="{StaticResource AppBarBackground}">
+                    ActionsSource="{Binding Actions}" IsVisible="{Binding HasActions}" Foreground="{StaticResource MenuText}"
+                    Background="{StaticResource MenuBackground}"
+                    Grid.Row="{Binding Active.homeAppBarRow, Source={StaticResource vbpResponsive}}"
+                    Grid.Column="{Binding Active.homeAppBarColumn, Source={StaticResource vbpResponsive}}"
+                    Grid.ColumnSpan="{Binding Active.homeAppBarColumnSpan, Source={StaticResource vbpResponsive}}">
         </was_actions:ActionsCommandBar>
         <was_controls:SectionList Grid.Row="1" Grid.ColumnSpan="2" x:Uid="SectionListItem" ErrorColor="{StaticResource PageTitleForeground}" LoadingTemplateStaticHeight="3">
             <was_controls:SectionList.TitleTemplate>
@@ -90,7 +73,7 @@
                 DataContext="{Binding Tours}" 
                 HeaderLinkClickCommand="{Binding SectionHeaderClickCommand}" 
                 HeaderLinkVisibility="Visible"
-                Background="{StaticResource AppBarBackground}"
+                Background="{StaticResource MenuBackground}"
                 ErrorVisibility="{Binding HasLoadDataErrors, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 LoadingVisibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}">

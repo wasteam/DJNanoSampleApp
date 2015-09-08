@@ -6,6 +6,8 @@ using AppStudio.Common.Navigation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using DJNanoShow.Navigation;
+using Windows.UI.Xaml.Controls;
+using DJNanoShow.Services;
 
 namespace DJNanoShow.ViewModels
 {
@@ -13,16 +15,38 @@ namespace DJNanoShow.ViewModels
     {
         private AppNavigation _navigation;
         private bool _navPanelOpened;
+        private bool _checkSizeChanged = true;
+        public string CurrentPageName;
+        private SplitViewDisplayMode _splitViewDisplayMode;
         private Visibility _hamburguerButtonVisibility;
+        public Visibility HamburguerButtonVisibility
+        {
+            get { return _hamburguerButtonVisibility; }
+            set { SetProperty(ref _hamburguerButtonVisibility, value); }
+        }
+        public static void SetHamburguerButtonProperties(Visibility hamburguerButtonVisibility)
+        {
+            SetHamburguerButtonVisibility(null, hamburguerButtonVisibility);
+        }
+        public static event EventHandler<Visibility> SetHamburguerButtonVisibility;
 
         public ShellViewModel()
         {
             Navigation = new AppNavigation();
             Navigation.LoadNavigation();
+            if (Window.Current.Bounds.Width < 800)
+            {
+                this.SplitViewDisplayMode = SplitViewDisplayMode.Overlay;
+            }
+            else
+            {
+                this.SplitViewDisplayMode = SplitViewDisplayMode.CompactOverlay;
+            }
             HamburguerButtonVisibility = Visibility.Visible;
             SetHamburguerButtonVisibility += ((sender, hamburguerButtonVisibility) => { HamburguerButtonVisibility = hamburguerButtonVisibility; });
-
+            Window.Current.SizeChanged += WindowSizeChanged;
             NavigationService.NavigatedToPage += NavigationService_NavigatedToPage;
+            FullScreenService.FullScreenModeChanged += FullScreenModeChanged;
             SystemNavigationManager.GetForCurrentView().BackRequested += ((sender, e) =>
             {
                 if (NavigationService.CanGoBack())
@@ -33,12 +57,32 @@ namespace DJNanoShow.ViewModels
             });
         }
 
-        public static event EventHandler<Visibility> SetHamburguerButtonVisibility;
-
-        public Visibility HamburguerButtonVisibility
+        private void WindowSizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
-            get { return _hamburguerButtonVisibility; }
-            set { SetProperty(ref _hamburguerButtonVisibility, value); }
+            if (_checkSizeChanged == false) return;
+            if (e.Size.Width <= 800)
+            {
+                this.SplitViewDisplayMode = SplitViewDisplayMode.Overlay;
+            }
+            else
+            {
+                this.SplitViewDisplayMode = SplitViewDisplayMode.CompactOverlay;
+            }
+        }
+
+        private void FullScreenModeChanged(object sender, bool isFullScreenModeEnabled)
+        {
+            if (isFullScreenModeEnabled)
+            {
+                HamburguerButtonVisibility = Visibility.Collapsed;
+                _checkSizeChanged = false;
+                this.SplitViewDisplayMode = SplitViewDisplayMode.Overlay;
+            }
+            else
+            {
+                HamburguerButtonVisibility = Visibility.Visible;
+                _checkSizeChanged = true;
+            }
         }
 
         public AppNavigation Navigation
@@ -51,6 +95,12 @@ namespace DJNanoShow.ViewModels
         {
             get { return _navPanelOpened; }
             set { SetProperty(ref _navPanelOpened, value); }
+        }
+
+        public SplitViewDisplayMode SplitViewDisplayMode
+        {
+            get { return _splitViewDisplayMode; }
+            set { SetProperty(ref _splitViewDisplayMode, value); }
         }
 
         public ICommand ItemSelected
@@ -82,14 +132,10 @@ namespace DJNanoShow.ViewModels
                 return NavigationService.GoBackCommand;
             }
         }
-        public static void SetHamburguerButtonProperties(Visibility hamburguerButtonVisibility)
-        {
-            SetHamburguerButtonVisibility(null, hamburguerButtonVisibility);
-        }
-
 
         private void NavigationService_NavigatedToPage(object sender, NavigatedEventArgs e)
         {
+            CurrentPageName = e.Page.FullName;
             var navigatedNode = Navigation.FindPage(e.Page);
             if (navigatedNode != null)
             {
