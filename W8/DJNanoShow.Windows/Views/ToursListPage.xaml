@@ -48,10 +48,10 @@
             <GridView Grid.Row="2" Padding="120,0,120,40" ItemsSource="{Binding Items}"
                       SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"
                       was_commands:ItemClickCommand.Command="{Binding ItemClickCommand}"
-                      ItemContainerStyle="{StaticResource GridViewTemplateStyle}" ItemTemplate="{StaticResource List_NoPhoto}"/>
+                      ItemContainerStyle="{StaticResource GridViewTemplateStyle}" ItemTemplate="{StaticResource List_Tour}"/>
         </Grid>
         <ContentPresenter x:Name="ContentHostSnapped" Grid.Row="2" Content="{Binding}"  Margin="12,12,12,0"
-                          ContentTemplate="{StaticResource Panel_List_NoPhoto_Snapped}" Visibility="Collapsed"/>
+                          ContentTemplate="{StaticResource List_Tour_Snapped}" Visibility="Collapsed"/>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="SnappedView">

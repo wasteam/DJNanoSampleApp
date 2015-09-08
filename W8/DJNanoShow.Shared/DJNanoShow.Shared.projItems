@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -58,9 +58,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sections\DiscographyConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sections\BiographyConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Commands\PlatformCommands.cs" />
-        <PRIResource Include="$(MSBuildThisFileDirectory)Strings\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\layoutFacebook.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\layoutInstagram.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\layoutTwitter.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\layoutYoutube.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DataImages\yticon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Design\DesignData.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -145,8 +150,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ErrorNotificationControl.xaml.cs">
       <DependentUpon>ErrorNotificationControl.xaml</DependentUpon>
     </Compile>
@@ -154,7 +157,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-        <Page Include="$(MSBuildThisFileDirectory)Styles\AppBarButtons.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Styles\AppBarButtons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

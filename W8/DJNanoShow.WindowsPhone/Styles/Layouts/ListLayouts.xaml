@@ -6,6 +6,232 @@
     xmlns:was_controls="using:AppStudio.Common.Controls"
     xmlns:controls="using:DJNanoShow.Controls">
 
+    <DataTemplate x:Key="List_Tour">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ProgressBar Height="3" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <controls:ErrorNotificationControl Grid.Row="1" IsVisible="{Binding HasLoadDataErrors}" />
+            <ListView Grid.Row="2" ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"
+                      was_commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,5">
+                            <TextBlock Style="{StaticResource TitleStyle}" Text="{Binding Title}" MaxLines="2" FontWeight="Bold" Foreground="Red"/>
+                            <TextBlock Margin="0,5,0,0" Style="{StaticResource SubtitleStyle}" MaxLines="1" Text="{Binding SubTitle}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="List_TwitterCard">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ProgressBar Height="3" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <controls:ErrorNotificationControl Grid.Row="1" IsVisible="{Binding HasLoadDataErrors}" />
+            <ListView Grid.Row="2" ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"
+                      was_commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="130" Margin="0,0,0,5" Background="White" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0" Margin="5">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" AlignmentX="Center" AlignmentY="Center"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Grid Grid.Column="1" Margin="12,-5,0,0">
+                                <Grid Width="900" Height="1"/>
+                                <TextBlock Style="{StaticResource SubtitleStyle}" Text="{Binding SubTitle}" Foreground="Black"/>
+                                <Image Source="/Assets/DataImages/layoutTwitter.png" Width="30" Height="30" Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,2,2"/>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="List_FacebookCards">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ProgressBar Height="3" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <controls:ErrorNotificationControl Grid.Row="1" IsVisible="{Binding HasLoadDataErrors}" />
+            <GridView Grid.Row="2" ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"
+                      was_commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,5,5" Width="155" Height="250" Style="{StaticResource BoxGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="120"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle Width="900"/>
+                            <Grid Grid.Row="0">
+                                <Image Source="{Binding Image}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="30" Height="30" Background="White">
+                                    <Image Source="/Assets/DataImages/layoutFacebook.png" Stretch="Fill"/>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Row="1" Background="#3b5998">
+                                <Grid Margin="12,5,12,5">
+                                    <TextBlock Style="{StaticResource BoxTitleStyle}" Text="{Binding Title}" Foreground="White"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="List_InstagramCards">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ProgressBar Height="3" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <controls:ErrorNotificationControl Grid.Row="1" IsVisible="{Binding HasLoadDataErrors}" />
+            <GridView Grid.Row="2" ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"
+                      was_commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,5,5" Width="155" Height="250" Style="{StaticResource BoxGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="120"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle Width="900"/>
+                            <Grid Grid.Row="0">
+                                <Image Source="{Binding Image}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="30" Height="30" Background="White">
+                                    <Image Source="/Assets/DataImages/layoutInstagram.png" Stretch="Fill"/>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Row="1" Background="#675144">
+                                <Grid Margin="12,5,12,5">
+                                    <TextBlock Style="{StaticResource BoxTitleStyle}" Text="{Binding Title}" Foreground="White"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="List_YouTubeCards">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ProgressBar Height="3" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <controls:ErrorNotificationControl Grid.Row="1" IsVisible="{Binding HasLoadDataErrors}" />
+            <ListView Grid.Row="2" ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"
+                      was_commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="120" Margin="0,0,0,10" Style="{StaticResource BoxGrid}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0">
+                                <Image Source="{Binding Image}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="40" Height="40" Background="White">
+                                    <Image Source="/Assets/DataImages/layoutYoutube.png" Stretch="Fill"/>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Rectangle Width="900" Height="0"/>
+                                <Grid Margin="16,5,16,5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Style="{StaticResource BoxTitleStyle}" Text="{Binding Title}" MaxLines="2"/>
+                                    <TextBlock Grid.Row="1" Margin="0,5,0,0" Style="{StaticResource BoxSubtitleStyle}" Text="{Binding SubTitle}" Foreground="Red"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="Menu_Social">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ProgressBar Height="3" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <controls:ErrorNotificationControl Grid.Row="1" IsVisible="{Binding HasLoadDataErrors}" />
+            <GridView Grid.Row="2" Width="360" ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"
+                      was_commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="160" Height="160">
+                            <Image Margin="5" Source="{Binding Image}" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="List_AlbumCards">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ProgressBar Height="3" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <controls:ErrorNotificationControl Grid.Row="1" IsVisible="{Binding HasLoadDataErrors}" />
+            <GridView Grid.Row="2" ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"
+                      was_commands:ItemClickCommand.Command="{Binding ItemClickCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,5,5" Width="155" Height="250" Style="{StaticResource BoxGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="155"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle Width="900"/>
+                            <Image Source="{Binding Image}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Grid Grid.Row="1">
+                                <Grid Margin="12,5,12,5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Style="{StaticResource BoxTitleStyle}" Text="{Binding Title}" MaxLines="2"/>
+                                    <TextBlock Grid.Row="1" Style="{StaticResource BoxSubtitleStyle}" Text="{Binding SubTitle}" Foreground="Red"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
+    </DataTemplate>
     <DataTemplate x:Key="List_NoPhoto">
         <Grid>
             <Grid.RowDefinitions>

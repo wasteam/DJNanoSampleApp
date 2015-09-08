@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using AppStudio.Common;
-using AppStudio.Common.Actions;
-using AppStudio.Common.Commands;
 using AppStudio.Common.Navigation;
 using AppStudio.DataProviders;
 using AppStudio.DataProviders.Core;
@@ -86,7 +84,7 @@ namespace DJNanoShow.Sections
                     Actions = actions
                 };
             }
-        }
+        }        
 
         public override string PageTitle
         {

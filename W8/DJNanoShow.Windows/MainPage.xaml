@@ -25,19 +25,19 @@
         <controls:PageHeaderControl x:Name="Header" LastUpdateDateTime="{Binding LastUpdated}" ShowBackButton="False" PageHeaderType="Logo" HeaderText="{StaticResource AppTitle}" ShowSnappedMode="False"/>
         <Hub x:Name="Container" Grid.Row="1" Padding="0,0,0,0" Margin="0,-18,0,0" DataContext="{Binding}" was_commands:SectionHeaderClickCommand.Command="{Binding SectionHeaderClickCommand}">
             <HubSection x:Name="ToursSection" Header="{Binding Title}" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}"
-                        ContentTemplate="{StaticResource Panel_List_NoPhoto}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="120,12,0,30"
+                        ContentTemplate="{StaticResource Panel_List_Tour}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="120,12,0,30"
                         DataContext="{Binding Tours}"
                         d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"/>
             <HubSection x:Name="VideosSection" Header="{Binding Title}" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}"
-                        ContentTemplate="{StaticResource Panel_List_HorizontalCards}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="80,12,0,30"
+                        ContentTemplate="{StaticResource Panel_List_YouTubeCards}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="80,12,0,30"
                         DataContext="{Binding Videos}"
                         d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"/>
             <HubSection x:Name="SocialSection" Header="{Binding Title}" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}"
-                        ContentTemplate="{StaticResource Panel_Menu_GridPhoto}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="80,12,0,30"
+                        ContentTemplate="{StaticResource Panel_Menu_Social}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="80,12,0,30"
                         DataContext="{Binding Social}"
                         d:DataContext="{d:DesignData Source=/Assets/Design/DesignDataMenu.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"/>
             <HubSection x:Name="DiscographySection" Header="{Binding Title}" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}"
-                        ContentTemplate="{StaticResource Panel_List_VerticalCards}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="80,12,0,30"
+                        ContentTemplate="{StaticResource Panel_List_AlbumCards}" IsHeaderInteractive="{Binding HasMoreItems}" Padding="80,12,0,30"
                         DataContext="{Binding Discography}"
                         d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}"/>
             <HubSection x:Name="BiographySection" Header="{Binding Title}" HeaderTemplate="{StaticResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}"
@@ -61,25 +61,25 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="True"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToursSection" Storyboard.TargetProperty="ContentTemplate">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_List_NoPhoto_Snapped}"/>
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_List_Tour_Snapped}"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ToursSection" Storyboard.TargetProperty="Padding">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,24,10"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VideosSection" Storyboard.TargetProperty="ContentTemplate">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_List_HorizontalCards_Snapped}"/>
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_List_YouTubeCards_Snapped}"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VideosSection" Storyboard.TargetProperty="Padding">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,24,10"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SocialSection" Storyboard.TargetProperty="ContentTemplate">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_Menu_GridPhoto_Snapped}"/>
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_Menu_Social_Snapped}"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SocialSection" Storyboard.TargetProperty="Padding">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,24,10"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DiscographySection" Storyboard.TargetProperty="ContentTemplate">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_List_VerticalCards_Snapped}"/>
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Panel_List_AlbumCards_Snapped}"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DiscographySection" Storyboard.TargetProperty="Padding">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="24,10,24,10"/>
