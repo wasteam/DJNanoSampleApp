@@ -20,6 +20,11 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <UapDefaultAssetScale>100</UapDefaultAssetScale>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxPackageDir>C:\Projects\AppStudio\GitHub\DJNanoShow\W10\Store\AppPackages\</AppxPackageDir>
+    <AppxBundlePlatforms>x86|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>60A6925C7249CD235DF404D98C4ECFE7FC735750</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>DJNanoShow.W10_StoreKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -171,6 +176,8 @@
     <Content Include="Assets\DataImages\TwitterIcon.png" />
     <Content Include="Assets\DataImages\YouTubeIcon.png" />
     <Content Include="Assets\DjNanoHeroImage.jpg" />
+    <None Include="DJNanoShow.W10_StoreKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

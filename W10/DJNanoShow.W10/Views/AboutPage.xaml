@@ -18,7 +18,7 @@
         <ScrollViewer Grid.Row="1">
             <StackPanel Margin="24,32,24,8">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                    <Image Source="ms-appx:///Assets/Logo.png" VerticalAlignment="Top"/>
+                    <Image Source="ms-appx:///Assets/ApplicationLogo.png" VerticalAlignment="Top"/>
                     <StackPanel Margin="24,-9,0,0" VerticalAlignment="Top">
                         <TextBlock Text="DJNano Show" Style="{StaticResource TitleStyle}"/>
                         <TextBlock Style="{StaticResource SubtitleStyle}">
