@@ -1,36 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" 
-         xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" 
-         xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" 
-         xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
-         xmlns:appstudio="http://schemas.microsoft.com/developer/appx/2015/appstudio" 
-         IgnorableNamespaces="appstudio">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:appstudio="http://schemas.microsoft.com/developer/appx/2015/appstudio" IgnorableNamespaces="appstudio">
   <Identity Name="MicrosoftWindowsAppStudio.DJNanoShow" Publisher="CN=687403C5-72F1-42B7-87C2-A050E9459F28" Version="1.0.0.0" />
-
-  <mp:PhoneIdentity PhoneProductId="2a4aecfd-7ef0-487a-b45f-785033404119" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
-
+  <mp:PhoneIdentity PhoneProductId="2a4aecfd-7ef0-487a-b45f-785033404119" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>DJNano Show</DisplayName>
     <PublisherDisplayName>Microsoft Windows App Studio</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
-
   <Prerequisites>
     <OSMinVersion>6.3.1</OSMinVersion>
     <OSMaxVersionTested>6.3.1</OSMaxVersionTested>
   </Prerequisites>
-
   <Resources>
     <Resource Language="x-generate" />
   </Resources>
-
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="DJNanoShow.App">
-      <m3:VisualElements DisplayName="DJNano Show" Description="Official DJ Nano App created with App Studio"
-          Square150x150Logo="Assets\Logo.png"
-          Square44x44Logo="Assets\SmallLogo.png"
-          ForegroundText="light"
-          BackgroundColor="#000000">
+      <m3:VisualElements DisplayName="DJNano Show" Description="Official DJ Nano App created with App Studio" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" ForegroundText="light" BackgroundColor="#000000">
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png" ShortName="DJNano Show">
           <m3:TileUpdate Recurrence="halfHour" UriTemplate="http://ds.winappstudio.com/api/tile/2a4aecfd-7ef0-487a-b45f-785033404119/3a102651-2d2f-4a86-b616-cbddb10e0e7e?columnName=ImageUrl" />
           <m3:ShowNameOnTiles>
@@ -38,33 +24,30 @@
             <m3:ShowOn Tile="wide310x150Logo" />
           </m3:ShowNameOnTiles>
         </m3:DefaultTile>
-        <m3:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#000000"/>
-        <m3:ApplicationView MinWidth="width320"/>
+        <m3:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#000000" />
+        <m3:ApplicationView MinWidth="width320" />
         <!--Used in XAML Designer. DO NOT REMOVE-->
         <m3:InitialRotationPreference>
           <m3:Rotation Preference="portrait" />
         </m3:InitialRotationPreference>
       </m3:VisualElements>
-
     </Application>
   </Applications>
-
   <!-- Microphone capability required for TextToSpeech -->
   <Capabilities>
     <Capability Name="internetClientServer" />
     <DeviceCapability Name="microphone" />
   </Capabilities>
-    
   <appstudio:Metadata>
     <appstudio:Item Name="appId" Value="2a4aecfd-7ef0-487a-b45f-785033404119" />
     <appstudio:Item Name="model" Version="1.11" />
     <appstudio:Item Name="formula" Value="Win81" Version="1.11.0903.1" />
-    <appstudio:Item DataSource="Collection" Version="0.1.1"/>
-    <appstudio:Item DataSource="YouTube" Version="0.1.1"/>
-    <appstudio:Item DataSource="Menu" Version="0.1.1"/>
-    <appstudio:Item DataSource="Instagram" Version="0.1.1"/>
-    <appstudio:Item DataSource="Facebook" Version="0.1.1"/>
-    <appstudio:Item DataSource="Twitter" Version="0.1.1"/>
-    <appstudio:Item DataSource="Html" Version="0.1.1"/>
+    <appstudio:Item DataSource="Collection" Version="0.1.1" />
+    <appstudio:Item DataSource="YouTube" Version="0.1.1" />
+    <appstudio:Item DataSource="Menu" Version="0.1.1" />
+    <appstudio:Item DataSource="Instagram" Version="0.1.1" />
+    <appstudio:Item DataSource="Facebook" Version="0.1.1" />
+    <appstudio:Item DataSource="Twitter" Version="0.1.1" />
+    <appstudio:Item DataSource="Html" Version="0.1.1" />
   </appstudio:Metadata>
 </Package>
