@@ -196,3 +196,5 @@ FakesAssemblies/
 
 #Universal Windows Platform
 *.lock.json
+*.pfx
+!**/*_TemporaryKey.pfx
