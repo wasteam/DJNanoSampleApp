@@ -4,27 +4,27 @@
     "Title": "Instagram",
     "Icon": "/Assets/DataImages/IconInstagram.png",
     "Target": "InstagramListPage",
-    "_id": "f66ffaf4-1fcf-48f2-bf1d-d1ce99e881f1"
+    "_id": "fd2a6236-2bad-48c5-8abd-8ad82794cd87"
   },
   {
     "MenuType": "Page",
     "Title": "YouTube",
     "Icon": "/Assets/DataImages/iconYouTube.png",
     "Target": "YouTubeListPage",
-    "_id": "a2893891-9de1-4e07-9932-26c93300f71c"
+    "_id": "1831ffa1-f6b3-4bd3-9f55-3d1f79db39aa"
   },
   {
     "MenuType": "Page",
     "Title": "Facebook",
     "Icon": "/Assets/DataImages/IconFacebook-1.png",
     "Target": "FacebookListPage",
-    "_id": "bcc6b671-7861-4da4-aa90-fafcb07a3ff4"
+    "_id": "825faa1f-71e1-4fbf-96db-5596f28e17db"
   },
   {
     "MenuType": "Page",
     "Title": "Twitter",
     "Icon": "/Assets/DataImages/IconTwitter.png",
     "Target": "TwitterListPage",
-    "_id": "bc1412bd-1704-4882-9cf0-135d415cabf4"
+    "_id": "dbcc24ca-9238-407b-a6aa-98fd43ef85c7"
   }
 ]

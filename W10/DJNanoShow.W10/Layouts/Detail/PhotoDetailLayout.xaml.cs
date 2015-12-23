@@ -1,9 +1,12 @@
 using System;
+using System.Threading.Tasks;
+using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using DJNanoShow.Services;
 
-namespace DJNanoShow.Layouts
+namespace DJNanoShow.Layouts.Detail
 {
     public sealed partial class PhotoDetailLayout : BaseDetailLayout
     {
@@ -30,27 +33,10 @@ namespace DJNanoShow.Layouts
             set { SetValue(MaxHProperty, value); }
         }
 
-        public override void UpdateFontSize()
-        {
-        }
-
         private void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             MaxH = e.NewSize.Height;
             MaxW = e.NewSize.Width;
-        }
-
-        private void ItemTapped(object sender, TappedRoutedEventArgs e)
-        {
-            var grid = sender as Grid;
-            if (grid != null)
-            {
-                if (grid.Tag is bool)
-                {
-                    var currentValue = (bool)grid.Tag;
-                    grid.Tag = !currentValue;
-                }
-            }
         }
     }
 }

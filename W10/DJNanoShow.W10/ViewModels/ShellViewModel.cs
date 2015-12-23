@@ -1,12 +1,12 @@
 using System;
 using System.Windows.Input;
-using AppStudio.Common;
-using AppStudio.Common.Commands;
-using AppStudio.Common.Navigation;
+using AppStudio.Uwp;
+using AppStudio.Uwp.Commands;
+using AppStudio.Uwp.Navigation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
-using DJNanoShow.Navigation;
 using Windows.UI.Xaml.Controls;
+using DJNanoShow.Navigation;
 using DJNanoShow.Services;
 
 namespace DJNanoShow.ViewModels
@@ -16,19 +16,8 @@ namespace DJNanoShow.ViewModels
         private AppNavigation _navigation;
         private bool _navPanelOpened;
         private bool _checkSizeChanged = true;
-        public string CurrentPageName;
         private SplitViewDisplayMode _splitViewDisplayMode;
-        private Visibility _hamburguerButtonVisibility;
-        public Visibility HamburguerButtonVisibility
-        {
-            get { return _hamburguerButtonVisibility; }
-            set { SetProperty(ref _hamburguerButtonVisibility, value); }
-        }
-        public static void SetHamburguerButtonProperties(Visibility hamburguerButtonVisibility)
-        {
-            SetHamburguerButtonVisibility(null, hamburguerButtonVisibility);
-        }
-        public static event EventHandler<Visibility> SetHamburguerButtonVisibility;
+        private bool _isFullScreen;        
 
         public ShellViewModel()
         {
@@ -42,47 +31,24 @@ namespace DJNanoShow.ViewModels
             {
                 this.SplitViewDisplayMode = SplitViewDisplayMode.CompactOverlay;
             }
-            HamburguerButtonVisibility = Visibility.Visible;
-            SetHamburguerButtonVisibility += ((sender, hamburguerButtonVisibility) => { HamburguerButtonVisibility = hamburguerButtonVisibility; });
-            Window.Current.SizeChanged += WindowSizeChanged;
+            Window.Current.SizeChanged += ((args, e) => { WindowSizeChanged(e.Size.Width); });
             NavigationService.NavigatedToPage += NavigationService_NavigatedToPage;
             FullScreenService.FullScreenModeChanged += FullScreenModeChanged;
             SystemNavigationManager.GetForCurrentView().BackRequested += ((sender, e) =>
             {
                 if (NavigationService.CanGoBack())
                 {
+                    FullScreenService.ExitFullScreenMode();
                     e.Handled = true;
                     NavigationService.GoBack();
                 }
             });
         }
 
-        private void WindowSizeChanged(object sender, WindowSizeChangedEventArgs e)
+        public bool IsFullScreen
         {
-            if (_checkSizeChanged == false) return;
-            if (e.Size.Width <= 800)
-            {
-                this.SplitViewDisplayMode = SplitViewDisplayMode.Overlay;
-            }
-            else
-            {
-                this.SplitViewDisplayMode = SplitViewDisplayMode.CompactOverlay;
-            }
-        }
-
-        private void FullScreenModeChanged(object sender, bool isFullScreenModeEnabled)
-        {
-            if (isFullScreenModeEnabled)
-            {
-                HamburguerButtonVisibility = Visibility.Collapsed;
-                _checkSizeChanged = false;
-                this.SplitViewDisplayMode = SplitViewDisplayMode.Overlay;
-            }
-            else
-            {
-                HamburguerButtonVisibility = Visibility.Visible;
-                _checkSizeChanged = true;
-            }
+            get { return _isFullScreen; }
+            set { SetProperty(ref _isFullScreen, value); }
         }
 
         public AppNavigation Navigation
@@ -118,9 +84,13 @@ namespace DJNanoShow.ViewModels
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand(async () =>
                 {
-                    NavPanelOpened = !NavPanelOpened;
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () =>
+                    {
+                        NavPanelOpened = !NavPanelOpened;
+                    });
                 });
             }
         }
@@ -133,9 +103,39 @@ namespace DJNanoShow.ViewModels
             }
         }
 
+        private void WindowSizeChanged(double width)
+        {
+            if (!_checkSizeChanged)
+            {
+                return;
+            }
+            if (width < 800)
+            {
+                this.SplitViewDisplayMode = SplitViewDisplayMode.Overlay;
+            }
+            else
+            {
+                this.SplitViewDisplayMode = SplitViewDisplayMode.CompactOverlay;
+            }
+        }
+
+        private void FullScreenModeChanged(object sender, bool isFullScreenModeEnabled)
+        {
+            IsFullScreen = isFullScreenModeEnabled;
+            if (IsFullScreen)
+            {
+                _checkSizeChanged = false;
+                this.SplitViewDisplayMode = SplitViewDisplayMode.Overlay;
+            }
+            else
+            {
+                _checkSizeChanged = true;
+                WindowSizeChanged(Window.Current.Bounds.Width);
+            }
+        }
+
         private void NavigationService_NavigatedToPage(object sender, NavigatedEventArgs e)
         {
-            CurrentPageName = e.Page.FullName;
             var navigatedNode = Navigation.FindPage(e.Page);
             if (navigatedNode != null)
             {
@@ -158,7 +158,8 @@ namespace DJNanoShow.ViewModels
             {
                 SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
             }
-            OnPropertyChanged("GoBackCommand");
+            OnPropertyChanged("GoBackCommand");            
         }
+        
     }
 }

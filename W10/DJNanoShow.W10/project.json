@@ -1,13 +1,12 @@
-﻿{
-  "dependencies": {
-    "Microsoft.ApplicationInsights": "1.1.1-beta",
-    "Microsoft.ApplicationInsights.PersistenceChannel": "1.1.0",
+{
+  "dependencies": {  
+    "Microsoft.ApplicationInsights": "1.2.1-beta",
+    "Microsoft.ApplicationInsights.PersistenceChannel": "1.2.0",
     "Microsoft.ApplicationInsights.WindowsApps": "1.1.0",
+    "Newtonsoft.Json": "7.0.1",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "Newtonsoft.Json": "6.0.8",
-    "WindowsAppStudio.Common": "0.1.3-beta",
-    "WindowsAppStudio.Controls": "0.1.3-beta",
-    "WindowsAppStudio.DataProviders": "0.1.3-beta"
+    "WindowsAppStudio.DataProviders": "1.1.*",
+    "WindowsAppStudio.Uwp": "1.1.*"
   },
   "frameworks": {
     "uap10.0": {}

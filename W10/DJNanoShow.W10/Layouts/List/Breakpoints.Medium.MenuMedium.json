@@ -1,66 +1,91 @@
-﻿{
-  "_import": "/Layouts/List/Breakpoints.Medium.json",
-  //This Menu overrides itemsDesiredWidth property from Breakpoints.Medium.json
-  "breakpoints": [
-    {
-      "maxwidth": "321",
+﻿{  
+  "breakpoints": [{
+      "maxwidth": "318",
       "properties": {
-        "itemsDesiredWidth": "75",
-        "itemsHeight": "110",
-        "imageHeight": "60",
-        "menuMargin": "0,6,0,0",
-        "titleMaxLines": "3"
+        "itemsDesiredWidth": "69",
+        "itemsHeight": "200",
+        "imageHeight": "100",
+        "menuMargin": "0,4,0,0",        
+        "itemMargin": "2",
+        "titleFontSize": "15"
       }
     },
     {
-      "maxwidth": "500",
+      "maxwidth": "470",
       "properties": {
-        "itemsDesiredWidth": "75",
-        "itemsHeight": "120",
-        "imageHeight": "75",
-        "menuMargin": "0,6,0,0",
-        "titleMaxLines": "2"
+        "itemsDesiredWidth": "69",
+        "itemsHeight": "240",
+        "imageHeight": "120",
+        "menuMargin": "0,6,0,0",        
+        "itemMargin": "4",
+        "titleFontSize": "17"
       }
     },
     {
-      "maxwidth": "900",
+      "maxwidth": "570",
       "properties": {
-        "itemsDesiredWidth": "110",
-        "itemsHeight": "210",
-        "imageHeight": "110",
+        "itemsDesiredWidth": "114",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",    
+        "itemMargin": "4",
+        "titleFontSize": "17"
+      }
+    },
+    {
+      "maxwidth": "1278",
+      "properties": {
+        "itemsDesiredWidth": "142",
+        "itemsHeight": "280",
+        "imageHeight": "160",
         "menuMargin": "0,8,0,0",
-        "titleMaxLines": "2"
+        "itemMargin": "4",
+        "titleFontSize": "17"
       }
     },
     {
-      "maxwidth": "1140",
+      "maxwidth": "1430",
       "properties": {
-        "itemsDesiredWidth": "140",
-        "itemsHeight": "250",
-        "imageHeight": "140",
-        "menuMargin": "0,10,0,0",
-        "titleMaxLines": "2"
+        "itemsDesiredWidth": "159",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",
+        "itemMargin": "4",
+        "titleFontSize": "17"
       }
     },
     {
-      "maxwidth": "1820",
+      "maxwidth": "1600",
       "properties": {
-        "itemsDesiredWidth": "180",
-        "itemsHeight": "300",
-        "imageHeight": "180",
-        "menuMargin": "0,12,0,0",
-        "titleMaxLines": "3"
+        "itemsDesiredWidth": "178",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",
+        "itemMargin": "4",
+        "titleFontSize": "17"
+      }
+    },
+    {
+      "maxwidth": "1800",
+      "properties": {
+        "itemsDesiredWidth": "200",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",
+        "itemMargin": "4",
+        "titleFontSize": "17"
       }
     },
     {
       "maxwidth": "*",
       "properties": {
-        "itemsDesiredWidth": "220",
-        "itemsHeight": "350",
-        "imageHeight": "220",
-        "menuMargin": "0,14,0,0",
-        "titleMaxLines": "4"
+        "itemsDesiredWidth": "224",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",
+        "itemMargin": "4",
+        "titleFontSize": "17"
       }
     }
-  ]
+  ] 
 }

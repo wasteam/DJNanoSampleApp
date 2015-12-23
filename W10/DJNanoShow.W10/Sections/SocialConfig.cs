@@ -1,42 +1,43 @@
-using AppStudio.Common.Navigation;
+
+
+
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using AppStudio.DataProviders;
 using AppStudio.DataProviders.Core;
 using AppStudio.DataProviders.LocalStorage;
 using AppStudio.DataProviders.Menu;
+using AppStudio.Uwp.Navigation;
+using AppStudio.Uwp;
+using System.Linq;
 using DJNanoShow.Config;
 using DJNanoShow.ViewModels;
 
 namespace DJNanoShow.Sections
 {
-    public class SocialConfig : SectionConfigBase<LocalStorageDataConfig, MenuSchema>
+    public class SocialConfig : SectionConfigBase<MenuSchema>
     {
-        public override DataProviderBase<LocalStorageDataConfig, MenuSchema> DataProvider
+	    public override Func<Task<IEnumerable<MenuSchema>>> LoadDataAsyncFunc
         {
             get
             {
-                return new LocalStorageDataProvider<MenuSchema>();
-            }
-        }
-
-        public override LocalStorageDataConfig Config
-        {
-            get
-            {
-                return new LocalStorageDataConfig
+                var config = new LocalStorageDataConfig
                 {
                     FilePath = "/Assets/Data/Social.json"
                 };
+
+                return () => Singleton<LocalStorageDataProvider<MenuSchema>>.Instance.LoadDataAsync(config, MaxRecords);
             }
         }
 
-        public override NavigationInfo ListNavigationInfo
+        public override bool NeedsNetwork
         {
-            get 
+            get
             {
-                return NavigationInfo.FromPage("SocialListPage");
+                return false;
             }
         }
-
 
         public override ListPageConfig<MenuSchema> ListPage
         {
@@ -46,12 +47,16 @@ namespace DJNanoShow.Sections
                 {
                     Title = "Social",
 
+					PageTitle = "Social",
+
+                    ListNavigationInfo = NavigationInfo.FromPage("SocialListPage"),
+
                     LayoutBindings = (viewModel, item) =>
                     {
-                        viewModel.Title = item.Title;
-                        viewModel.Image = item.Icon;
+                        viewModel.Title = item.Title;						
+                        viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.Icon);
                     },
-                    NavigationInfo = (item) =>
+                    DetailNavigation = (item) =>
                     {
                         return item.ToNavigationInfo();
                     }
@@ -63,11 +68,5 @@ namespace DJNanoShow.Sections
         {
             get { return null; }
         }
-
-        public override string PageTitle
-        {
-            get { return "Social"; }
-        }
-
     }
 }

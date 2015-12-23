@@ -1,5 +1,5 @@
 using System;
-using AppStudio.Common;
+using AppStudio.Uwp;
 
 namespace DJNanoShow.ViewModels
 {

@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using AppStudio.Common.Navigation;
+using AppStudio.Uwp.Navigation;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 
 namespace DJNanoShow.Navigation
@@ -42,94 +43,47 @@ namespace DJNanoShow.Navigation
         public void LoadNavigation()
         {
             Nodes = new ObservableCollection<NavigationNode>();
+		    var resourceLoader = new ResourceLoader();
+			AddNode(Nodes, "Home", "\ue10f", string.Empty, "HomePage", true, @"DJNano Show");
+			AddNode(Nodes, "Tours", "\ue1d3", string.Empty, "ToursListPage", true);			
+			AddNode(Nodes, "Videos", "\ue173", string.Empty, "VideosListPage", true);			
+			AddNode(Nodes, "Gallery", "\ue12d", string.Empty, "GalleryListPage", false);			
+			var menuNodeSocial = new GroupNavigationNode("Social", "\ue10c", string.Empty);
+			AddNode(menuNodeSocial.Nodes, "Instagram", "\ue12d", string.Empty, "InstagramListPage");
+			AddNode(menuNodeSocial.Nodes, "YouTube", "\ue173", string.Empty, "YouTubeListPage");
+			AddNode(menuNodeSocial.Nodes, "Facebook", "\ue19f", string.Empty, "FacebookListPage");
+			AddNode(menuNodeSocial.Nodes, "Twitter", "\ue134", string.Empty, "TwitterListPage");
+			Nodes.Add(menuNodeSocial);
+			AddNode(Nodes, "Discography", "\ue189", string.Empty, "DiscographyListPage", true);			
+			AddNode(Nodes, "Biography", "\ue185", string.Empty, "BiographyListPage", true);			
+			AddNode(Nodes, resourceLoader.GetString("NavigationPaneAbout"), "\ue11b", string.Empty, "AboutPage");
+			AddNode(Nodes, resourceLoader.GetString("NavigationPanePrivacy"), "\ue1f7", string.Empty, string.Empty, true, string.Empty, "http://1drv.ms/1llJOkM");            
+        }
 
-            Nodes.Add(new ItemNavigationNode
+		private void AddNode(ObservableCollection<NavigationNode> nodes, string label, string fontIcon, string image, string pageName, bool isVisible = true, string title = null, string deepLinkUrl = null, bool isSelected = false)
+        {
+            if (nodes != null && isVisible)
             {
-                Title = @"DJNano Show",
-                Label = "Home",
-                FontIcon = "\ue10f",
-                IsSelected = true,
-                NavigationInfo = NavigationInfo.FromPage("HomePage")
-            });
-
-            Nodes.Add(new ItemNavigationNode
-            {
-                Label = "Tours",
-                FontIcon = "\ue709",
-                NavigationInfo = NavigationInfo.FromPage("ToursListPage")
-            });
-
-            Nodes.Add(new ItemNavigationNode
-            {
-                Label = "Videos",
-                FontIcon = "\ue102",
-                NavigationInfo = NavigationInfo.FromPage("VideosListPage")
-            });
-
-            Nodes.Add(new GroupNavigationNode
-            {
-                Label = "Social",
-                FontIcon = "\ue10c",
-                Visibility = Visibility.Visible,
-                Nodes = new ObservableCollection<NavigationNode>()
+                var node = new ItemNavigationNode
                 {
-                    new ItemNavigationNode
-                    {
-                        Label = "Instagram",
-                        Image = "/Assets/DataImages/InstagramIcon.png",
-                        NavigationInfo = NavigationInfo.FromPage("InstagramListPage")
-                    },
-                    new ItemNavigationNode
-                    {
-                        Label = "YouTube",
-                        Image = "/Assets/DataImages/YouTubeIcon.png",
-                        NavigationInfo = NavigationInfo.FromPage("YouTubeListPage")
-                    },
-                    new ItemNavigationNode
-                    {
-                        Label = "Facebook",
-                        Image = "/Assets/DataImages/FacebookIcon.png",
-                        NavigationInfo = NavigationInfo.FromPage("FacebookListPage")
-                    },
-                    new ItemNavigationNode
-                    {
-                        Label = "Twitter",
-                        Image = "/Assets/DataImages/TwitterIcon.png",
-                        NavigationInfo = NavigationInfo.FromPage("TwitterListPage")
-                    },
-                }
-            });
-
-            Nodes.Add(new ItemNavigationNode
-            {
-                Label = "Discography",
-                FontIcon = "\ue958",
-                NavigationInfo = NavigationInfo.FromPage("DiscographyListPage")
-            });
-
-            Nodes.Add(new ItemNavigationNode
-            {
-                Label = "Biography",
-                FontIcon = "\ue181",
-                NavigationInfo = NavigationInfo.FromPage("BiographyListPage")
-            });
-
-            Nodes.Add(new ItemNavigationNode
-            {
-                Label = "About",
-                FontIcon = "\ue11b",
-                NavigationInfo = NavigationInfo.FromPage("AboutPage")
-            });
-            Nodes.Add(new ItemNavigationNode
-            {
-                Label = "Privacy terms",
-                FontIcon = "\ue1F6",
-                NavigationInfo = new NavigationInfo()
+                    Title = title,
+                    Label = label,
+                    FontIcon = fontIcon,
+                    Image = image,
+                    IsSelected = isSelected,
+                    IsVisible = isVisible,
+                    NavigationInfo = NavigationInfo.FromPage(pageName)
+                };
+                if (!string.IsNullOrEmpty(deepLinkUrl))
                 {
-                    NavigationType = NavigationType.DeepLink,
-                    TargetUri = new Uri("http://1drv.ms/1llJOkM", UriKind.Absolute)
+                    node.NavigationInfo = new NavigationInfo()
+                    {
+                        NavigationType = NavigationType.DeepLink,
+                        TargetUri = new Uri(deepLinkUrl, UriKind.Absolute)
+                    };
                 }
-            });
+                nodes.Add(node);
+            }            
         }
 
         public NavigationNode FindPage(Type pageType)

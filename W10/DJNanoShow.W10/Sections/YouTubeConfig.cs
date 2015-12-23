@@ -1,47 +1,40 @@
+
+
+
 using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
-using AppStudio.Common.Actions;
-using AppStudio.Common.Commands;
-using AppStudio.Common.Navigation;
 using AppStudio.DataProviders;
 using AppStudio.DataProviders.Core;
 using AppStudio.DataProviders.YouTube;
+using AppStudio.Uwp.Actions;
+using AppStudio.Uwp.Commands;
+using AppStudio.Uwp.Navigation;
+using AppStudio.Uwp;
+using System.Linq;
 using DJNanoShow.Config;
 using DJNanoShow.ViewModels;
 
 namespace DJNanoShow.Sections
 {
-    public class YouTubeConfig : SectionConfigBase<YouTubeDataConfig, YouTubeSchema>
+    public class YouTubeConfig : SectionConfigBase<YouTubeSchema>
     {
-        public override DataProviderBase<YouTubeDataConfig, YouTubeSchema> DataProvider
+	    private readonly YouTubeDataProvider _dataProvider = new YouTubeDataProvider(new YouTubeOAuthTokens
+        {
+			ApiKey = "AIzaSyC_eh7JH13Ow4fD3HvK5cldYvObumDSWHs"
+        });
+
+		public override Func<Task<IEnumerable<YouTubeSchema>>> LoadDataAsyncFunc
         {
             get
             {
-                return new YouTubeDataProvider(new YouTubeOAuthTokens
-                {
-                    ApiKey = "AIzaSyC_eh7JH13Ow4fD3HvK5cldYvObumDSWHs"
-
-                });
-            }
-        }
-
-        public override YouTubeDataConfig Config
-        {
-            get
-            {
-                return new YouTubeDataConfig
+                var config = new YouTubeDataConfig
                 {
                     QueryType = YouTubeQueryType.Channels,
-                    Query = @"djnanoshow",
+                    Query = @"djnanoshow"
                 };
-            }
-        }
 
-        public override NavigationInfo ListNavigationInfo
-        {
-            get 
-            {
-                return NavigationInfo.FromPage("YouTubeListPage");
+                return () => _dataProvider.LoadDataAsync(config, MaxRecords);
             }
         }
 
@@ -53,15 +46,18 @@ namespace DJNanoShow.Sections
                 {
                     Title = "YouTube",
 
+					PageTitle = "YouTube",
+
+                    ListNavigationInfo = NavigationInfo.FromPage("YouTubeListPage"),
+
                     LayoutBindings = (viewModel, item) =>
                     {
                         viewModel.Title = item.Title.ToSafeString();
                         viewModel.SubTitle = item.Summary.ToSafeString();
                         viewModel.Description = null;
-                        viewModel.Image = item.ImageUrl.ToSafeString();
-
+                        viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
                     },
-                    NavigationInfo = (item) =>
+                    DetailNavigation = (item) =>
                     {
                         return NavigationInfo.FromPage("YouTubeDetailPage", true);
                     }
@@ -74,20 +70,19 @@ namespace DJNanoShow.Sections
             get
             {
                 var bindings = new List<Action<ItemViewModel, YouTubeSchema>>();
-
                 bindings.Add((viewModel, item) =>
                 {
                     viewModel.PageTitle = item.Title.ToSafeString();
                     viewModel.Title = null;
                     viewModel.Description = item.Summary.ToSafeString();
-                    viewModel.Image = null;
+                    viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(null);
                     viewModel.Content = item.EmbedHtmlFragment;
                 });
 
-				var actions = new List<ActionConfig<YouTubeSchema>>
-				{
+                var actions = new List<ActionConfig<YouTubeSchema>>
+                {
                     ActionConfig<YouTubeSchema>.Link("Go To Source", (item) => item.ExternalUrl.ToSafeString()),
-				};
+                };
 
                 return new DetailPageConfig<YouTubeSchema>
                 {
@@ -97,11 +92,5 @@ namespace DJNanoShow.Sections
                 };
             }
         }
-
-        public override string PageTitle
-        {
-            get { return "YouTube"; }
-        }
-
     }
 }

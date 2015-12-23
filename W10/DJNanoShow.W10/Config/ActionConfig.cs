@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Input;
-using AppStudio.Common.Actions;
-using AppStudio.Common.Commands;
 using AppStudio.DataProviders;
+using AppStudio.Uwp.Actions;
+using AppStudio.Uwp.Commands;
 
 namespace DJNanoShow.Config
 {

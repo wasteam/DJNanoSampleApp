@@ -1,116 +1,65 @@
+
+
+
 using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
-using AppStudio.Common;
-using AppStudio.Common.Actions;
-using AppStudio.Common.Commands;
-using AppStudio.Common.Navigation;
 using AppStudio.DataProviders;
 using AppStudio.DataProviders.Core;
-using AppStudio.DataProviders.DynamicStorage;
 using Windows.Storage;
+using AppStudio.DataProviders.DynamicStorage;
+using AppStudio.Uwp;
+using AppStudio.Uwp.Actions;
+using AppStudio.Uwp.Commands;
+using AppStudio.Uwp.Navigation;
+using System.Linq;
 using DJNanoShow.Config;
 using DJNanoShow.ViewModels;
-using Windows.ApplicationModel.Appointments;
-using Windows.UI.Xaml;
-using System.Globalization;
-using System.Collections.ObjectModel;
 
 namespace DJNanoShow.Sections
 {
-    public class ToursConfig : SectionConfigBase<DynamicStorageDataConfig, Tours1Schema>
+    public class ToursConfig : SectionConfigBase<Tours1Schema>
     {
-        public override DataProviderBase<DynamicStorageDataConfig, Tours1Schema> DataProvider
+	    public override Func<Task<IEnumerable<Tours1Schema>>> LoadDataAsyncFunc
         {
             get
             {
-                return new DynamicStorageDataProvider<Tours1Schema>();
-            }
-        }
-
-        public override DynamicStorageDataConfig Config
-        {
-            get
-            {
-                return new DynamicStorageDataConfig
+                var config = new DynamicStorageDataConfig
                 {
                     Url = new Uri("http://ds.winappstudio.com/api/data/collection?dataRowListId=c5f2660f-9fd0-4d53-9b14-157394920ffe&appId=543c63b8-2956-4450-8efd-1cf199bee7ed"),
                     AppId = "543c63b8-2956-4450-8efd-1cf199bee7ed",
                     StoreId = ApplicationData.Current.LocalSettings.Values[LocalSettingNames.StoreId] as string,
                     DeviceType = ApplicationData.Current.LocalSettings.Values[LocalSettingNames.DeviceType] as string
                 };
-            }
-        }
 
-        public override NavigationInfo ListNavigationInfo
-        {
-            get 
-            {
-                return NavigationInfo.FromPage("ToursListPage");
+                return () => Singleton<DynamicStorageDataProvider<Tours1Schema>>.Instance.LoadDataAsync(config, MaxRecords);
             }
         }
 
         public override ListPageConfig<Tours1Schema> ListPage
         {
-            get
+            get 
             {
                 return new ListPageConfig<Tours1Schema>
                 {
                     Title = "Tours",
 
+					PageTitle = "Tours",
+
+                    ListNavigationInfo = NavigationInfo.FromPage("ToursListPage"),
+
                     LayoutBindings = (viewModel, item) =>
                     {
-                        viewModel.Title = item.When.ToSafeString();
-                        viewModel.SubTitle = item.Where.ToSafeString();
+                        viewModel.Title = item.Where.ToSafeString();
+                        viewModel.SubTitle = item.When.ToSafeString();
                         viewModel.Description = "";
-                        viewModel.Image = "";
-                        var dateTime = DateTimeSafeStringParse(item.When);
-                        if (dateTime != null)
-                        {
-                            viewModel.MainCommand = new RelayCommand(() =>
-                            {
-                                Appointment a = new Appointment();
-                                a.Subject = "DJ Nano Live Show at " + item.Where + " on " + item.When;
-                                a.StartTime = new System.DateTimeOffset(dateTime.Value);
-                                a.AllDay = true;
-                                var s = AppointmentManager.ShowAddAppointmentAsync(a, RectHelper.Empty);
-                            });
-                        }
-                        viewModel.Content = item.When;
+                        viewModel.ImageUrl = ItemViewModel.LoadSafeUrl("");
                     },
-                    NavigationInfo = (item) =>
+                    DetailNavigation = (item) =>
                     {
                         return null;
                     }
                 };
-            }
-        }
-
-        public static DateTime? DateTimeSafeStringParse(string stringDateTime)
-        {
-            string dateTimeFormat = "dd/MM/yyyy";
-            DateTime result;
-            bool success = DateTime.TryParseExact(stringDateTime, dateTimeFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
-            if (success) return result;
-            else return null;
-        }
-
-        public static void RemoveDeprecatedTours(ObservableCollection<ItemViewModel> items)
-        {
-            List<ItemViewModel> deprecatedItems = new List<ItemViewModel>();
-            foreach (var t in items)
-            {
-                var dateTime = ToursConfig.DateTimeSafeStringParse(t.Content);
-                if (dateTime != null)
-                {
-                    if (dateTime.Value.Ticks < DateTime.Now.Ticks)
-                    {
-                        deprecatedItems.Add(t);
-                    }
-                }
-            }
-            foreach (var t in deprecatedItems)
-            {
-                items.Remove(t);
             }
         }
 
@@ -120,9 +69,9 @@ namespace DJNanoShow.Sections
             {
                 var bindings = new List<Action<ItemViewModel, Tours1Schema>>();
 
-				var actions = new List<ActionConfig<Tours1Schema>>
-				{
-				};
+                var actions = new List<ActionConfig<Tours1Schema>>
+                {
+                };
 
                 return new DetailPageConfig<Tours1Schema>
                 {
@@ -132,11 +81,5 @@ namespace DJNanoShow.Sections
                 };
             }
         }
-
-        public override string PageTitle
-        {
-            get { return "Tours"; }
-        }
-
     }
 }

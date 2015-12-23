@@ -1,43 +1,43 @@
-using AppStudio.Common.Navigation;
+
+
+
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using AppStudio.DataProviders;
 using AppStudio.DataProviders.Core;
 using AppStudio.DataProviders.Html;
 using AppStudio.DataProviders.LocalStorage;
+using AppStudio.Uwp.Navigation;
+using AppStudio.Uwp;
+using System.Linq;
 using DJNanoShow.Config;
 using DJNanoShow.ViewModels;
 
 namespace DJNanoShow.Sections
 {
-    public class BiographyConfig : SectionConfigBase<LocalStorageDataConfig, HtmlSchema>
+    public class BiographyConfig : SectionConfigBase<HtmlSchema>
     {
-        public override DataProviderBase<LocalStorageDataConfig, HtmlSchema> DataProvider
+		public override Func<Task<IEnumerable<HtmlSchema>>> LoadDataAsyncFunc
         {
             get
             {
-                return new HtmlDataProvider();
-            }
-        }
-
-        public override LocalStorageDataConfig Config
-        {
-            get
-            {
-                return new LocalStorageDataConfig
+                var config = new LocalStorageDataConfig
                 {
                     FilePath = "/Assets/Data/Biography.htm"
                 };
+
+                return () => Singleton<HtmlDataProvider>.Instance.LoadDataAsync(config, MaxRecords);
             }
         }
 
-
-        public override NavigationInfo ListNavigationInfo
+        public override bool NeedsNetwork
         {
-            get 
+            get
             {
-                return NavigationInfo.FromPage("BiographyListPage");
+                return false;
             }
         }
-
 
         public override ListPageConfig<HtmlSchema> ListPage
         {
@@ -47,11 +47,15 @@ namespace DJNanoShow.Sections
                 {
                     Title = "Biography",
 
+					PageTitle = "Biography",
+
+                    ListNavigationInfo = NavigationInfo.FromPage("BiographyListPage"),
+
                     LayoutBindings = (viewModel, item) =>
                     {
                         viewModel.Content = item.Content;
                     },
-                    NavigationInfo = (item) =>
+                    DetailNavigation = (item) =>
                     {
                         return null;
                     }
@@ -63,11 +67,5 @@ namespace DJNanoShow.Sections
         {
             get { return null; }
         }
-
-        public override string PageTitle
-        {
-            get { return "Biography"; }
-        }
-
     }
 }

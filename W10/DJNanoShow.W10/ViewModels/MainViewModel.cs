@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AppStudio.Common;
-using AppStudio.Common.Actions;
-using AppStudio.Common.Commands;
-using AppStudio.Common.Navigation;
+using AppStudio.Uwp;
+using AppStudio.Uwp.Actions;
+using AppStudio.Uwp.Commands;
+using AppStudio.Uwp.Navigation;
 using AppStudio.DataProviders;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using AppStudio.DataProviders.YouTube;
+using AppStudio.DataProviders.Instagram;
 using AppStudio.DataProviders.Menu;
 using AppStudio.DataProviders.Html;
 using AppStudio.DataProviders.LocalStorage;
@@ -19,14 +22,16 @@ namespace DJNanoShow.ViewModels
 {
     public class MainViewModel : ObservableBase
     {
-        public MainViewModel(int visibleItems)
+        public MainViewModel(int visibleItems) : base()
         {
             PageTitle = "DJNano Show";
-            Tours = new ListViewModel<DynamicStorageDataConfig, Tours1Schema>(new ToursConfig());
-            Videos = new ListViewModel<YouTubeDataConfig, YouTubeSchema>(new VideosConfig(), visibleItems);
-            Social = new ListViewModel<LocalStorageDataConfig, MenuSchema>(new SocialConfig());
-            Discography = new ListViewModel<DynamicStorageDataConfig, Discography1Schema>(new DiscographyConfig(), visibleItems);
-            Biography = new ListViewModel<LocalStorageDataConfig, HtmlSchema>(new BiographyConfig(), visibleItems);
+            Tours = ListViewModel.CreateNew(Singleton<ToursConfig>.Instance, visibleItems);
+            Videos = ListViewModel.CreateNew(Singleton<VideosConfig>.Instance, visibleItems);
+            Gallery = ListViewModel.CreateNew(Singleton<GalleryConfig>.Instance, visibleItems);
+            Social = ListViewModel.CreateNew(Singleton<SocialConfig>.Instance);
+            Discography = ListViewModel.CreateNew(Singleton<DiscographyConfig>.Instance, visibleItems);
+            Biography = ListViewModel.CreateNew(Singleton<BiographyConfig>.Instance, visibleItems);
+
             Actions = new List<ActionInfo>();
 
             if (GetViewModels().Any(vm => !vm.HasLocalData))
@@ -42,11 +47,12 @@ namespace DJNanoShow.ViewModels
         }
 
         public string PageTitle { get; set; }
-        public ListViewModel<DynamicStorageDataConfig, Tours1Schema> Tours { get; private set; }
-        public ListViewModel<YouTubeDataConfig, YouTubeSchema> Videos { get; private set; }
-        public ListViewModel<LocalStorageDataConfig, MenuSchema> Social { get; private set; }
-        public ListViewModel<DynamicStorageDataConfig, Discography1Schema> Discography { get; private set; }
-        public ListViewModel<LocalStorageDataConfig, HtmlSchema> Biography { get; private set; }
+        public ListViewModel Tours { get; private set; }
+        public ListViewModel Videos { get; private set; }
+        public ListViewModel Gallery { get; private set; }
+        public ListViewModel Social { get; private set; }
+        public ListViewModel Discography { get; private set; }
+        public ListViewModel Biography { get; private set; }
 
         public RelayCommand<INavigable> SectionHeaderClickCommand
         {
@@ -83,26 +89,25 @@ namespace DJNanoShow.ViewModels
             var loadDataTasks = GetViewModels().Select(vm => vm.LoadDataAsync());
 
             await Task.WhenAll(loadDataTasks);
+
             OnPropertyChanged("LastUpdated");
-            ToursConfig.RemoveDeprecatedTours(Tours.Items);
         }
 
         private async void Refresh()
         {
             var refreshDataTasks = GetViewModels()
-                                        .Where(vm => !vm.HasLocalData)
-                                        .Select(vm => vm.LoadDataAsync(true));
+                                        .Where(vm => !vm.HasLocalData).Select(vm => vm.LoadDataAsync(true));
 
             await Task.WhenAll(refreshDataTasks);
 
             OnPropertyChanged("LastUpdated");
-            ToursConfig.RemoveDeprecatedTours(Tours.Items);
         }
 
-        private IEnumerable<DataViewModelBase> GetViewModels()
+        private IEnumerable<ListViewModel> GetViewModels()
         {
             yield return Tours;
             yield return Videos;
+            yield return Gallery;
             yield return Social;
             yield return Discography;
             yield return Biography;

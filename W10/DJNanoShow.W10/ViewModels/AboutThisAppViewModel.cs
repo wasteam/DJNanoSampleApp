@@ -1,11 +1,34 @@
 using System;
-using AppStudio.Common;
+using AppStudio.Uwp;
 using Windows.ApplicationModel;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.ApplicationModel.Resources;
 
 namespace DJNanoShow.ViewModels
 {
     public class AboutThisAppViewModel : ObservableBase
     {
+		private ResourceLoader _resourceLoader;
+        private ResourceLoader ResourceLoader
+        {
+            get
+            {
+                if (_resourceLoader == null)
+                {
+                    _resourceLoader = new ResourceLoader();
+                }
+                return _resourceLoader;
+            }
+        }
+
+        public string PageTitle
+        {
+            get
+            {
+                return ResourceLoader.GetString("NavigationPaneAbout");
+            }
+        }
+
         public string Publisher
         {
             get
@@ -27,6 +50,30 @@ namespace DJNanoShow.ViewModels
             get
             {
                 return "Official DJ Nano App created with App Studio";
+            }
+        }
+		
+        public string AppName
+        {
+            get
+            {
+                return "DJNano Show";
+            }
+        }
+
+		public string PrivacyUrl
+        {
+            get
+            {
+                return "http://1drv.ms/1llJOkM";
+            }
+        }
+
+		public BitmapImage AppLogo
+        {
+            get
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/ApplicationLogo.png"));
             }
         }
     }

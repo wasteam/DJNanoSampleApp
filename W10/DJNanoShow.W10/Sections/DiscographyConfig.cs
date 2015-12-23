@@ -1,47 +1,38 @@
+
+
+
 using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
-using AppStudio.Common;
-using AppStudio.Common.Actions;
-using AppStudio.Common.Commands;
-using AppStudio.Common.Navigation;
 using AppStudio.DataProviders;
 using AppStudio.DataProviders.Core;
-using AppStudio.DataProviders.DynamicStorage;
 using Windows.Storage;
+using AppStudio.DataProviders.DynamicStorage;
+using AppStudio.Uwp;
+using AppStudio.Uwp.Actions;
+using AppStudio.Uwp.Commands;
+using AppStudio.Uwp.Navigation;
+using System.Linq;
 using DJNanoShow.Config;
 using DJNanoShow.ViewModels;
 
 namespace DJNanoShow.Sections
 {
-    public class DiscographyConfig : SectionConfigBase<DynamicStorageDataConfig, Discography1Schema>
+    public class DiscographyConfig : SectionConfigBase<Discography1Schema>
     {
-        public override DataProviderBase<DynamicStorageDataConfig, Discography1Schema> DataProvider
+	    public override Func<Task<IEnumerable<Discography1Schema>>> LoadDataAsyncFunc
         {
             get
             {
-                return new DynamicStorageDataProvider<Discography1Schema>();
-            }
-        }
-
-        public override DynamicStorageDataConfig Config
-        {
-            get
-            {
-                return new DynamicStorageDataConfig
+                var config = new DynamicStorageDataConfig
                 {
                     Url = new Uri("http://ds.winappstudio.com/api/data/collection?dataRowListId=ee25a9dc-2850-4f61-848f-684fef6a345a&appId=543c63b8-2956-4450-8efd-1cf199bee7ed"),
                     AppId = "543c63b8-2956-4450-8efd-1cf199bee7ed",
                     StoreId = ApplicationData.Current.LocalSettings.Values[LocalSettingNames.StoreId] as string,
                     DeviceType = ApplicationData.Current.LocalSettings.Values[LocalSettingNames.DeviceType] as string
                 };
-            }
-        }
 
-        public override NavigationInfo ListNavigationInfo
-        {
-            get 
-            {
-                return NavigationInfo.FromPage("DiscographyListPage");
+                return () => Singleton<DynamicStorageDataProvider<Discography1Schema>>.Instance.LoadDataAsync(config, MaxRecords);
             }
         }
 
@@ -53,15 +44,18 @@ namespace DJNanoShow.Sections
                 {
                     Title = "Discography",
 
+					PageTitle = "Discography",
+
+                    ListNavigationInfo = NavigationInfo.FromPage("DiscographyListPage"),
+
                     LayoutBindings = (viewModel, item) =>
                     {
                         viewModel.Title = item.Title.ToSafeString();
                         viewModel.SubTitle = item.ReleaseDate.ToSafeString();
                         viewModel.Description = null;
-                        viewModel.Image = item.ImageUrl.ToSafeString();
-
+                        viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
                     },
-                    NavigationInfo = (item) =>
+                    DetailNavigation = (item) =>
                     {
                         return NavigationInfo.FromPage("DiscographyDetailPage", true);
                     }
@@ -74,29 +68,27 @@ namespace DJNanoShow.Sections
             get
             {
                 var bindings = new List<Action<ItemViewModel, Discography1Schema>>();
-
                 bindings.Add((viewModel, item) =>
                 {
                     viewModel.PageTitle = item.Title.ToSafeString();
                     viewModel.Title = "";
                     viewModel.Description = item.ReleaseDate.ToSafeString();
-                    viewModel.Image = item.ImageUrl.ToSafeString();
+                    viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
                     viewModel.Content = null;
                 });
-
                 bindings.Add((viewModel, item) =>
                 {
                     viewModel.PageTitle = "Tracks";
                     viewModel.Title = "";
                     viewModel.Description = item.Description.ToSafeString();
-                    viewModel.Image = "";
+                    viewModel.ImageUrl = ItemViewModel.LoadSafeUrl("");
                     viewModel.Content = null;
                 });
 
-				var actions = new List<ActionConfig<Discography1Schema>>
-				{
+                var actions = new List<ActionConfig<Discography1Schema>>
+                {
                     ActionConfig<Discography1Schema>.Play("Play", (item) => item.Link.ToSafeString()),
-				};
+                };
 
                 return new DetailPageConfig<Discography1Schema>
                 {
@@ -106,11 +98,5 @@ namespace DJNanoShow.Sections
                 };
             }
         }
-
-        public override string PageTitle
-        {
-            get { return "Discography"; }
-        }
-
     }
 }

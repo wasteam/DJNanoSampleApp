@@ -183,43 +183,76 @@
   <data name="SmallTextButton.Label" xml:space="preserve">
     <value>small text</value>
   </data>
-  <data name="TouchDevelopBy.Text" xml:space="preserve">
-    <value>by</value>
-  </data>
-  <data name="TouchDevelopPlay.Text" xml:space="preserve">
-    <value>Play</value>
-  </data>
   <data name="SectionListItem.ErrorText" xml:space="preserve">
     <value>There was an unexpected error loading the section data. Try to refresh later.</value>
   </data>
   <data name="SectionListItem.HeaderLinkText" xml:space="preserve">
     <value>View all</value>
   </data>
-  <data name="AfterExtensionString" xml:space="preserve">
-    <value> ago</value>
+  <data name="ShowPresentationButton.Label" xml:space="preserve">
+    <value>Slide show</value>
   </data>
-  <data name="BeforeExtensionString" xml:space="preserve">
-    <value />
+  <data name="ShowInfoButton.Label" xml:space="preserve">
+    <value>Show info</value>
   </data>
-  <data name="DayString" xml:space="preserve">
-    <value> day</value>
+  <data name="RefreshButton.AutomationPropertiesName" xml:space="preserve">
+    <value>Press to refresh the data</value>
   </data>
-  <data name="HourString" xml:space="preserve">
-    <value> hour</value>
+  <data name="BigTextButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Press to set big size on text</value>
   </data>
-  <data name="LessThan1Minute" xml:space="preserve">
-    <value>Less than one minute</value>
+  <data name="FullScreenButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Press to start full screen mode</value>
   </data>
-  <data name="LessThan1SecondString" xml:space="preserve">
-    <value>Less than 1 second</value>
+  <data name="NormalTextButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Press to set normal size on text</value>
   </data>
-  <data name="MinuteString" xml:space="preserve">
-    <value> minute</value>
+  <data name="ShareItemButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Press to share</value>
   </data>
-  <data name="MonthString" xml:space="preserve">
-    <value> month</value>
+  <data name="ShowInfoButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Press to show or hide information</value>
   </data>
-  <data name="MoreThan1YearString" xml:space="preserve">
-    <value>More than one year</value>
+  <data name="ShowPresentationButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Press to start media presentation</value>
+  </data>
+  <data name="SmallTextButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Press to set small size on text</value>
+  </data>
+  <data name="NavigationPageButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Application navigation panel</value>
+  </data>
+  <data name="NarrationSubTitle" xml:space="preserve">
+    <value>subtitle</value>
+  </data>
+  <data name="NarrationTitle" xml:space="preserve">
+    <value>title</value>
+  </data>
+  <data name="NavigationPaneAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="NavigationPanePrivacy" xml:space="preserve">
+    <value>Privacy terms</value>
+  </data>
+  <data name="AboutAppStudioOpenSourceLibraries.Text" xml:space="preserve">
+    <value>App Studio Open Source Libraries</value>
+  </data>
+  <data name="AboutCapabilityApplicationInsights.Text" xml:space="preserve">
+    <value>·   Application Insights</value>
+  </data>
+  <data name="AboutCapabilityInternet.Text" xml:space="preserve">
+    <value>·   Internet connection</value>
+  </data>
+  <data name="AboutCapabilityTileUpdater.Text" xml:space="preserve">
+    <value>·   Tile Updater</value>
+  </data>
+  <data name="AboutOpenProjectURL.Content" xml:space="preserve">
+    <value>Open project URL</value>
+  </data>
+  <data name="LoadingRelatedContent" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="ThereIsNotRelatedContent" xml:space="preserve">
+    <value>There is no related content.</value>
   </data>
 </root>

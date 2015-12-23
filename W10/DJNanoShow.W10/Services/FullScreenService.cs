@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,38 +9,35 @@ namespace DJNanoShow.Services
 {
     public static class FullScreenService
     {
+        public static bool CurrentPageSupportFullScreen;
         public static event EventHandler<bool> FullScreenModeChanged;
-        public static void ChangeFullScreenMode()
+        public static event EventHandler FullScreenPlayActionsChanged;
+        public static void EnterFullScreenMode(bool playActions = false)
         {
-            if (IsFullScreenMode)
+            ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            NotifyFullScreenModeChangedEvent(true);
+            if (playActions)
             {
-                ApplicationView.GetForCurrentView().ExitFullScreenMode();
-            }
-            else
-            {
-                ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
-            }
-            IsFullScreenMode = !IsFullScreenMode;
-            NotifyFullScreenModeChangedEvent();            
-        }
-        private static bool _isFullScreenMode = false;
-        public static bool IsFullScreenMode
-        {
-            get
-            {
-                return _isFullScreenMode;
-            }
-            set
-            {
-                _isFullScreenMode = value;
+                NotifyFullScreenPlayActionsChanged();
             }
         }
-
-        private static void NotifyFullScreenModeChangedEvent()
+        public static void ExitFullScreenMode()
+        {
+            ApplicationView.GetForCurrentView().ExitFullScreenMode();
+            NotifyFullScreenModeChangedEvent(false);
+        }
+        private static void NotifyFullScreenModeChangedEvent(bool isFullScreenMode)
         {
             if (FullScreenModeChanged != null)
             {
-                FullScreenModeChanged(null, IsFullScreenMode);
+                FullScreenModeChanged(null, isFullScreenMode);
+            }
+        }
+        private static void NotifyFullScreenPlayActionsChanged()
+        {
+            if (FullScreenPlayActionsChanged != null)
+            {
+                FullScreenPlayActionsChanged(null, EventArgs.Empty);
             }
         }
     }

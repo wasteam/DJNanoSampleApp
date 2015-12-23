@@ -1,13 +1,26 @@
+//---------------------------------------------------------------------------
+//
+// <copyright file="App.xaml.cs" company="Microsoft">
+//    Copyright (C) 2015 by Microsoft Corporation.  All rights reserved.
+// </copyright>
+//
+// <createdOn>12/23/2015 11:24:07 AM</createdOn>
+//
+//---------------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Store;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using AppStudio.Common;
+using AppStudio.Uwp;
+using Windows.UI.Notifications;
 using DJNanoShow.Services;
 
 namespace DJNanoShow
@@ -49,7 +62,7 @@ namespace DJNanoShow
 #endif
 
             GetAppData();
-            UpdateAppTiles();
+            SetupTiles();
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -78,7 +91,7 @@ namespace DJNanoShow
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(Shell), e.Arguments);
+				rootFrame.Navigate(typeof(Shell), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();
@@ -125,19 +138,17 @@ namespace DJNanoShow
             }
         }
 
-        private void UpdateAppTiles()
+		private void SetupTiles()
         {
-            var init = ApplicationData.Current.LocalSettings.Values[LocalSettingNames.TilesInitialized];
-            if (init == null || (init is bool && !(bool)init))
+            if (Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily.ToLower() != "windows.iot")
             {
-                Dictionary<string, string> tiles = new Dictionary<string, string>();
-                tiles.Add("0762ba0d34d766a6", "DataImages/Tile1.jpg");
-                tiles.Add("0762ba0d34d766a7", "DataImages/Tile2.jpg");
-                tiles.Add("0762ba0d34d766a8", "DataImages/Tile3.jpg");
-                tiles.Add("0762ba0d34d766a9", "DataImages/Tile4.jpg");
-                tiles.Add("0762ba0d34d766aa", "DataImages/Tile5.jpg");
-                TileServices.CreateCycleTile(tiles);
-                ApplicationData.Current.LocalSettings.Values[LocalSettingNames.TilesInitialized] = true;
+                var init = ApplicationData.Current.LocalSettings.Values[LocalSettingNames.TilesInitialized];
+                if (init == null || (init is bool && !(bool)init))
+                {
+                    var tileUpdater = TileUpdateManager.CreateTileUpdaterForApplication();
+                    tileUpdater.EnableNotificationQueue(true);
+                    ApplicationData.Current.LocalSettings.Values[LocalSettingNames.TilesInitialized] = true;
+                }
             }
         }
 

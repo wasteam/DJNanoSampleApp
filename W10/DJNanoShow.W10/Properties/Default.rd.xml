@@ -1,4 +1,5 @@
-﻿<!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
     This file contains Runtime Directives used by .NET Native. The defaults here are suitable for most
     developers. However, you can modify these parameters to modify the behavior of the .NET Native
     optimizer.
@@ -28,4 +29,9 @@
 
 
   </Application>
+
+  <!-- Enable dynamic access to types that Application Insights requires -->
+  <Library Name="*Microsoft.ApplicationInsights*">
+    <Type Name="Windows.ApplicationModel.Core.CoreApplication" Dynamic="Required Public" />
+  </Library>
 </Directives>

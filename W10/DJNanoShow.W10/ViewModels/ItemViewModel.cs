@@ -1,9 +1,12 @@
+using AppStudio.Uwp;
+using AppStudio.Uwp.Actions;
+using AppStudio.Uwp.Converters;
+using AppStudio.Uwp.DataSync;
+using AppStudio.Uwp.Navigation;
+using System;
 using System.Collections.Generic;
-using AppStudio.Common;
-using AppStudio.Common.Actions;
-using AppStudio.Common.DataSync;
-using AppStudio.Common.Navigation;
-using System.Windows.Input;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace DJNanoShow.ViewModels
 {
@@ -13,9 +16,8 @@ namespace DJNanoShow.ViewModels
         private string _title;
         private string _subTitle;
         private string _description;
-        private string _image;
+        private string _imageUrl;
         private string _content;
-        private ICommand _mainCommand;
 
         public string Id { get; set; }
 
@@ -43,10 +45,10 @@ namespace DJNanoShow.ViewModels
             set { SetProperty(ref _description, value); }
         }
 
-        public string Image
+        public string ImageUrl
         {
-            get { return _image; }
-            set { SetProperty(ref _image, value); }
+            get { return _imageUrl; }
+            set { SetProperty(ref _imageUrl, value); }
         }
 
         public string Content
@@ -59,12 +61,6 @@ namespace DJNanoShow.ViewModels
 
         public List<ActionInfo> Actions { get; set; }
 
-        public ICommand MainCommand
-        {
-            get { return _mainCommand; }
-            set { SetProperty(ref _mainCommand, value); }
-        }
-
         public bool HasActions
         {
             get
@@ -75,7 +71,7 @@ namespace DJNanoShow.ViewModels
 
         public bool NeedSync(ItemViewModel other)
         {
-            return this.Id == other.Id && (this.PageTitle != other.PageTitle || this.Title != other.Title || this.SubTitle != other.SubTitle || this.Description != other.Description || this.Image != other.Image || this.Content != other.Content);
+            return this.Id == other.Id && (this.PageTitle != other.PageTitle || this.Title != other.Title || this.SubTitle != other.SubTitle || this.Description != other.Description || this.ImageUrl != other.ImageUrl || this.Content != other.Content);
         }
 
         public void Sync(ItemViewModel other)
@@ -84,7 +80,7 @@ namespace DJNanoShow.ViewModels
             this.Title = other.Title;
             this.SubTitle = other.SubTitle;
             this.Description = other.Description;
-            this.Image = other.Image;
+            this.ImageUrl = other.ImageUrl;
             this.Content = other.Content;
         }
 
@@ -104,6 +100,40 @@ namespace DJNanoShow.ViewModels
         public override int GetHashCode()
         {
             return this.Id.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            var resourceLoader = new ResourceLoader();
+            string toStringResult = string.Empty;
+            if (!string.IsNullOrEmpty(Title))
+            {
+                toStringResult += resourceLoader.GetString("NarrationTitle") + ". ";
+                toStringResult += Title + ". ";
+            }
+            if (!string.IsNullOrEmpty(SubTitle))
+            {
+                toStringResult += resourceLoader.GetString("NarrationSubTitle") + ". ";
+                toStringResult += SubTitle;
+            }
+            return toStringResult;
+        }
+
+        public static string LoadSafeUrl(string imageUrl)
+        {
+            if (string.IsNullOrEmpty(imageUrl))
+            {
+                return StringToSizeConverter.DefaultEmpty;
+            }
+            try
+            {
+                if (!imageUrl.StartsWith("http") && !imageUrl.StartsWith("ms-appx:"))
+                {
+                    imageUrl = string.Concat("ms-appx://", imageUrl);
+                }
+            }
+            catch (Exception) { }
+            return imageUrl;
         }
     }
 }

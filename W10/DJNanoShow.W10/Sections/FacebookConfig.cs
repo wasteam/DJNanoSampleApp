@@ -1,47 +1,38 @@
+
+
+
 using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
-using AppStudio.Common.Actions;
-using AppStudio.Common.Commands;
-using AppStudio.Common.Navigation;
 using AppStudio.DataProviders;
 using AppStudio.DataProviders.Core;
 using AppStudio.DataProviders.Facebook;
+using AppStudio.Uwp.Actions;
+using AppStudio.Uwp.Commands;
+using AppStudio.Uwp.Navigation;
 using DJNanoShow.Config;
 using DJNanoShow.ViewModels;
 
 namespace DJNanoShow.Sections
 {
-    public class FacebookConfig : SectionConfigBase<FacebookDataConfig, FacebookSchema>
+    public class FacebookConfig : SectionConfigBase<FacebookSchema>
     {
-        public override DataProviderBase<FacebookDataConfig, FacebookSchema> DataProvider
+		private readonly FacebookDataProvider _dataProvider = new FacebookDataProvider(new FacebookOAuthTokens
+        {
+			AppId = "599862193478955",
+                    AppSecret = "83c6e8bf7be41f3bdeeb246ec16e106b"
+        });
+
+		public override Func<Task<IEnumerable<FacebookSchema>>> LoadDataAsyncFunc
         {
             get
             {
-                return new FacebookDataProvider(new FacebookOAuthTokens
-                {
-                    AppId = "599862193478955",
-                        AppSecret = "83c6e8bf7be41f3bdeeb246ec16e106b"
-
-                });
-            }
-        }
-
-        public override FacebookDataConfig Config
-        {
-            get
-            {
-                return new FacebookDataConfig
+                var config = new FacebookDataConfig
                 {
                     UserId = "372977625450"
                 };
-            }
-        }
 
-        public override NavigationInfo ListNavigationInfo
-        {
-            get 
-            {
-                return NavigationInfo.FromPage("FacebookListPage");
+                return () => _dataProvider.LoadDataAsync(config, MaxRecords);
             }
         }
 
@@ -53,15 +44,18 @@ namespace DJNanoShow.Sections
                 {
                     Title = "Facebook",
 
+					PageTitle = "Facebook",
+
+                    ListNavigationInfo = NavigationInfo.FromPage("FacebookListPage"),
+
                     LayoutBindings = (viewModel, item) =>
                     {
                         viewModel.Title = item.Author.ToSafeString();
                         viewModel.SubTitle = item.Summary.ToSafeString();
                         viewModel.Description = "";
-                        viewModel.Image = item.ImageUrl.ToSafeString();
-
+                        viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
                     },
-                    NavigationInfo = (item) =>
+                    DetailNavigation = (item) =>
                     {
                         return NavigationInfo.FromPage("FacebookDetailPage", true);
                     }
@@ -74,20 +68,19 @@ namespace DJNanoShow.Sections
             get
             {
                 var bindings = new List<Action<ItemViewModel, FacebookSchema>>();
-
                 bindings.Add((viewModel, item) =>
                 {
                     viewModel.PageTitle = item.Author.ToSafeString();
                     viewModel.Title = "";
                     viewModel.Description = item.Content.ToSafeString();
-                    viewModel.Image = item.ImageUrl.ToSafeString();
+                    viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
                     viewModel.Content = null;
                 });
 
-				var actions = new List<ActionConfig<FacebookSchema>>
-				{
+                var actions = new List<ActionConfig<FacebookSchema>>
+                {
                     ActionConfig<FacebookSchema>.Link("Go To Source", (item) => item.FeedUrl.ToSafeString()),
-				};
+                };
 
                 return new DetailPageConfig<FacebookSchema>
                 {
@@ -97,11 +90,5 @@ namespace DJNanoShow.Sections
                 };
             }
         }
-
-        public override string PageTitle
-        {
-            get { return "Facebook"; }
-        }
-
     }
 }

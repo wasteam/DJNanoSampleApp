@@ -2,17 +2,27 @@
   "_import": "/Layouts/List/Breakpoints.Medium.json",
   "breakpoints": [
     {
-      "maxwidth": "321",
+      "maxwidth": "318",
       "properties": {
-        "itemsHeight": "220",
+        "itemsHeight": "200",
+        "imageHeight": "100",
+        "titleMaxLines": "2",
+        "leftMarginTitleBox": "4,4,4,0",
+        "leftMarginSubTitleBox": "4,4,4,4"
+      }
+    },
+    {
+      "maxwidth": "470",
+      "properties": {
+        "itemsHeight": "240",
         "imageHeight": "120",
-        "titleMaxLines": "3",
+        "titleMaxLines": "2",
         "leftMarginTitleBox": "6,6,6,0",
         "leftMarginSubTitleBox": "6,6,6,6"
       }
     },
     {
-      "maxwidth": "500",
+      "maxwidth": "1170",
       "properties": {
         "itemsHeight": "240",
         "imageHeight": "120",
@@ -22,7 +32,7 @@
       }
     },
     {
-      "maxwidth": "900",
+      "maxwidth": "1460",
       "properties": {
         "itemsHeight": "280",
         "imageHeight": "160",
@@ -32,33 +42,23 @@
       }
     },
     {
-      "maxwidth": "1140",
+      "maxwidth": "1825",
       "properties": {
         "itemsHeight": "350",
         "imageHeight": "210",
         "titleMaxLines": "2",
-        "leftMarginTitleBox": "16,16,16,0",
-        "leftMarginSubTitleBox": "16,16,16,16"
-      }
-    },
-    {
-      "maxwidth": "1820",
-      "properties": {
-        "itemsHeight": "400",
-        "imageHeight": "240",
-        "titleMaxLines": "2",
-        "leftMarginTitleBox": "16,16,16,0",
-        "leftMarginSubTitleBox": "16,16,16,16"
+        "leftMarginTitleBox": "12,12,12,0",
+        "leftMarginSubTitleBox": "12,12,12,12"
       }
     },
     {
       "maxwidth": "*",
       "properties": {
-        "itemsHeight": "500",
-        "imageHeight": "300",
-        "titleMaxLines": "3",
-        "leftMarginTitleBox": "16,16,16,0",
-        "leftMarginSubTitleBox": "16,16,16,16"
+        "itemsHeight": "400",
+        "imageHeight": "240",
+        "titleMaxLines": "2",
+        "leftMarginTitleBox": "14,14,14,0",
+        "leftMarginSubTitleBox": "14,14,14,14"
       }
     }
   ]

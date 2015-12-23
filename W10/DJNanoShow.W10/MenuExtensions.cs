@@ -1,10 +1,6 @@
-using AppStudio.Common.Navigation;
-using AppStudio.DataProviders.Menu;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AppStudio.DataProviders.Menu;
+using AppStudio.Uwp.Navigation;
 
 namespace DJNanoShow
 {

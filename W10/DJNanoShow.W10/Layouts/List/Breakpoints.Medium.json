@@ -1,48 +1,46 @@
 ﻿{
   "breakpoints": [
     {
-      //Small Phones
-      "maxwidth": "321",
+      "maxwidth": "318",
       "properties": {
-        "itemsDesiredWidth": "140",
-        "itemMargin": "2,2,2,2",
-        "titleFontSize": "15",
-        "subTitleFontSize": "13"
-      }
-    },
-    {
-      //Big Phones
-      "maxwidth": "500",
-      "properties": {
-        "itemsDesiredWidth": "170",
-        "itemMargin": "4,4,4,4",
+        "itemsDesiredWidth": "108",
+        "itemMargin": "2",
         "titleFontSize": "17",
         "subTitleFontSize": "15"
       }
     },
     {
-      "maxwidth": "900",
+      "maxwidth": "470",
       "properties": {
-        "itemsDesiredWidth": "220",
-        "itemMargin": "6,6,6,6",
+        "itemsDesiredWidth": "158",
+        "itemMargin": "4",
         "titleFontSize": "17",
         "subTitleFontSize": "15"
       }
     },
     {
-      "maxwidth": "1140",
+      "maxwidth": "1170",
       "properties": {
-        "itemsDesiredWidth": "280",
-        "itemMargin": "10,10,10,10",
-        "titleFontSize": "19",
-        "subTitleFontSize": "17"
+        "itemsDesiredWidth": "234",
+        "itemMargin": "4",
+        "titleFontSize": "17",
+        "subTitleFontSize": "15"
       }
     },
     {
-      "maxwidth": "1820",
+      "maxwidth": "1460",
       "properties": {
-        "itemsDesiredWidth": "360",
-        "itemMargin": "10,10,10,10",
+        "itemsDesiredWidth": "292",
+        "itemMargin": "4",
+        "titleFontSize": "17",
+        "subTitleFontSize": "15"
+      }
+    },
+    {
+      "maxwidth": "1825",
+      "properties": {
+        "itemsDesiredWidth": "365",
+        "itemMargin": "10",
         "titleFontSize": "21",
         "subTitleFontSize": "19"
       }
@@ -50,8 +48,8 @@
     {
       "maxwidth": "*",
       "properties": {
-        "itemsDesiredWidth": "450",
-        "itemMargin": "10,10,10,10",
+        "itemsDesiredWidth": "456",
+        "itemMargin": "10",
         "titleFontSize": "21",
         "subTitleFontSize": "19"
       }

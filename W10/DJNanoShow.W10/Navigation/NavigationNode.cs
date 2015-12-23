@@ -1,19 +1,21 @@
+using System;
 using System.Collections.ObjectModel;
-using AppStudio.Common;
-using AppStudio.Common.Navigation;
+using AppStudio.Uwp;
+using AppStudio.Uwp.Navigation;
 using Windows.UI.Xaml;
 
 namespace DJNanoShow.Navigation
 {
     public abstract class NavigationNode : ObservableBase
     {
+        private bool _isSelected;
         public string Title { get; set; }
         public string Label { get; set; }
         public string FontIcon { get; set; }
         public string Image { get; set; }
+        public bool IsVisible { get; set; }
         public abstract bool IsContainer { get; }
 
-        private bool _isSelected;
         public bool IsSelected
         {
             get
@@ -25,7 +27,13 @@ namespace DJNanoShow.Navigation
                 SetProperty(ref _isSelected, value);
             }
         }
+
         public abstract void Selected();
+
+        public override string ToString()
+        {
+            return Label;
+        }
     }
 
     public class ItemNavigationNode : NavigationNode, INavigable
@@ -42,17 +50,28 @@ namespace DJNanoShow.Navigation
 
         public override void Selected()
         {
-            NavigationService.NavigateTo(this);            
+            NavigationService.NavigateTo(this);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 
     public class GroupNavigationNode : NavigationNode
     {
-        private Visibility _visibility;
+        private bool _isGroupListOpened;
+        private double _backgroundOpacity;
 
-        public GroupNavigationNode()
+        public GroupNavigationNode(string label, string fontIcon, string image, bool isVisible = true, bool isGroupListOpened = true)
         {
             Nodes = new ObservableCollection<NavigationNode>();
+            Label = label;
+            FontIcon = fontIcon;
+            IsVisible = isVisible;
+            IsGroupListOpened = isGroupListOpened;
+            Image = image;
         }
 
         public override bool IsContainer
@@ -64,23 +83,38 @@ namespace DJNanoShow.Navigation
         }
 
         public ObservableCollection<NavigationNode> Nodes { get; set; }
-
-        public Visibility Visibility
+        
+        public bool IsGroupListOpened
         {
-            get { return _visibility; }
-            set { SetProperty(ref _visibility, value); }
+            get { return _isGroupListOpened; }
+            set
+            {
+                SetProperty(ref _isGroupListOpened, value);
+                if (_isGroupListOpened == true)
+                {
+                    BackgroundOpacity = 0.2;
+                }
+                else
+                {
+                    BackgroundOpacity = 0;
+                }
+            }
+        }
+
+        public double BackgroundOpacity
+        {
+            get { return _backgroundOpacity; }
+            set { SetProperty(ref _backgroundOpacity, value); }
         }
 
         public override void Selected()
         {
-            if (Visibility == Visibility.Collapsed)
-            {
-                Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Visibility = Visibility.Collapsed;
-            }
+            IsGroupListOpened = !IsGroupListOpened;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

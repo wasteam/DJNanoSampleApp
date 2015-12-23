@@ -1,4 +1,4 @@
-using AppStudio.Common.Services;
+using AppStudio.Uwp.Services;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
