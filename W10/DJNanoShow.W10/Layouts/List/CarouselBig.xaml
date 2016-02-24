@@ -34,7 +34,7 @@
                                     Margin="24,6"
                                     Text="{Binding Title}"
                                     TextWrapping="NoWrap"
-                                    TextTrimming="WordEllipsis"
+                                    TextTrimming="CharacterEllipsis"
                                     TextAlignment="Center"
                                     Foreground="White"
                                     FontSize="24"/>
@@ -46,7 +46,8 @@
         </was_controls:Carousel>
 		<was_controls:Indicator
             ItemsSource="{Binding ItemsSource, ElementName=carousel, Mode=TwoWay}"
-            SelectedIndex="{Binding SelectedIndex, ElementName=carousel, Mode=TwoWay}"
-            ItemTemplate="{StaticResource IndicatorItemTemplate}" Height="40"/>
+            SelectedIndex="{Binding SelectedIndex, ElementName=carousel, Mode=TwoWay}"            
+            ItemTemplate="{StaticResource IndicatorItemTemplate}" Height="40"
+            SelectedForeground="{StaticResource BoxBackground}" Background="{StaticResource BoxForeground}"/>
     </StackPanel>
 </local:ListLayoutBase>

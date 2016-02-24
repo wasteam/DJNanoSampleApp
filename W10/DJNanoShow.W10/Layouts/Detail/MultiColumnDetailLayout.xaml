@@ -18,7 +18,7 @@
             ItemsSource="{x:Bind ViewModel.SelectedItem}">
             <Pivot.HeaderTemplate>
                 <DataTemplate x:DataType="vm:ItemViewModel">
-                    <TextBlock Text="{x:Bind PageTitle}" TextTrimming="WordEllipsis" MaxWidth="300" Style="{StaticResource PageTitleStyle}" FontSize="{StaticResource TitleTextSizeDefault}"/>
+                    <TextBlock Text="{x:Bind PageTitle}" TextTrimming="CharacterEllipsis" MaxWidth="300" Style="{StaticResource PageTitleStyle}" FontSize="{StaticResource TitleTextSizeDefault}"/>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <Pivot.ItemTemplate>

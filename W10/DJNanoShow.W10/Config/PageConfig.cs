@@ -17,6 +17,7 @@ namespace DJNanoShow.Config
         public NavigationInfo ListNavigationInfo { get; set; }
         public Func<T, NavigationInfo> DetailNavigation { get; set; }
         public Action<ItemViewModel, T> LayoutBindings { get; set; }
+        public OrderType OrderType { get; set; }
     }
 
     public class DetailPageConfig<T> : PageConfigBase where T : SchemaBase

@@ -49,6 +49,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <TextBlock x:Name="titleText" Text="{Binding Title, ElementName=root}" Style="{StaticResource PageTitleStyle}" TextTrimming="WordEllipsis" VerticalAlignment="Center"/>
+        <TextBlock x:Name="titleText" Text="{Binding Title, ElementName=root}" Style="{StaticResource PageTitleStyle}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

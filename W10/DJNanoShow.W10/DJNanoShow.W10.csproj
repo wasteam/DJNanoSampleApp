@@ -5,14 +5,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{40AB2662-DD40-417A-8F40-F7FE490DE6DD}</ProjectGuid>
+    <ProjectGuid>{DE162A40-B911-45FA-8640-EEB4DB23DB1E}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DJNanoShow</RootNamespace>
     <AssemblyName>DJNanoShow.W10</AssemblyName>
     <DefaultLanguage>en-us</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -167,6 +167,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Layouts\List\ListGroupedHome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Layouts\List\ListGrouped.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Layouts\Detail\MultiColumnDetailLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -239,11 +247,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\DiscographyTracksListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\BiographyListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ToursDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -268,6 +284,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\DiscographyDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\DiscographyTracksDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SearchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\FavoritesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -348,6 +376,12 @@
     <Compile Include="Layouts\List\CarouselMedium.xaml.cs">
       <DependentUpon>CarouselMedium.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\List\ListGroupedHome.xaml.cs">
+      <DependentUpon>ListGroupedHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\List\ListGrouped.xaml.cs">
+      <DependentUpon>ListGrouped.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Detail\MultiColumnDetailLayout.xaml.cs">
       <DependentUpon>MultiColumnDetailLayout.xaml</DependentUpon>
     </Compile>
@@ -402,11 +436,17 @@
     <Compile Include="Pages\DiscographyListPage.xaml.cs">
       <DependentUpon>DiscographyListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DiscographyTracksListPage.xaml.cs">
+      <DependentUpon>DiscographyTracksListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BiographyListPage.xaml.cs">
       <DependentUpon>BiographyListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ToursDetailPage.xaml.cs">
+      <DependentUpon>ToursDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\VideosDetailPage.xaml.cs">
       <DependentUpon>VideosDetailPage.xaml</DependentUpon>
@@ -426,6 +466,15 @@
     <Compile Include="Pages\DiscographyDetailPage.xaml.cs">
       <DependentUpon>DiscographyDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DiscographyTracksDetailPage.xaml.cs">
+      <DependentUpon>DiscographyTracksDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FavoritesPage.xaml.cs">
+      <DependentUpon>FavoritesPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -443,10 +492,16 @@
     <Compile Include="Services\DeviceFamilyService.cs" />
     <Compile Include="ViewModels\AdvertisingViewModel.cs" />
     <Compile Include="Config\RelatedContentConfig.cs" />
+    <Compile Include="ViewModels\GroupedItemViewModel.cs" />
+    <Compile Include="Services\RoamingService.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="ViewModels\GroupedListViewModel.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Navigation\NavigationNode.cs" />
     <Compile Include="Navigation\NavigationTemplateSelector.cs" />
     <Compile Include="Layouts\Detail\BaseDetailLayout.cs" />
-    <Compile Include="MenuExtensions.cs" />
+    <Compile Include="Extensions\MenuExtensions.cs" />
     <Compile Include="Services\TileServices.cs" />
     <Compile Include="Triggers\IsTypePresentStateTrigger.cs" />
     <Compile Include="Triggers\OrientationStateTrigger.cs" />
@@ -458,6 +513,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sections\Tours1Schema.cs" />
     <Compile Include="Sections\Discography1Schema.cs" />
+    <Compile Include="Sections\DiscographyTracks1Schema.cs" />
     <Compile Include="Sections\ToursConfig.cs" />
     <Compile Include="Sections\DiscographyConfig.cs" />
     <Compile Include="Sections\FacebookConfig.cs" />
@@ -465,6 +521,7 @@
     <Compile Include="Sections\GalleryConfig.cs" />
     <Compile Include="Sections\InstagramConfig.cs" />
     <Compile Include="Sections\SocialConfig.cs" />
+    <Compile Include="Sections\DiscographyTracksConfig.cs" />
     <Compile Include="Sections\TwitterConfig.cs" />
     <Compile Include="Sections\VideosConfig.cs" />
     <Compile Include="Sections\YouTubeConfig.cs" />
@@ -473,7 +530,10 @@
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PrivacyViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\FavoritesViewModel.cs" />
     <Compile Include="Navigation\AppNavigation.cs" />
+    <Compile Include="Services\UserFavorites.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -490,6 +550,8 @@
           <Content Include="Layouts\List\Breakpoints.Medium.MenuText.json" />
           <Content Include="Layouts\List\Breakpoints.Medium.Photo.json" />
           <Content Include="Layouts\List\Breakpoints.Medium.ListTextCard.json" />
+          <Content Include="Layouts\List\Breakpoints.ListGrouped.json" />
+          <Content Include="Layouts\List\Breakpoints.Large.ListBigHorizontalCardGroupedHome.json" />
           <Content Include="Assets\Design\DesignData.json" />
           <Content Include="Assets\Design\DesignDataHtml.json" />
           <Content Include="Assets\Design\DesignDataMenu.json" />
@@ -513,14 +575,28 @@
           <Content Include="Assets\StoreLogo.scale-100.png" />
           <Content Include="Assets\Wide310x150Logo.scale-100.png" />
           <Content Include="Assets\Data\Biography.htm" />
+          <Content Include="Assets\Data\DiscographyTracks.json" />
           <Content Include="Assets\Data\Social.json" />
+          <Content Include="Assets\DataImages\05F23907-0100-11DB-89CA-0019B92A3933-image.png" />
+          <Content Include="Assets\DataImages\136AF506-0100-11DB-89CA-0019B92A3933-image.png" />
+          <Content Include="Assets\DataImages\1456185574_18-youtub.png" />
+          <Content Include="Assets\DataImages\1456185579_06-facebo.png" />
+          <Content Include="Assets\DataImages\1456185583_38-instag.png" />
+          <Content Include="Assets\DataImages\1456185609_03-twitte.png" />
+          <Content Include="Assets\DataImages\5E60F506-0100-11DB-89CA-0019B92A3933-image.png" />
+          <Content Include="Assets\DataImages\6B2C1708-0100-11DB-89CA-0019B92A3933-image.png" />
+          <Content Include="Assets\DataImages\71A0DD06-0100-11DB-89CA-0019B92A3933-image.png" />
+          <Content Include="Assets\DataImages\A44EFB06-0100-11DB-89CA-0019B92A3933-image.png" />
+          <Content Include="Assets\DataImages\AD64F506-0100-11DB-89CA-0019B92A3933-image.png" />
+          <Content Include="Assets\DataImages\CA073907-0100-11DB-89CA-0019B92A3933-image.png" />
+          <Content Include="Assets\DataImages\djnano.png" />
+          <Content Include="Assets\DataImages\FB409406-0100-11DB-89CA-0019B92A3933-image.png" />
           <Content Include="Assets\DataImages\IconFacebook-1.png" />
           <Content Include="Assets\DataImages\IconInstagram.png" />
           <Content Include="Assets\DataImages\IconTwitter.png" />
           <Content Include="Assets\DataImages\iconYouTube.png" />
-          <Content Include="Assets\DataImages\Nano004.jpg" />
-          <Content Include="Assets\DataImages\s.jpg" />
-          <Content Include="Assets\DataImages\Sin-título-1.jpg" />
+          <Content Include="Assets\DataImages\nano_bio.jpg" />
+          <Content Include="Assets\DataImages\Sin-título-1-1.png" />
     </ItemGroup>
 
   <ItemGroup>
@@ -531,7 +607,7 @@
   </ItemGroup>
    <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
+    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
