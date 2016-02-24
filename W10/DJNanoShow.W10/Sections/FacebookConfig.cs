@@ -2,11 +2,13 @@
 
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using AppStudio.DataProviders;
 using AppStudio.DataProviders.Core;
 using AppStudio.DataProviders.Facebook;
+using AppStudio.Uwp;
 using AppStudio.Uwp.Actions;
 using AppStudio.Uwp.Commands;
 using AppStudio.Uwp.Navigation;
@@ -52,7 +54,6 @@ namespace DJNanoShow.Sections
                     {
                         viewModel.Title = item.Author.ToSafeString();
                         viewModel.SubTitle = item.Summary.ToSafeString();
-                        viewModel.Description = "";
                         viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
                     },
                     DetailNavigation = (item) =>
@@ -75,6 +76,7 @@ namespace DJNanoShow.Sections
                     viewModel.Description = item.Content.ToSafeString();
                     viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
                     viewModel.Content = null;
+					viewModel.Source = item.FeedUrl;
                 });
 
                 var actions = new List<ActionConfig<FacebookSchema>>

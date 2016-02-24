@@ -12,6 +12,7 @@ using AppStudio.Uwp;
 using AppStudio.Uwp.Actions;
 using AppStudio.Uwp.Commands;
 using AppStudio.Uwp.Navigation;
+using Windows.ApplicationModel.Appointments;
 using System.Linq;
 using DJNanoShow.Config;
 using DJNanoShow.ViewModels;
@@ -50,14 +51,20 @@ namespace DJNanoShow.Sections
 
                     LayoutBindings = (viewModel, item) =>
                     {
+						viewModel.Header = item.Month.ToSafeString();
                         viewModel.Title = item.Where.ToSafeString();
-                        viewModel.SubTitle = item.When.ToSafeString();
-                        viewModel.Description = "";
-                        viewModel.ImageUrl = ItemViewModel.LoadSafeUrl("");
+                        viewModel.SubTitle = item.WhenDate.ToString(DateTimeFormat.LongDate);
+						viewModel.Aside = item.WhenDate.ToString(DateTimeFormat.CardDate);
+						viewModel.Footer = item.WhereFrom.ToSafeString();
+
+						viewModel.GroupBy = item.Month.SafeType();
+
+						viewModel.OrderBy = item.WhenDate;
                     },
+					OrderType = OrderType.Ascending,
                     DetailNavigation = (item) =>
                     {
-                        return null;
+                        return NavigationInfo.FromPage("ToursDetailPage", true);
                     }
                 };
             }
@@ -68,9 +75,18 @@ namespace DJNanoShow.Sections
             get
             {
                 var bindings = new List<Action<ItemViewModel, Tours1Schema>>();
+                bindings.Add((viewModel, item) =>
+                {
+                    viewModel.PageTitle = item.Where.ToSafeString();
+                    viewModel.Title = item.Where.ToSafeString();
+                    viewModel.Description = item.Description.ToSafeString();
+                    viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.Image.ToSafeString());
+                    viewModel.Content = null;
+                });
 
                 var actions = new List<ActionConfig<Tours1Schema>>
                 {
+                    ActionConfig<Tours1Schema>.AddToCalendar("Add to Calendar", (item) => new Windows.ApplicationModel.Appointments.Appointment() {StartTime = item.WhenDate.SafeType() == DateTime.MinValue ? DateTime.Now : item.WhenDate.SafeType(), Subject = item.Where.ToSafeString(), AllDay = true }),
                 };
 
                 return new DetailPageConfig<Tours1Schema>

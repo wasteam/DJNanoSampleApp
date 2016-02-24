@@ -30,7 +30,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" x:Name="topBarBackground" Grid.ColumnSpan="2" Background="{StaticResource AppBarBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48" Visibility="{x:Bind ViewModel.IsFullScreen, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true, Mode=OneWay}">
-            <TextBlock x:Name="appTitle" Margin="{Binding Active.pageTitleMargin, Source={StaticResource ResponsiveBehaviorsVBP}}" Text="{x:Bind ViewModel.Title}" Foreground="{StaticResource AppBarForeground}" FontSize="{StaticResource AppTitleTextSizeDefault}" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
+            <TextBlock x:Name="appTitle" Margin="{Binding Active.pageTitleMargin, Source={StaticResource ResponsiveBehaviorsVBP}}" Text="{x:Bind ViewModel.SelectedItem.PageTitle, Mode=OneWay}" Foreground="{StaticResource AppBarForeground}" FontSize="{StaticResource AppTitleTextSizeDefault}" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" MaxLines="1"/>
         </Grid>
         <was_actions:ActionsCommandBar 
             x:Name="appBar"
@@ -46,14 +46,50 @@
                     <Setter Property="Background" Value="{StaticResource AppBarBackground}"/>
                 </Style>
             </was_actions:ActionsCommandBar.CommandBarOverflowPresenterStyle>
+			<was_actions:ActionsCommandBar.PrimaryCommands>
+			<AppBarToggleButton Icon="Favorite" Command="{Binding ViewModel.FavoritesCommand, ElementName=root}" IsChecked="{Binding ViewModel.IsOnFavorites}" Style="{StaticResource WasAppBarToggleButtonStyle}"/>
+			</was_actions:ActionsCommandBar.PrimaryCommands>
             <was_actions:ActionsCommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="ShareItemButton" Icon="ReShare" Command="{Binding Source={StaticResource ActionCommands}, Path=Share}" Foreground="{StaticResource AppBarForeground}" Style="{StaticResource WasAppBarButtonStyle}"/>
+                <AppBarButton x:Uid="SmallTextButton" Click="ChangeFontSize" Tag="{StaticResource DescriptionTextSizeSmall}" Foreground="{StaticResource AppBarForeground}" Style="{StaticResource WasAppBarButtonStyle}">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe UI" Glyph="&#x0041;" FontSize="10"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Uid="NormalTextButton" Click="ChangeFontSize" Tag="{StaticResource DescriptionTextSizeNormal}" Foreground="{StaticResource AppBarForeground}" Style="{StaticResource WasAppBarButtonStyle}">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe UI" Glyph="&#x0041;" FontSize="15"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Uid="BigTextButton" Click="ChangeFontSize" Tag="{StaticResource DescriptionTextSizeLarge}" Foreground="{StaticResource AppBarForeground}" Style="{StaticResource WasAppBarButtonStyle}">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe UI" Glyph="&#x0041;" FontSize="20"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
             </was_actions:ActionsCommandBar.SecondaryCommands>
         </was_actions:ActionsCommandBar>
         <Grid Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
               Grid.Row="1" Grid.ColumnSpan="2"
               Visibility="{Binding ViewModel.IsFullScreen, Converter={StaticResource BoolToVisibilityConverter}}">
         </Grid>
-        <layouts:MultiColumnDetailLayout Grid.Row="1" Grid.ColumnSpan="2" x:Name="mainPanel" ViewModel="{x:Bind ViewModel}" BodyFontSize="{StaticResource DescriptionTextSizeNormal}"/>
+		<layouts:RelatedContentDetailLayout Grid.Row="1" Grid.ColumnSpan="2" x:Name="mainPanel" ViewModel="{x:Bind ViewModel}" BodyFontSize="{StaticResource DescriptionTextSizeNormal}">
+			<layouts:RelatedContentDetailLayout.RelatedContentTemplate>
+			<DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Margin="24,0" Text="{Binding ViewModel.RelatedContentTitle, ElementName=root}" Style="{StaticResource TitleStyle}" FontSize="{StaticResource AppTitleTextSizeDefault}"/>
+                        <TextBlock Grid.Row="1" Margin="24,12,24,0" Text="{Binding ViewModel.RelatedContentStatus, ElementName=root}" Style="{StaticResource TitleStyle}"/>
+                        <list_layouts:ListTextCard
+                            Grid.Row="1"
+                            Margin="20,12,20,0"
+                            ItemsSource="{Binding ViewModel.RelatedItems, ElementName=root}"
+                            ItemClickCommand="{Binding ViewModel.RelatedItemClickCommand, ElementName=root}"/>
+                    </Grid>
+                </DataTemplate>
+			</layouts:RelatedContentDetailLayout.RelatedContentTemplate>
+		</layouts:RelatedContentDetailLayout>
     </Grid>
 </Page>

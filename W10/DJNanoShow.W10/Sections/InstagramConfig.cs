@@ -54,7 +54,6 @@ namespace DJNanoShow.Sections
                     {
                         viewModel.Title = item.Author.ToSafeString();
                         viewModel.SubTitle = item.Title.ToSafeString();
-                        viewModel.Description = null;
                         viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ThumbnailUrl.ToSafeString());
                     },
                     DetailNavigation = (item) =>
@@ -77,6 +76,7 @@ namespace DJNanoShow.Sections
                     viewModel.Description = item.Author.ToSafeString();
                     viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
                     viewModel.Content = null;
+					viewModel.Source = item.SourceUrl;
                 });
 
                 var actions = new List<ActionConfig<InstagramSchema>>

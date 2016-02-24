@@ -5,7 +5,7 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:appstudio="http://schemas.microsoft.com/developer/appx/2015/appstudio" 
   IgnorableNamespaces="uap mp appstudio">
-			<Identity Name="MicrosoftWindowsAppStudio.DJNanoShow" Publisher="CN=687403C5-72F1-42B7-87C2-A050E9459F28" Version="1.0.1.0" />
+			<Identity Name="MicrosoftWindowsAppStudio.DJNanoShow" Publisher="CN=687403C5-72F1-42B7-87C2-A050E9459F28" Version="1.3.6.0" />
 	    <mp:PhoneIdentity PhoneProductId="543c63b8-2956-4450-8efd-1cf199bee7ed" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
     <Properties>
         <DisplayName>DJNano Show</DisplayName>
@@ -13,7 +13,7 @@
         <Logo>Assets\StoreLogo.png</Logo>
     </Properties>
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
     </Dependencies>
     <Resources>
         <Resource Language="x-generate"/>
@@ -42,14 +42,14 @@
     </Capabilities>
     <appstudio:Metadata>
         <appstudio:Item Name="appId" Value="543c63b8-2956-4450-8efd-1cf199bee7ed" />
-        <appstudio:Item Name="model" Version="1.13" />
-        <appstudio:Item Name="formula" Value="Win10" Version="1.11.1222.3" />
-        <appstudio:Item DataSource="Collection" Version="1.1.*"/>
-        <appstudio:Item DataSource="YouTube" Version="1.1.*"/>
-        <appstudio:Item DataSource="Instagram" Version="1.1.*"/>
-        <appstudio:Item DataSource="Menu" Version="1.1.*"/>
-        <appstudio:Item DataSource="Facebook" Version="1.1.*"/>
-        <appstudio:Item DataSource="Twitter" Version="1.1.*"/>
-        <appstudio:Item DataSource="Html" Version="1.1.*"/>
+        <appstudio:Item Name="model" Version="1.14" />
+        <appstudio:Item Name="formula" Value="Win10" Version="1.12.0222.1" />
+        <appstudio:Item DataSource="Collection" Version="1.2.*"/>
+        <appstudio:Item DataSource="YouTube" Version="1.2.*"/>
+        <appstudio:Item DataSource="Instagram" Version="1.2.*"/>
+        <appstudio:Item DataSource="Menu" Version="1.2.*"/>
+        <appstudio:Item DataSource="Facebook" Version="1.2.*"/>
+        <appstudio:Item DataSource="Twitter" Version="1.2.*"/>
+        <appstudio:Item DataSource="Html" Version="1.2.*"/>
     </appstudio:Metadata>
 </Package>

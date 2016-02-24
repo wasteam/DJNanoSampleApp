@@ -7,7 +7,6 @@
     xmlns:was_actions="using:AppStudio.Uwp.Actions"
     xmlns:was_commands="using:AppStudio.Uwp.Commands"
     xmlns:was_controls="using:AppStudio.Uwp.Controls"
-    xmlns:layouts="using:DJNanoShow.Layouts"
     xmlns:list_layouts="using:DJNanoShow.Layouts.List"
     xmlns:controls="using:DJNanoShow.Layouts.Controls"
     xmlns:vm="using:DJNanoShow.ViewModels"
@@ -30,7 +29,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="{StaticResource AppBarBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48"/>
-        <TextBlock Grid.Row="0" Grid.Column="0" Margin="{Binding Active.pageTitleMargin, Source={StaticResource ResponsiveBehaviorsVBP}}" Text="{x:Bind ViewModel.PageTitle}" Foreground="{StaticResource AppBarForeground}" FontSize="{StaticResource AppTitleTextSizeDefault}" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="{Binding Active.pageTitleMargin, Source={StaticResource ResponsiveBehaviorsVBP}}" Text="{x:Bind ViewModel.PageTitle}" Foreground="{StaticResource AppBarForeground}" FontSize="{StaticResource AppTitleTextSizeDefault}" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" MaxLines="1"/>
         <was_actions:ActionsCommandBar 
             x:Name="appBar"
             ActionsSource="{x:Bind ViewModel.Actions}" Style="{StaticResource WasCommandBarStyle}"
@@ -49,7 +48,6 @@
                 <AppBarButton x:Uid="ShareItemButton" Icon="ReShare" Command="{Binding Source={StaticResource ActionCommands}, Path=Share}"/>
             </was_actions:ActionsCommandBar.SecondaryCommands>
         </was_actions:ActionsCommandBar>
-
         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
 			<Grid>
 				<Grid.RowDefinitions>
@@ -58,11 +56,11 @@
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
-				<ProgressBar Grid.Row="1" Height="3" Margin="0,6,0,6" IsIndeterminate="True" Foreground="{StaticResource PageTitleForeground}" Visibility="{x:Bind ViewModel.IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed, Mode=OneWay}"/>
-				<was_controls:ErrorNotificationControl x:Uid="ListErrorNotificationControl" Grid.Row="2" ErrorVisibility="{x:Bind ViewModel.HasLoadDataErrors, Converter={StaticResource BoolToVisibilityConverter}}" ErrorColor="{StaticResource PageTitleForeground}" Margin="10,0,18,0"/>
-				<was_controls:HtmlViewer Grid.Row="3" Html="{x:Bind HtmlContent}" Background="Transparent" Foreground="{StaticResource DescriptionForeground}" ContentAlignment="Center"/>
-			</Grid>
+					<ProgressBar Grid.Row="1" Height="3" Margin="0,6,0,6" IsIndeterminate="True" Foreground="{StaticResource PageTitleForeground}" Visibility="{x:Bind ViewModel.IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed, Mode=OneWay}"/>
+				<was_controls:ErrorNotificationControl x:Uid="ListErrorNotificationControl" Grid.Row="2" ErrorVisibility="{x:Bind ViewModel.HasLoadDataErrors, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" ErrorColor="{StaticResource PageTitleForeground}" Margin="10,0,18,0"/>
+					<was_controls:HtmlViewer Grid.Row="3" Html="{x:Bind HtmlContent, Mode=OneWay}" Background="Transparent" Foreground="{StaticResource DescriptionForeground}" ContentAlignment="Center"/>
+				</Grid>
         </ScrollViewer>
-        <controls:DataUpdateInformationControl Grid.Row="2" Grid.ColumnSpan="2" LastUpdateDateTime="{x:Bind ViewModel.LastUpdated}" Color="{StaticResource PageTitleForeground}" Margin="8,4,8,4" HorizontalAlignment="Left" HasLocalData="{x:Bind ViewModel.HasLocalData}"/>
+        <controls:DataUpdateInformationControl Grid.Row="2" Grid.ColumnSpan="2" LastUpdateDateTime="{x:Bind ViewModel.LastUpdated, Mode=OneWay}" Color="{StaticResource PageTitleForeground}" Margin="8,4,8,4" HorizontalAlignment="Left" HasLocalData="{x:Bind ViewModel.HasLocalData}"/>
     </Grid>
 </Page>

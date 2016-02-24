@@ -28,16 +28,32 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="{StaticResource AppBarBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48"/>
-        <TextBlock Grid.Row="0" Grid.Column="0" Margin="{Binding Active.pageTitleMargin, Source={StaticResource ResponsiveBehaviorsVBP}}" Text="{Binding PageTitle}" Foreground="{StaticResource AppBarForeground}" FontSize="{StaticResource AppTitleTextSizeDefault}" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
-        <was_actions:ActionsCommandBar            
-            x:Name="appBar" Style="{StaticResource WasCommandBarStyle}"
-            ActionsSource="{Binding Actions}" IsVisible="{Binding HasActions}"
-            Foreground="{StaticResource AppBarForeground}"
-            Background="{StaticResource AppBarBackground}"
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="{Binding Active.pageTitleMargin, Source={StaticResource ResponsiveBehaviorsVBP}}" Text="{Binding PageTitle}" Foreground="{StaticResource AppBarForeground}" FontSize="{StaticResource AppTitleTextSizeDefault}" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" MaxLines="1"/>
+		<Grid
             Grid.Row="{Binding Active.appBarRow, Source={StaticResource ResponsiveBehaviorsVBP}}"
             Grid.Column="{Binding Active.appBarColumn, Source={StaticResource ResponsiveBehaviorsVBP}}"
-            Grid.ColumnSpan="{Binding Active.appBarColumnSpan, Source={StaticResource ResponsiveBehaviorsVBP}}">
-        </was_actions:ActionsCommandBar>
+            Grid.ColumnSpan="{Binding Active.appBarColumnSpan, Source={StaticResource ResponsiveBehaviorsVBP}}"
+            Background="{StaticResource AppBarBackground}" HorizontalAlignment="Stretch">
+			<Grid HorizontalAlignment="Right">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<was_controls:SearchBox x:Uid="SearchBox" x:Name="searchCtrl" DisplayMode="FadeIn" SearchCommand="{x:Bind ViewModel.SearchCommand}" Style="{StaticResource wasSearchBox}" Height="48" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				<was_actions:ActionsCommandBar            
+						Grid.Column="1"
+						x:Name="appBar" Style="{StaticResource WasCommandBarStyle}"
+						ActionsSource="{Binding Actions}" IsVisible="{Binding HasActions}"
+						Foreground="{StaticResource AppBarForeground}"
+						Background="{StaticResource AppBarBackground}">
+						<was_actions:ActionsCommandBar.CommandBarOverflowPresenterStyle>
+                        <Style TargetType="CommandBarOverflowPresenter">
+                            <Setter Property="Background" Value="{StaticResource AppBarBackground}"/>
+                        </Style>
+                    </was_actions:ActionsCommandBar.CommandBarOverflowPresenterStyle>
+				</was_actions:ActionsCommandBar>
+			</Grid>
+        </Grid>
         <was_controls:SectionList
 			Grid.Row="1" Grid.ColumnSpan="2" x:Uid="SectionListItem"
 			ErrorColor="{StaticResource PageTitleForeground}"
@@ -49,8 +65,8 @@
                 HeaderLinkVisibility="Collapsed" TitleVisibility="Collapsed" ErrorVisibility="Collapsed" LoadingVisibility="Collapsed" ManageLoading="False">
                 <DataTemplate>
                     <controls:HeroImage
-						Image="/Assets/DataImages/Sin-título-1.jpg"
-						MobileImage="/Assets/DataImages/s.jpg"/>
+						Image="/Assets/DataImages/djnano.png"
+						MobileImage="/Assets/DataImages/Sin-título-1-1.png"/>
                 </DataTemplate>
             </was_controls:SectionListItem>
 			<was_controls:SectionListItem
@@ -62,7 +78,7 @@
                 LoadingVisibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}">
                 <DataTemplate>
-                    <list_layouts:ListTextCard DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="19,0,12,24"/>
+                    <list_layouts:ListGroupedHome DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="19,0,12,24"/>
                 </DataTemplate>
 			</was_controls:SectionListItem>
 			<was_controls:SectionListItem
@@ -74,7 +90,7 @@
                 LoadingVisibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}">
                 <DataTemplate>
-                    <list_layouts:ListBigHorizontalCardBox DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="19,0,12,24"/>
+                    <list_layouts:CarouselMedium DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="19,0,12,24"/>
                 </DataTemplate>
 			</was_controls:SectionListItem>
 			<was_controls:SectionListItem
@@ -98,19 +114,19 @@
                 LoadingVisibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 d:DataContext="{d:DesignData Source=/Assets/Design/DesignDataMenu.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}">
                 <DataTemplate>
-                    <list_layouts:MenuMedium DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="False" Margin="19,0,12,24"/>
+                    <list_layouts:MenuBig DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="False" Margin="19,0,12,24"/>
                 </DataTemplate>
 			</was_controls:SectionListItem>
 			<was_controls:SectionListItem
                 DataContext="{Binding Discography}"
                 HeaderLinkClickCommand="{Binding SectionHeaderClickCommand}" 
                 HeaderLinkVisibility="Visible"
-				Background="#455969"
+				Background="#1b1f25"
                 ErrorVisibility="{Binding HasLoadDataErrors, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 LoadingVisibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}, FallbackValue=Collapsed}"
                 d:DataContext="{d:DesignData Source=/Assets/Design/DesignData.json, Type=vm:DesignViewModel, IsDesignTimeCreatable=true}">
                 <DataTemplate>
-                    <list_layouts:ListContactCard DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="19,0,12,24"/>
+                    <list_layouts:ListBigVerticalCard DataContext="{Binding}" ItemsSource="{Binding Items}" ItemClickCommand="{Binding ItemClickCommand}" OneRowModeEnabled="True" Margin="19,0,12,24"/>
                 </DataTemplate>
 			</was_controls:SectionListItem>
 			<was_controls:SectionListItem

@@ -54,7 +54,6 @@ namespace DJNanoShow.Sections
                     {
                         viewModel.Title = item.Title.ToSafeString();
                         viewModel.SubTitle = item.Summary.ToSafeString();
-                        viewModel.Description = null;
                         viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
                     },
                     DetailNavigation = (item) =>
@@ -77,6 +76,7 @@ namespace DJNanoShow.Sections
                     viewModel.Description = item.Summary.ToSafeString();
                     viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(null);
                     viewModel.Content = item.EmbedHtmlFragment;
+					viewModel.Source = item.ExternalUrl;
                 });
 
                 var actions = new List<ActionConfig<YouTubeSchema>>

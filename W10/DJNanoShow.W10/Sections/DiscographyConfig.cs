@@ -8,17 +8,19 @@ using AppStudio.DataProviders;
 using AppStudio.DataProviders.Core;
 using Windows.Storage;
 using AppStudio.DataProviders.DynamicStorage;
+using AppStudio.DataProviders.LocalStorage;
 using AppStudio.Uwp;
 using AppStudio.Uwp.Actions;
 using AppStudio.Uwp.Commands;
 using AppStudio.Uwp.Navigation;
+using Windows.ApplicationModel.Appointments;
 using System.Linq;
 using DJNanoShow.Config;
 using DJNanoShow.ViewModels;
 
 namespace DJNanoShow.Sections
 {
-    public class DiscographyConfig : SectionConfigBase<Discography1Schema>
+    public class DiscographyConfig : SectionConfigBase<Discography1Schema, DiscographyTracks1Schema>
     {
 	    public override Func<Task<IEnumerable<Discography1Schema>>> LoadDataAsyncFunc
         {
@@ -26,7 +28,7 @@ namespace DJNanoShow.Sections
             {
                 var config = new DynamicStorageDataConfig
                 {
-                    Url = new Uri("http://ds.winappstudio.com/api/data/collection?dataRowListId=ee25a9dc-2850-4f61-848f-684fef6a345a&appId=543c63b8-2956-4450-8efd-1cf199bee7ed"),
+                    Url = new Uri("http://ds.winappstudio.com/api/data/collection?dataRowListId=8a3580ec-aa0e-419e-8092-8c7ad63a54bb&appId=543c63b8-2956-4450-8efd-1cf199bee7ed"),
                     AppId = "543c63b8-2956-4450-8efd-1cf199bee7ed",
                     StoreId = ApplicationData.Current.LocalSettings.Values[LocalSettingNames.StoreId] as string,
                     DeviceType = ApplicationData.Current.LocalSettings.Values[LocalSettingNames.DeviceType] as string
@@ -51,8 +53,7 @@ namespace DJNanoShow.Sections
                     LayoutBindings = (viewModel, item) =>
                     {
                         viewModel.Title = item.Title.ToSafeString();
-                        viewModel.SubTitle = item.ReleaseDate.ToSafeString();
-                        viewModel.Description = null;
+                        viewModel.SubTitle = item.LabelName.ToSafeString();
                         viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
                     },
                     DetailNavigation = (item) =>
@@ -71,17 +72,9 @@ namespace DJNanoShow.Sections
                 bindings.Add((viewModel, item) =>
                 {
                     viewModel.PageTitle = item.Title.ToSafeString();
-                    viewModel.Title = "";
-                    viewModel.Description = item.ReleaseDate.ToSafeString();
+                    viewModel.Title = item.ReleaseDate.ToString(DateTimeFormat.LongDate);
+                    viewModel.Description = item.LabelName.ToSafeString();
                     viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.ImageUrl.ToSafeString());
-                    viewModel.Content = null;
-                });
-                bindings.Add((viewModel, item) =>
-                {
-                    viewModel.PageTitle = "Tracks";
-                    viewModel.Title = "";
-                    viewModel.Description = item.Description.ToSafeString();
-                    viewModel.ImageUrl = ItemViewModel.LoadSafeUrl("");
                     viewModel.Content = null;
                 });
 
@@ -98,5 +91,42 @@ namespace DJNanoShow.Sections
                 };
             }
         }
+		public override RelatedContentConfig<DiscographyTracks1Schema, Discography1Schema> RelatedContent
+		{
+			get
+			{
+				return new RelatedContentConfig<DiscographyTracks1Schema, Discography1Schema>()
+				{
+					NeedsNetwork = false,
+					LoadDataAsync = async (selected) =>
+					{
+						var config = new LocalStorageDataConfig
+						{
+							FilePath = "/Assets/Data/DiscographyTracks.json"
+						};
+						var result = await Singleton<LocalStorageDataProvider<DiscographyTracks1Schema>>.Instance.LoadDataAsync(config, MaxRecords);
+						return result
+								.Where(r => r.Title.ToSafeString() == selected.Title.ToSafeString())
+								.ToList();
+					},
+					ListPage = new ListPageConfig<DiscographyTracks1Schema>
+					{
+						Title = "Tracks",
+
+						LayoutBindings = (viewModel, item) =>
+						{
+							viewModel.Title = item.Genre.ToSafeString();
+							viewModel.SubTitle = item.Tracks.ToSafeString();
+							viewModel.Description = null;
+							viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(null);
+						},
+						DetailNavigation = (item) =>
+						{
+							return NavigationInfo.FromPage("DiscographyTracksDetailPage", true);
+						}
+					}
+				};
+			}
+		}
     }
 }

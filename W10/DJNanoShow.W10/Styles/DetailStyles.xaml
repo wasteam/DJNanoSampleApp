@@ -12,6 +12,6 @@
         </StackPanel>
     </DataTemplate>
     <DataTemplate x:Key="IndicatorItemTemplate">
-        <Border Height="12" Width="12" BorderBrush="{StaticResource TitleForeground}" BorderThickness="1"/>
+        <Border Width="12" Height="8" BorderBrush="{StaticResource BoxBackground}" BorderThickness="1" />
     </DataTemplate>
 </ResourceDictionary>

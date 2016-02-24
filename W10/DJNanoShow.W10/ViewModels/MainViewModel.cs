@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AppStudio.Uwp;
-using AppStudio.Uwp.Actions;
-using AppStudio.Uwp.Commands;
-using AppStudio.Uwp.Navigation;
-using AppStudio.DataProviders;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using System.Windows.Input;
+using AppStudio.Uwp;
+using AppStudio.Uwp.Actions;
+using AppStudio.Uwp.Navigation;
+using AppStudio.Uwp.Commands;
+using AppStudio.DataProviders;
+
 using AppStudio.DataProviders.YouTube;
 using AppStudio.DataProviders.Instagram;
 using AppStudio.DataProviders.Menu;
@@ -62,6 +64,17 @@ namespace DJNanoShow.ViewModels
                     {
                         NavigationService.NavigateTo(item);
                     });
+            }
+        }
+		public ICommand SearchCommand
+        {
+            get
+            {
+                return new RelayCommand<string>(
+                (text) =>
+                {
+                    NavigationService.NavigateToPage("SearchPage", text);
+                }, SearchViewModel.CanSearch);
             }
         }
 

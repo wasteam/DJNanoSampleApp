@@ -57,7 +57,6 @@ namespace DJNanoShow.Sections
                     {
                         viewModel.Title = item.UserName.ToSafeString();
                         viewModel.SubTitle = item.Text.ToSafeString();
-                        viewModel.Description = null;
                         viewModel.ImageUrl = ItemViewModel.LoadSafeUrl(item.UserProfileImageUrl.ToSafeString());
                     },
                     DetailNavigation = (item) =>

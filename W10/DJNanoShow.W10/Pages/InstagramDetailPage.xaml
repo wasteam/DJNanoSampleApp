@@ -30,7 +30,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" x:Name="topBarBackground" Grid.ColumnSpan="2" Background="{StaticResource AppBarBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="48" Visibility="{x:Bind ViewModel.IsFullScreen, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true, Mode=OneWay}">
-            <TextBlock x:Name="appTitle" Margin="{Binding Active.pageTitleMargin, Source={StaticResource ResponsiveBehaviorsVBP}}" Text="{x:Bind ViewModel.SelectedItem.PageTitle}" Foreground="{StaticResource AppBarForeground}" FontSize="{StaticResource AppTitleTextSizeDefault}" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
+            <TextBlock x:Name="appTitle" Margin="{Binding Active.pageTitleMargin, Source={StaticResource ResponsiveBehaviorsVBP}}" Text="{x:Bind ViewModel.SelectedItem.PageTitle, Mode=OneWay}" Foreground="{StaticResource AppBarForeground}" FontSize="{StaticResource AppTitleTextSizeDefault}" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" MaxLines="1"/>
         </Grid>
         <was_actions:ActionsCommandBar 
             x:Name="appBar"
@@ -46,13 +46,14 @@
                     <Setter Property="Background" Value="{StaticResource AppBarBackground}"/>
                 </Style>
             </was_actions:ActionsCommandBar.CommandBarOverflowPresenterStyle>
-            <was_actions:ActionsCommandBar.PrimaryCommands>
+			<was_actions:ActionsCommandBar.PrimaryCommands>
+            
                 <AppBarButton x:Uid="ShowInfoButton" Icon="DockBottom" Command="{Binding ViewModel.ShowInfoCommand, ElementName=root}" Style="{StaticResource WasAppBarButtonStyle}"/>
-                <AppBarButton x:Uid="FullScreenButton" Icon="FullScreen" Command="{Binding ViewModel.FullScreenCommand, ElementName=root}" Style="{StaticResource WasAppBarButtonStyle}"/>
-                <AppBarButton x:Uid="ShowPresentationButton" Icon="SlideShow" Command="{Binding ViewModel.ShowPresentationCommand, ElementName=root}" Style="{StaticResource WasAppBarButtonStyle}"/>
-            </was_actions:ActionsCommandBar.PrimaryCommands>
+                <AppBarButton x:Uid="FullScreenButton" Icon="FullScreen" Command="{Binding ViewModel.FullScreenCommand, ElementName=root}" Style="{StaticResource WasAppBarButtonStyle}"/>            
+			</was_actions:ActionsCommandBar.PrimaryCommands>
             <was_actions:ActionsCommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="ShareItemButton" Icon="ReShare" Command="{Binding Source={StaticResource ActionCommands}, Path=Share}" Foreground="{StaticResource AppBarForeground}" Style="{StaticResource WasAppBarButtonStyle}"/>
+                <AppBarButton x:Uid="ShowPresentationButton" Icon="SlideShow" Command="{Binding ViewModel.ShowPresentationCommand, ElementName=root}" Style="{StaticResource WasAppBarButtonStyle}"/>
             </was_actions:ActionsCommandBar.SecondaryCommands>
         </was_actions:ActionsCommandBar>
         <Grid Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"

@@ -21,9 +21,10 @@ namespace DJNanoShow.ViewModels
     {
         private ObservableCollection<ItemViewModel> _items = new ObservableCollection<ItemViewModel>();
         private bool _hasMoreItems;
+		private bool _hasItems;
         private int _visibleItems;
 
-        private Func<bool, Task<DateTime?>> LoadDataInternal;
+        private Func<bool, Func<ItemViewModel, bool>, Task<DateTime?>> LoadDataInternal;
 
         private ListViewModel()
         {
@@ -33,6 +34,7 @@ namespace DJNanoShow.ViewModels
         {
             var vm = new ListViewModel
             {
+				SectionName = sectionConfig.Name,
                 Title = sectionConfig.ListPage.Title,
                 NavigationInfo = sectionConfig.ListPage.ListNavigationInfo,
                 PageTitle = sectionConfig.ListPage.PageTitle,
@@ -48,7 +50,7 @@ namespace DJNanoShow.ViewModels
                 UseStorage = sectionConfig.NeedsNetwork,
             };
             //we save a reference to the load delegate in order to avoid export TSchema outside the view model
-            vm.LoadDataInternal = (refresh) => AppCache.LoadItemsAsync<TSchema>(settings, sectionConfig.LoadDataAsyncFunc, (content) => vm.ParseItems(sectionConfig.ListPage, content), refresh);
+            vm.LoadDataInternal = (refresh, filterFunc) => AppCache.LoadItemsAsync<TSchema>(settings, sectionConfig.LoadDataAsyncFunc, (content) => vm.ParseItems(sectionConfig.ListPage, content, filterFunc), refresh);
 
             if (sectionConfig.NeedsNetwork)
             {
@@ -71,7 +73,7 @@ namespace DJNanoShow.ViewModels
                 HasLoadDataErrors = false;
                 IsBusy = true;
 
-                LastUpdated = await LoadDataInternal(forceRefresh);
+                LastUpdated = await LoadDataInternal(forceRefresh, null);
             }
             catch (Exception ex)
             {
@@ -84,6 +86,60 @@ namespace DJNanoShow.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+		public async Task SearchDataAsync(string searchTerm)
+        {
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                try
+                {
+                    HasLoadDataErrors = false;
+                    IsBusy = true;
+                    LastUpdated = await LoadDataInternal(true, i => i.ContainsString(searchTerm));
+                }
+                catch (Exception ex)
+                {
+					Microsoft.ApplicationInsights.TelemetryClient telemetry = new Microsoft.ApplicationInsights.TelemetryClient();
+					telemetry.TrackException(ex);
+                    HasLoadDataErrors = true;
+                    Debug.WriteLine(ex.ToString());
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            }
+        }
+
+		public async Task FilterDataAsync(List<string> itemsId)
+        {
+            if (itemsId != null && itemsId.Any())
+            {
+                try
+                {
+                    HasLoadDataErrors = false;
+                    IsBusy = true;
+                    LastUpdated = await LoadDataInternal(true, i => itemsId.Contains(i.Id));
+                }
+                catch (Exception ex)
+                {
+					Microsoft.ApplicationInsights.TelemetryClient telemetry = new Microsoft.ApplicationInsights.TelemetryClient();
+					telemetry.TrackException(ex);
+                    HasLoadDataErrors = true;
+                    Debug.WriteLine(ex.ToString());
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            }
+        }
+
+		internal void CleanItems()
+        {
+            this.Items.Clear();
+            this.HasItems = false;
         }
 
         public RelayCommand<ItemViewModel> ItemClickCommand
@@ -125,6 +181,12 @@ namespace DJNanoShow.ViewModels
             private set { SetProperty(ref _hasMoreItems, value); }
         }
 
+		public bool HasItems
+        {
+            get { return _hasItems; }
+            private set { SetProperty(ref _hasItems, value); }
+        }
+
         public ICommand Refresh
         {
             get
@@ -144,10 +206,9 @@ namespace DJNanoShow.ViewModels
             }
         }
 
-        private void ParseItems<TSchema>(ListPageConfig<TSchema> listConfig, CachedContent<TSchema> content) where TSchema : SchemaBase
+        private void ParseItems<TSchema>(ListPageConfig<TSchema> listConfig, CachedContent<TSchema> content, Func<ItemViewModel, bool> filterFunc) where TSchema : SchemaBase
         {
             var parsedItems = new List<ItemViewModel>();
-
             foreach (var item in GetVisibleItems(content, _visibleItems))
             {
                 var parsedItem = new ItemViewModel
@@ -156,10 +217,17 @@ namespace DJNanoShow.ViewModels
                     NavigationInfo = listConfig.DetailNavigation(item)
                 };
                 listConfig.LayoutBindings(parsedItem, item);
-                parsedItems.Add(parsedItem);
+                if (filterFunc == null)
+                {
+                    parsedItems.Add(parsedItem);
+                }
+                else if (filterFunc(parsedItem))
+                {
+                    parsedItems.Add(parsedItem);
+                }
             }
-
             Items.Sync(parsedItems);
+            HasItems = Items.Count > 0;
             HasMoreItems = content.Items.Count() > Items.Count;
         }
 

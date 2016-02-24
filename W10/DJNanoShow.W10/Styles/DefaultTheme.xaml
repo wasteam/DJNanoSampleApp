@@ -3,5 +3,5 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--Override system colors-->
-    <x:String x:Key="SystemControlForegroundBaseHighBrush">#ffffff</x:String>
+    <x:String x:Key="SystemControlForegroundBaseHighBrush">#d6d6d6</x:String>
 </ResourceDictionary>

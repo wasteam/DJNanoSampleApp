@@ -255,4 +255,22 @@
   <data name="ThereIsNotRelatedContent" xml:space="preserve">
     <value>There is no related content.</value>
   </data>
+  <data name="SearchBox.PlaceholderText" xml:space="preserve">
+    <value>type search text...</value>
+  </data>
+  <data name="SearchResultTxt.Text" xml:space="preserve">
+    <value>Search results for:</value>
+  </data>
+  <data name="SearchNoResultsTxt.Text" xml:space="preserve">
+    <value>Not results found.</value>
+  </data>
+  <data name="RoamingWarning.Text" xml:space="preserve">
+    <value>Roaming is not enabled in this device. Data stored on this device will not be replicated in the rest of your devices.</value>
+  </data>
+  <data name="NoFavoritesTxt.Text" xml:space="preserve">
+    <value>Looks that there is nothing here. Navigate through the application and add your items hear by tapping or clicking in the icon</value>
+  </data>
+  <data name="NoFavoritesTxt.Text" xml:space="preserve">
+    <value>Looks that there is nothing here. Navigate through the application and add your items hear by tapping or clicking in the icon</value>
+  </data>
 </root>

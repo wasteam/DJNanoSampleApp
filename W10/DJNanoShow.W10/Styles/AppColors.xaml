@@ -7,15 +7,16 @@
 			<Color x:Key="AppBackgroundColor">#13161a</Color>
 			<Color x:Key="PageTitleForegroundColor">#ffffff</Color>
 			<Color x:Key="TitleForegroundColor">#ffffff</Color>
-			<Color x:Key="SubtitleForegroundColor">#d6d6d6</Color>
+			<Color x:Key="SubtitleForegroundColor">#ae0136</Color>
 			<Color x:Key="DescriptionForegroundColor">#ffffff</Color>
-			<Color x:Key="AppBarBackgroundColor">#171c20</Color>
-			<Color x:Key="AppBarForegroundColor">#ffffff</Color>
-			<Color x:Key="NavigationPaneBackgroundColor">#005eaa</Color>
-			<Color x:Key="NavigationPaneTextColor">#ffffff</Color>
-			<Color x:Key="NavigationPaneButtonColor">#d6d6d6</Color>
-			<Color x:Key="BoxBackgroundColor">#005eaa</Color>
-			<Color x:Key="BoxForegroundColor">#ffffff</Color>
+			<Color x:Key="AppBarBackgroundColor">#1b1f25</Color>
+			<Color x:Key="AppBarForegroundColor">#d6d6d6</Color>
+			<Color x:Key="NavigationPaneBackgroundColor">#d6d6d6</Color>
+			<Color x:Key="NavigationPaneTextColor">#13161a</Color>
+			<Color x:Key="NavigationPaneButtonColor">#ae0136</Color>
+			<Color x:Key="NavigationPaneButtonForegroundColor">#d6d6d6</Color>
+			<Color x:Key="BoxBackgroundColor">#1b1f25</Color>
+			<Color x:Key="BoxForegroundColor">#d6d6d6</Color>
         </ResourceDictionary>
         <ResourceDictionary x:Key="HighContrast">
             <Color x:Key="AppBackgroundColor">#ffffff</Color>
@@ -28,6 +29,7 @@
             <Color x:Key="NavigationPaneBackgroundColor">#000000</Color>
             <Color x:Key="NavigationPaneTextColor">#ffffff</Color>
             <Color x:Key="NavigationPaneButtonColor">#666666</Color>
+			<Color x:Key="NavigationPaneButtonForegroundColor">#000000</Color>
             <Color x:Key="BoxBackgroundColor">#000000</Color>
             <Color x:Key="BoxForegroundColor">#ffffff</Color>
         </ResourceDictionary>

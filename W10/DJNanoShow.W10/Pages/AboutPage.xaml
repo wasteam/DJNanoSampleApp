@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Height="48" HorizontalAlignment="Stretch" Background="{StaticResource AppBarBackground}">
-            <TextBlock x:Uid="AboutSection" Margin="{Binding Active.pageTitleMargin, Source={StaticResource ResponsiveBehaviorsVBP}}" Foreground="{StaticResource AppBarForeground}" FontSize="{StaticResource AppTitleTextSizeDefault}" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="WordEllipsis" MaxLines="1"/>
+            <TextBlock x:Uid="AboutSection" Margin="{Binding Active.pageTitleMargin, Source={StaticResource ResponsiveBehaviorsVBP}}" Foreground="{StaticResource AppBarForeground}" FontSize="{StaticResource AppTitleTextSizeDefault}" VerticalAlignment="Center" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" MaxLines="1"/>
         </Grid>
         <ScrollViewer Grid.Row="1">
             <StackPanel Margin="24,32,24,8">

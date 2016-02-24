@@ -61,14 +61,6 @@ namespace DJNanoShow.ViewModels
             }
         }
 
-		public string PrivacyUrl
-        {
-            get
-            {
-                return "http://1drv.ms/1llJOkM";
-            }
-        }
-
 		public BitmapImage AppLogo
         {
             get

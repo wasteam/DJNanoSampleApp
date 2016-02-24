@@ -21,6 +21,7 @@ using AppStudio.Uwp.Navigation;
 using DJNanoShow.Config;
 using DJNanoShow.Services;
 using Windows.ApplicationModel.Resources;
+using AppStudio.Uwp;
 
 namespace DJNanoShow.ViewModels
 {
@@ -34,6 +35,7 @@ namespace DJNanoShow.ViewModels
         private bool _supportSlideShow;
         private bool _supportFullScreen;
         private bool _isRestoreScreenButtonVisible;
+        private bool _isOnFavorites;
         private DispatcherTimer _slideShowTimer;
         private DispatcherTimer _mouseMovedTimer;
         private MouseCapabilities _mouseCapabilities;
@@ -77,7 +79,8 @@ namespace DJNanoShow.ViewModels
         {
             var vm = new DetailViewModel
             {
-                Title = sectionConfig.DetailPage.Title
+                Title = sectionConfig.DetailPage.Title,
+                SectionName = sectionConfig.Name
             };
             vm.RelatedContentTitle = sectionConfig.RelatedContent?.ListPage?.Title;
 
@@ -123,7 +126,8 @@ namespace DJNanoShow.ViewModels
         {
             var vm = new DetailViewModel
             {
-                Title = sectionConfig.DetailPage.Title
+                Title = sectionConfig.DetailPage.Title,
+                SectionName = sectionConfig.Name
             };
 
             var settings = new CacheSettings
@@ -170,6 +174,7 @@ namespace DJNanoShow.ViewModels
             set
             {
                 SetProperty(ref _selectedItem, value);
+				IsOnFavorites = Singleton<UserFavorites>.Instance.IsOnFavorites(SectionName, SelectedItem);
             }
         }
         private ZoomMode _zoomMode;
@@ -237,6 +242,12 @@ namespace DJNanoShow.ViewModels
             get { return _isRestoreScreenButtonVisible; }
             set { SetProperty(ref _isRestoreScreenButtonVisible, value); }
         }
+        public bool IsOnFavorites
+        {
+            get { return _isOnFavorites; }
+            set { SetProperty(ref _isOnFavorites, value); }
+        }
+
         public DispatcherTimer SlideShowTimer
         {
             get
@@ -332,6 +343,17 @@ namespace DJNanoShow.ViewModels
                     {
                         FullScreenService.ExitFullScreenMode();
                     }
+                });
+            }
+        }
+        public ICommand FavoritesCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    await Singleton<UserFavorites>.Instance.AddOrRemoveToFavoritesAsync(SectionName, SelectedItem);
+                    IsOnFavorites = Singleton<UserFavorites>.Instance.IsOnFavorites(SectionName, SelectedItem);
                 });
             }
         }
