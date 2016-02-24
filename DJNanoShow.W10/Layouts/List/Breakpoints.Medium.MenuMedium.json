@@ -1,0 +1,91 @@
+﻿{  
+  "breakpoints": [{
+      "maxwidth": "318",
+      "properties": {
+        "itemsDesiredWidth": "69",
+        "itemsHeight": "200",
+        "imageHeight": "100",
+        "menuMargin": "0,4,0,0",        
+        "itemMargin": "2",
+        "titleFontSize": "15"
+      }
+    },
+    {
+      "maxwidth": "470",
+      "properties": {
+        "itemsDesiredWidth": "69",
+        "itemsHeight": "240",
+        "imageHeight": "120",
+        "menuMargin": "0,6,0,0",        
+        "itemMargin": "4",
+        "titleFontSize": "17"
+      }
+    },
+    {
+      "maxwidth": "570",
+      "properties": {
+        "itemsDesiredWidth": "114",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",    
+        "itemMargin": "4",
+        "titleFontSize": "17"
+      }
+    },
+    {
+      "maxwidth": "1278",
+      "properties": {
+        "itemsDesiredWidth": "142",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",
+        "itemMargin": "4",
+        "titleFontSize": "17"
+      }
+    },
+    {
+      "maxwidth": "1430",
+      "properties": {
+        "itemsDesiredWidth": "159",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",
+        "itemMargin": "4",
+        "titleFontSize": "17"
+      }
+    },
+    {
+      "maxwidth": "1600",
+      "properties": {
+        "itemsDesiredWidth": "178",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",
+        "itemMargin": "4",
+        "titleFontSize": "17"
+      }
+    },
+    {
+      "maxwidth": "1800",
+      "properties": {
+        "itemsDesiredWidth": "200",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",
+        "itemMargin": "4",
+        "titleFontSize": "17"
+      }
+    },
+    {
+      "maxwidth": "*",
+      "properties": {
+        "itemsDesiredWidth": "224",
+        "itemsHeight": "280",
+        "imageHeight": "160",
+        "menuMargin": "0,8,0,0",
+        "itemMargin": "4",
+        "titleFontSize": "17"
+      }
+    }
+  ] 
+}

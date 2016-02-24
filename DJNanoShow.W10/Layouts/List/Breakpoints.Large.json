@@ -1,0 +1,49 @@
+﻿{
+  "breakpoints": [
+     {
+      "maxwidth": "318",
+      "properties": {
+        "itemsDesiredWidth": "318",
+        "itemMargin": "2",
+        "titleFontSize": "17",
+        "subTitleFontSize": "15"
+      }
+    },
+    {
+      "maxwidth": "470",
+      "properties": {
+        "itemsDesiredWidth": "470",
+        "itemMargin": "2",
+        "titleFontSize": "17",
+        "subTitleFontSize": "15"
+      }
+    },
+    {
+      "maxwidth": "1053",
+      "properties": {
+        "itemsDesiredWidth": "351",
+        "itemMargin": "4",
+        "titleFontSize": "17",
+        "subTitleFontSize": "15"
+      }
+    },
+    {
+      "maxwidth": "1578",
+      "properties": {
+        "itemsDesiredWidth": "526",
+        "itemMargin": "10",
+        "titleFontSize": "21",
+        "subTitleFontSize": "19"
+      }
+    },
+    {
+      "maxwidth": "*",
+      "properties": {
+        "itemsDesiredWidth": "789",
+        "itemMargin": "10",
+        "titleFontSize": "21",
+        "subTitleFontSize": "19"
+      }
+    }
+  ]
+}
